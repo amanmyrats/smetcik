@@ -11,6 +11,9 @@ class Unit(models.Model):
     name_ru = models.CharField(max_length=30)
     name_en = models.CharField(max_length=30)
     name_original = models.CharField(max_length=30)
+
+    def __str__(self) -> str:
+        return self.name_tm
     
 
 class Trade(models.Model):
@@ -23,6 +26,9 @@ class Trade(models.Model):
     name_ru = models.CharField(max_length=30)
     name_en = models.CharField(max_length=30)
     name_original = models.CharField(max_length=30)
+
+    def __str__(self) -> str:
+        return self.name_tm
     
 
 class Lot(models.Model):
@@ -33,6 +39,9 @@ class Lot(models.Model):
     name_ru = models.CharField(max_length=30)
     name_en = models.CharField(max_length=30)
     name_original = models.CharField(max_length=30)
+
+    def __str__(self) -> str:
+        return self.name_tm
     
 
 class Currency(models.Model):
@@ -45,4 +54,21 @@ class Currency(models.Model):
     name_ru = models.CharField(max_length=30)
     name_en = models.CharField(max_length=30)
     name_original = models.CharField(max_length=30)
-        
+
+    def __str__(self) -> str:
+        return self.name_en
+
+
+class Country(models.Model):
+    code = models.CharField(max_length=2)   
+    code3Letter = models.CharField(max_length=3)    
+    numericCode = models.IntegerField()    
+    callingCode = models.IntegerField()
+    name_tm = models.CharField(max_length=30)
+    name_ru = models.CharField(max_length=30)
+    name_en = models.CharField(max_length=30)
+    name_original = models.CharField(max_length=30)
+
+    def __str__(self) -> str:
+        return self.name_tm
+     
