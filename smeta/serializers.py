@@ -1,6 +1,13 @@
 from rest_framework.serializers import ModelSerializer
 
-from smeta.models import BoqItem, Consumption, Material
+from smeta.models import Boq, BoqItem, Consumption, Material
+
+
+class BoqModelSerializer(ModelSerializer):
+    class Meta:
+        model = Boq
+        fields = '__all__'
+
 
 class BoqItemModelSerializer(ModelSerializer):
     class Meta:

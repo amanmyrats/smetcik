@@ -1,11 +1,20 @@
 from django.shortcuts import render
 
 from rest_framework.generics import ListCreateAPIView
+from rest_framework.viewsets import ModelViewSet
 from rest_framework.response import Response
 from rest_framework import status
 
-from smeta.models import BoqItem, Consumption, Material
-from smeta.serializers import BoqItemModelSerializer, ConsumptionModelSerializer, MaterialModelSerializer
+from smeta.models import Boq, BoqItem, Consumption, Material
+from smeta.serializers import (
+    BoqItemModelSerializer, ConsumptionModelSerializer, MaterialModelSerializer, 
+    BoqModelSerializer
+)
+
+
+class BoqModelViewSet(ModelViewSet):
+    queryset = Boq.objects.all()
+    serializer_class = BoqModelSerializer
 
 
 class BoqItemListCreateAPIView(ListCreateAPIView):
