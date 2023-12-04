@@ -1,0 +1,5 @@
+
+<p-card *ngFor="let boq of boqs" title="BOQ">
+    Registered BOQ - {{boq.contract_number}}
+    <p-button label="See BOQ Items" [rounded]="true" severity="info" (onClick)="gotoBoqItems(boq.id!)"></p-button>
+</p-card>

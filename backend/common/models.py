@@ -61,9 +61,9 @@ class Currency(models.Model):
 
 class Country(models.Model):
     code = models.CharField(max_length=2)   
-    code3Letter = models.CharField(max_length=3)    
-    numericCode = models.IntegerField()    
-    callingCode = models.IntegerField()
+    code_3_letter = models.CharField(max_length=3)    
+    numeric_code = models.IntegerField()    
+    calling_code = models.IntegerField()
     name_tm = models.CharField(max_length=30)
     name_ru = models.CharField(max_length=30)
     name_en = models.CharField(max_length=30)
