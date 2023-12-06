@@ -1,9 +1,94 @@
+<!-- Trade -->
 <p-accordion [activeIndex]="0">
-    <p-accordionTab *ngFor="let trade of trades" header="{{trade.name_tm}}">
-        <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-            consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-        </p>
+    <p-button label="Add Trade" icon="pi pi-plus" (onClick)="openCreateTradeForm()"></p-button>
+    <p-accordionTab *ngFor="let trade of trades">
+        <ng-template pTemplate="header">
+            <div style="width: 30%;">
+                {{trade.name_tm}}
+            </div>
+            <div style="width: 100%;"></div>
+            <p-button icon="pi pi-pencil" severity="info" (onClick)="openUpdateTradeForm(trade)"></p-button>
+            <p-button [style]="{'margin-left': '5px', 'margin-right': 'px'}" icon="pi pi-times" (onClick)="deleteTrade(trade.id!)" severity="danger"></p-button>
+        </ng-template>
+        <p-button  icon="pi pi-plus"  label="Add Lot" (onClick)="openCreateLotForm(trade.id!)"></p-button>
+
+                <!-- Lot -->
+                <p-table [value]="trade.lots" dataKey="id" [tableStyle]="{ 'min-width': '60rem' }" *ngIf="trade.lots">
+
+                    <ng-template pTemplate="body" let-lot let-expanded="expanded">
+                        <tr>
+                            <td>
+                                <button type="button" pButton pRipple [pRowToggler]="lot" class="p-button-text p-button-rounded p-button-plain" [icon]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"></button>
+                            </td>
+                            <td style="width: 100px; padding: 0;">LOT-{{ lot.id }}</td>
+                            <td style="width: 600px; padding: 0;">{{ lot.name_tm }}</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td style="width: 50%;"></td>
+                            <td>
+                                <p-button icon="pi pi-pencil" severity="info" (onClick)="openUpdateLotForm(trade.id!, lot)"></p-button>
+                            </td>
+                            <td>
+                                <p-button [style]="{'margin-left': '5px', 'margin-right': 'px'}" icon="pi pi-times" (onClick)="deleteLot(lot.id!)" severity="danger"></p-button>
+                            </td>
+                        </tr>
+                    </ng-template>
+
+                    <ng-template pTemplate="rowexpansion" let-lot>
+                        <tr>
+                            <td colspan="7">
+                                <div class="p-3">
+
+                                    <!-- BoqItems -->
+                                    <!-- BoqItems -->
+                                    <!-- BoqItems -->
+                                    <p-button  icon="pi pi-plus"  label="Add BoqItem" (onClick)="openCreateBoqItemForm(lot.id!, trade.lots)"></p-button>
+
+                                    <p-table [value]="lot.boq_items" dataKey="id">
+                                        <ng-template pTemplate="header">
+                                            <tr>
+                                                <th pSortableColumn="id">Id <p-sortIcon field="price"></p-sortIcon></th>
+                                                <th pSortableColumn="customer">Name <p-sortIcon field="customer"></p-sortIcon></th>
+                                                <th pSortableColumn="date">Unit <p-sortIcon field="date"></p-sortIcon></th>
+                                                <th pSortableColumn="amount">Quantity <p-sortIcon field="amount"></p-sortIcon></th>
+                                                <th pSortableColumn="status">Unit Price <p-sortIcon field="status"></p-sortIcon></th>
+                      
+                                            </tr>
+                                        </ng-template>
+                                        <ng-template pTemplate="body" let-boq_item>
+                                            <tr>
+                                                <td>{{ boq_item.id }}</td>
+                                                <td>{{ boq_item.name_tm }}</td>
+                                                <td>{{ boq_item.unit }}</td>
+                                                <td>{{ boq_item.quantity | currency: 'USD' }}</td>
+                                                <td>
+                                                    <p-button icon="pi pi-pencil" severity="info" 
+                                                    (onClick)="openUpdateBoqItemForm(lot.id!, trade.lots,  boq_item)"></p-button>
+                                                </td>
+                                                <td>
+                                                    <p-button [style]="{'margin-left': '5px', 'margin-right': 'px'}" icon="pi pi-times" 
+                                                    (onClick)="deleteBoqItem(boq_item.id!)" severity="danger"></p-button>
+                                                </td>
+                                            </tr>
+                                        </ng-template>
+                                        <ng-template pTemplate="emptymessage">
+                                            <tr>
+                                                <td colspan="6">There are no boq_item for this lot yet.</td>
+                                            </tr>
+                                        </ng-template>
+                                    </p-table>
+
+
+
+                                </div>
+                            </td>
+                        </tr>
+                    </ng-template>
+                </p-table>
+                
+
+
     </p-accordionTab>
     <p-accordionTab header="Header II">
         <p>
@@ -18,3 +103,38 @@
         </p>
     </p-accordionTab>
 </p-accordion>
+
+<!-- Trade Form Dialog -->
+<p-dialog header="Create Trade" [(visible)]="showTradeForm" [style]="{width: '600px'}">
+    <app-trade-form *ngIf="showTradeForm" 
+    (closeDialogEventEmitter)="handleTradeFormCloseEvent($event)"
+    [tradeFromParent]="tradeToEdit"
+    >
+
+    </app-trade-form>
+</p-dialog>
+
+<!-- Lot Form Dialog -->
+<p-dialog header="Create Lot" [(visible)]="showLotForm" [style]="{width: '600px', height: '700px'}">
+    <app-lot-form *ngIf="showLotForm" 
+    (closeDialogEventEmitter)="handleLotFormCloseEvent($event)" 
+    [lotFromParent]="lotToEdit" 
+    [tradeIdFromParent]="currentTradeId" 
+    [trades]="trades"
+    >
+
+    </app-lot-form>
+</p-dialog>
+
+<!-- BoqItem Form Dialog -->
+<p-dialog header="Create BoqItem" [(visible)]="showBoqItemForm" [style]="{width: '600px', height: '700px'}">
+    <app-boq-item-form *ngIf="showBoqItemForm" 
+    (closeDialogEventEmitter)="handleBoqItemFormCloseEvent($event)" 
+    [boqItemFromParent]="boqItemToEdit" 
+    [boqIdFromParent]="boqIdFromUrl" 
+    [lotIdFromParent]="currentLotId" 
+    [lots]="lots"
+    >
+
+    </app-boq-item-form>
+</p-dialog>

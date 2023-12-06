@@ -1,0 +1,75 @@
+<form [formGroup]="boqItemForm" (ngSubmit)="onSubmit()">
+
+    <!-- BOQ -->
+    <!-- <p-dropdown [options]="boqs" formControlName="boq" 
+        optionLabel="contract_number" [filter]="true" filterBy="contract_number" 
+        [showClear]="true" placeholder="Select a Boq" 
+        optionValue="id"
+    >
+        <ng-template let-boq pTemplate="item">
+            <div class="flex align-items-center gap-2">
+                <div>{{ boq.contract_number }}</div>
+            </div>
+        </ng-template>
+    </p-dropdown> -->
+
+    <!-- LOT -->
+    <p-dropdown [options]="lots" formControlName="lot" 
+        optionLabel="name_tm" [filter]="true" filterBy="name_tm" 
+        [showClear]="true" placeholder="Select a Lot" 
+        optionValue="id"
+    >
+        <ng-template let-lot pTemplate="item">
+            <div class="flex align-items-center gap-2">
+                <div>{{ lot.name_tm }}</div>
+            </div>
+        </ng-template>
+    </p-dropdown>
+
+    <!-- unit = models.ForeignKey(Unit, on_delete=models.PROTECT)
+    material_unit_price = models.DecimalField(max_digits=12, decimal_places=2)
+    labor_unit_price = models.DecimalField(max_digits=12, decimal_places=2)
+    transport_unit_price -->
+
+    <!-- Name Tm -->
+    <span class="p-float-label" style="margin-top: 40px;">
+        <input pInputText id="name_tm" formControlName="name_tm" />
+        <label htmlFor="name_tm">BOQ Item Name TM</label>
+    </span>
+
+    <!-- Quantity -->
+    <span class="p-float-label">
+        <p-inputNumber mode="decimal" formControlName="quantity"> </p-inputNumber>
+        <label htmlFor="quantity">Quantity</label>
+    </span>
+
+    <!-- Unit -->
+    <p-dropdown [options]="units" formControlName="unit" 
+        optionLabel="code_tm" [filter]="true" filterBy="code_tm" 
+        [showClear]="true" placeholder="Select a Unit" 
+        optionValue="id"
+    >
+        <ng-template let-unit pTemplate="item">
+            <div class="flex align-items-center gap-2">
+                <div>{{ unit.code_tm }}</div>
+            </div>
+        </ng-template>
+    </p-dropdown>
+
+    <!-- Material Unit Price -->
+    <span class="p-float-label">
+        <p-inputNumber mode="decimal" formControlName="material_unit_price"> </p-inputNumber>
+        <label htmlFor="material_unit_price">Material Unit Price</label>
+    </span>
+
+    <!-- Labor Unit Price -->
+    <span class="p-float-label">
+        <p-inputNumber mode="decimal" formControlName="labor_unit_price"> </p-inputNumber>
+        <label htmlFor="labor_unit_price">Labor Unit Price</label>
+    </span>
+
+    <p-button type="button" pRipple label="Cancel" icon="pi pi-times" styleClass="p-button-outlined" class="p-button-text"
+    (click)="closeDialog(null)"></p-button>
+    <p-button type="submit" pRipple label="Save" icon="pi pi-check" styleClass="p-button-outlined" class="p-button-text" 
+    [disabled]="boqItemForm.invalid"></p-button>
+</form>

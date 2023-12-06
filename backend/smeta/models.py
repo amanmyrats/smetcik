@@ -17,19 +17,19 @@ class Boq(models.Model):
 
 class BoqItem(models.Model):
     boq = models.ForeignKey(Boq, on_delete=models.PROTECT)
-    trade = models.ForeignKey(Trade, on_delete=models.PROTECT)
-    lot = models.ForeignKey(Lot, on_delete=models.PROTECT)
+    # trade = models.ForeignKey(Trade, on_delete=models.PROTECT)
+    lot = models.ForeignKey(Lot, on_delete=models.PROTECT, related_name='boq_items')
 
-    code = models.CharField(max_length=20)
+    code = models.CharField(max_length=20, null=True)
     name_tm = models.CharField(max_length=255)
-    name_ru = models.CharField(max_length=255)
-    name_en = models.CharField(max_length=255)
-    name_original = models.CharField(max_length=255)
+    name_ru = models.CharField(max_length=255, null=True)
+    name_en = models.CharField(max_length=255, null=True)
+    name_original = models.CharField(max_length=255, null=True)
     quantity = models.DecimalField(max_digits=12, decimal_places=2)
     unit = models.ForeignKey(Unit, on_delete=models.PROTECT)
     material_unit_price = models.DecimalField(max_digits=12, decimal_places=2)
     labor_unit_price = models.DecimalField(max_digits=12, decimal_places=2)
-    transport_unit_price = models.DecimalField(max_digits=12, decimal_places=2)
+    transport_unit_price = models.DecimalField(max_digits=12, decimal_places=2, null=True)
     # materials = models.ManyToManyField('Material', through='BoqItemMaterial')
     
     def __str__(self) -> str:

@@ -1,0 +1,12 @@
+<form [formGroup]="tradeForm" (ngSubmit)="onSubmit()">
+    <span class="p-float-label">
+        <input pInputText id="name_tm" formControlName="name_tm" />
+        <label htmlFor="name_tm">Name TM</label>
+    </span>
+    
+    <p-button type="button" pRipple label="Cancel" icon="pi pi-times" styleClass="p-button-outlined" class="p-button-text"
+            (click)="closeDialog(null)"></p-button>
+    <p-button type="submit" pRipple label="Save" icon="pi pi-check" styleClass="p-button-outlined" class="p-button-text" 
+    [disabled]="tradeForm.invalid"></p-button>
+    
+</form>

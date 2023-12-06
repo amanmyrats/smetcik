@@ -1,3 +1,5 @@
+import { Lot } from "./lot.model";
+
 export class Trade {
     public id?: string;
     public index?: string;
@@ -8,6 +10,8 @@ export class Trade {
     public name_tm?: string;
     public name_ru?: string;
     public name_en?: string;
-    public name_original?: string
+    public name_original?: string;
+    public lots?: Lot[];
+
 
 }

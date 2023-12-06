@@ -1,6 +1,6 @@
 from django.shortcuts import render
 
-from rest_framework.generics import ListCreateAPIView
+from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView
 from rest_framework.viewsets import ModelViewSet
 from rest_framework.response import Response
 from rest_framework import status
@@ -28,6 +28,11 @@ class BoqItemListCreateAPIView(ListCreateAPIView):
 
         headers = self.get_success_headers(serializer.data)
         return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
+    
+
+class BoqItemRetrieveUpdateDestroyAPIView(RetrieveUpdateDestroyAPIView):
+    queryset = BoqItem.objects.all()
+    serializer_class = BoqItemModelSerializer
 
 
 class ConsumptionListCreateAPIView(ListCreateAPIView):

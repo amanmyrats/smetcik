@@ -17,28 +17,28 @@ class Unit(models.Model):
     
 
 class Trade(models.Model):
-    index = models.IntegerField()
-    code_tm = models.CharField(max_length=10)
-    code_ru = models.CharField(max_length=10)
-    code_en = models.CharField(max_length=10)
-    code_original = models.CharField(max_length=10)
+    index = models.IntegerField(null=True)
+    code_tm = models.CharField(max_length=10, null=True)
+    code_ru = models.CharField(max_length=10, null=True)
+    code_en = models.CharField(max_length=10, null=True)
+    code_original = models.CharField(max_length=10, null=True)
     name_tm = models.CharField(max_length=30)
-    name_ru = models.CharField(max_length=30)
-    name_en = models.CharField(max_length=30)
-    name_original = models.CharField(max_length=30)
+    name_ru = models.CharField(max_length=30, null=True)
+    name_en = models.CharField(max_length=30, null=True)
+    name_original = models.CharField(max_length=30, null=True)
 
     def __str__(self) -> str:
         return self.name_tm
     
 
 class Lot(models.Model):
-    trade = models.ForeignKey(Trade, on_delete=models.PROTECT)
-    index = models.IntegerField()
-    code = models.CharField(max_length=10)
+    trade = models.ForeignKey(Trade, on_delete=models.PROTECT, related_name='lots')
+    index = models.IntegerField(null=True)
+    code = models.CharField(max_length=10, null=True)
     name_tm = models.CharField(max_length=30)
-    name_ru = models.CharField(max_length=30)
-    name_en = models.CharField(max_length=30)
-    name_original = models.CharField(max_length=30)
+    name_ru = models.CharField(max_length=30, null=True)
+    name_en = models.CharField(max_length=30, null=True)
+    name_original = models.CharField(max_length=30, null=True)
 
     def __str__(self) -> str:
         return self.name_tm

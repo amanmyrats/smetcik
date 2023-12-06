@@ -1,0 +1,26 @@
+<form [formGroup]="lotForm" (ngSubmit)="onSubmit()">
+
+    <p-dropdown [options]="trades" formControlName="trade" 
+        optionLabel="name_tm" [filter]="true" filterBy="name_tm" 
+        [showClear]="true" placeholder="Select a Trade" 
+        optionValue="id"
+    >
+        <ng-template let-trade pTemplate="item">
+            <div class="flex align-items-center gap-2">
+                <div>{{ trade.name_tm }}</div>
+            </div>
+        </ng-template>
+    </p-dropdown>
+
+
+    <span class="p-float-label" style="margin-top: 40px;">
+        <input pInputText id="name_tm" formControlName="name_tm" />
+        <label htmlFor="name_tm">Lot Name TM</label>
+    </span>
+
+    <p-button type="button" pRipple label="Cancel" icon="pi pi-times" styleClass="p-button-outlined" class="p-button-text"
+            (click)="closeDialog(null)"></p-button>
+    <p-button type="submit" pRipple label="Save" icon="pi pi-check" styleClass="p-button-outlined" class="p-button-text" 
+    [disabled]="lotForm.invalid"></p-button>
+
+</form>
