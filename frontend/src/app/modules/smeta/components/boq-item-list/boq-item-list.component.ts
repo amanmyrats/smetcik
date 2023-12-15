@@ -23,6 +23,7 @@ export class BoqItemListComponent {
   showTradeForm: boolean = false;
   showLotForm: boolean = false;
   showBoqItemForm: boolean = false;
+  showConsumptionList: boolean = false;
 
   lotToEdit: Lot | null = null;
   boqItemToEdit: BoqItem | null = null;
@@ -30,6 +31,7 @@ export class BoqItemListComponent {
 
   currentTradeId: string;
   currentLotId: string;
+  currentBoqItem: BoqItem;
 
   constructor(
     private tradeService: TradeService, 
@@ -57,6 +59,7 @@ export class BoqItemListComponent {
   }
   
   openCreateTradeForm(): void {
+    this.tradeToEdit = null;
     this.showTradeForm = true;
   }
   
@@ -117,11 +120,10 @@ export class BoqItemListComponent {
     this.showLotForm = false;
   }
 
-
-  
   openCreateBoqItemForm(lotId: string, lots: Lot[]): void {
     this.currentLotId = lotId;
     this.lots = lots;
+    this.boqItemToEdit = null;
     this.showBoqItemForm = true;
   }
 
@@ -153,6 +155,10 @@ export class BoqItemListComponent {
     this.showBoqItemForm = false;
   }
 
+  openConsumptionList(boqItem: BoqItem): void {
+    this.showConsumptionList = true;
+    this.currentBoqItem = boqItem;
+  }
   
   updateTrades(updatedTrade: Trade | null, updatedLot: Lot | null, updatedBoqItem: BoqItem | null): void {
     if (updatedTrade) {
@@ -188,25 +194,36 @@ export class BoqItemListComponent {
 
     if (updatedBoqItem) {
       // Use the lot from the boqItem
-      const parentLot = updatedBoqItem.lot;
+      const parentLotId = updatedBoqItem.lot;
+      var parentLot: Lot | null = null;
       console.log("parentLot: " + parentLot);
-      if (parentLot) {
+      if (parentLotId) {
         // Find the parent trade based on the lot's trade_id
-        const parentTrade = this.trades.find(trade => trade.id === parentLot.trade?.id);
+        var parentTrade: Trade | null = null;
+        for (let trade of this.trades) {
+          for (let lot of trade.lots!) {
+            if (lot.id === parentLotId) {
+              parentTrade = trade;
+              parentLot = lot;
+            }
+          }
+        }
         console.log("parentTrade: " + parentTrade);
-  
+        
         if (parentTrade) {
           // Check if the boqItem already exists under the parent lot
-          const existingBoqItemIndex = (parentLot.boq_items || []).findIndex(boqItem => boqItem.id === updatedBoqItem.id);
+          const existingLotIndex = (parentTrade.lots || []).findIndex(lot => lot.id === parentLot);
+          const existingBoqItemIndex = (parentLot!.boq_items || []).findIndex(boqItem => boqItem.id === updatedBoqItem.id);
           console.log("existingBoqItemIndex: " + existingBoqItemIndex);
   
           if (existingBoqItemIndex !== -1) {
             // If boqItem is in the list, update it
-            parentLot.boq_items![existingBoqItemIndex] = updatedBoqItem;
-          } else {
+            parentLot!.boq_items![existingBoqItemIndex] = updatedBoqItem;
+            parentTrade.lots![existingLotIndex] = parentLot!;
+        } else {
             // If boqItem is not in the list, add it
-            parentLot.boq_items = parentLot.boq_items || [];
-            parentLot.boq_items.push(updatedBoqItem);
+            parentLot!.boq_items = parentLot!.boq_items || [];
+            parentLot!.boq_items.push(updatedBoqItem);
           }
         }
       }

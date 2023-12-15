@@ -36,10 +36,10 @@ export class BoqItemFormComponent implements OnInit {
       boq: '',
       lot: '',
       name_tm: '',
-      quantity: '',
+      quantity: null,
       unit: '',
-      material_unit_price: '',
-      labor_unit_price: '', 
+      material_unit_price: null,
+      labor_unit_price: null, 
     });
   }
 

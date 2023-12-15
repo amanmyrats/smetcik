@@ -41,4 +41,8 @@ export class BoqListComponent implements OnInit {
   gotoBoqItems(boqId: string): void {
     this.router.navigate([`smeta/boqs/${boqId}/boqitems`])
   }
+
+  gotoBoqMaterials(boqId: string): void {
+    this.router.navigate([`smeta/boqs/${boqId}/materials`])
+  }
 }

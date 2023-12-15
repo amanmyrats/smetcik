@@ -1,0 +1,36 @@
+<!-- <div class="card" style="width: 1000px;"> -->
+    <!-- <p-toolbar styleClass="bg-gray-900 shadow-2"
+        [style]="{ 'border-radius': '1rem', 'background-image': 'linear-gradient(to right, var(--bluegray-500), var(--bluegray-800))'}"> -->
+    <p-toolbar styleClass="bg-gray-900 shadow-2"
+        [style]="{ 'border-radius': '0.5rem', 'background-image': 'linear-gradient(to right, var(--bluegray-300), var(--bluegray-400))', 
+    'padding': '5px'}">
+        <ng-template pTemplate="start">
+            <img src="assets/smetcik_logo.png" style="max-height: 55px; border-radius: 10px;" />
+        </ng-template>
+        
+        <ng-template pTemplate="center">
+            <div class="flex flex-wrap align-items-center gap-3">
+                <button pButton class="p-button-success" label="Tender" ></button>
+                <button pButton class="p-button-success" label="BOQ" ></button>
+                <button pButton class="p-button-success" label="Payment" ></button>
+                <!-- <button
+                    class="p-link inline-flex justify-content-center align-items-center text-white h-3rem w-3rem border-circle hover:bg-white-alpha-10 transition-all transition-duration-200"><i
+                        class="pi pi-home text-2xl">Tender</i></button>
+                <button
+                    class="p-link inline-flex justify-content-center align-items-center text-white h-3rem w-3rem border-circle hover:bg-white-alpha-10 transition-all transition-duration-200"><i
+                        class="pi pi-user text-2xl">BOQ</i></button>
+                <button
+                    class="p-link inline-flex justify-content-center align-items-center text-white h-3rem w-3rem border-circle hover:bg-white-alpha-10 transition-all transition-duration-200"><i
+                        class="pi pi-search text-2xl">Payment</i></button> -->
+            </div>
+        </ng-template>
+        
+        <ng-template pTemplate="end">
+            <div class="flex align-items-center gap-2">
+                <p-avatar shape="circle" />
+                <span class="font-bold text-bluegray-50">User</span>
+            </div>
+        </ng-template>
+    
+    </p-toolbar>
+<!-- </div> -->

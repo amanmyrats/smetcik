@@ -1,0 +1,192 @@
+:host {
+    .custom-container {
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      background-color: #dce7f0;
+      border-radius: 5px;
+ 
+    }
+    .header {
+      position: fixed;
+      z-index: 1020;
+      width: 100%;
+      transition: margin-left 0.25s, margin-right 0.25s, width 0.25s, flex 0.25s;
+      flex: 0 0 55px;
+      flex-direction: row;
+      height: 55px;
+      padding: 0;
+      margin: 0;
+      background-color: #4d2a2a;
+      border-bottom: 1px solid #c8ced3;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      
+      // justify-content: space-between;
+      p-togglebutton {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0;
+        margin-right: 0;
+        background-color: transparent;
+        margin-left: 3px;
+        ::ng-deep {
+          .p-togglebutton.p-button {
+            &.p-highlight {
+              color: #333333;
+              .p-button-icon {
+                color: #333333;
+              }
+            }
+            background-color: transparent;
+            border-color: transparent;
+          }
+        }
+      }
+      .navbar-brand {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 155px;
+        height: 55px;
+        padding: 0;
+        margin-right: 0;
+        background-color: transparent;
+      }
+      arc-avatar-section {
+        margin-left: auto;
+      }
+    }
+    .sidebar {
+      position: fixed;
+      bottom: 0;
+      z-index: 1;
+      p-menu {
+        ::ng-deep {
+          .p-menu {
+            height: calc(100vh - 55px);
+            border: none;
+            background: #2f353a;
+            border-radius: unset;
+            -webkit-transition: width 0.1s ease-in-out;
+            -moz-transition: width 0.1s ease-in-out;
+            -o-transition: width 0.1s ease-in-out;
+            transition: width 0.1s ease-in-out;
+            &.minimized {
+              .p-menuitem {
+                &.title {
+                  display: none;
+                }
+              }
+              width: 50px;
+              .p-menuitem-icon {
+                display: block;
+                float: left;
+                width: 50px;
+                font-size: 18px;
+              }
+              .p-menuitem-link {
+                .p-menuitem-icon {
+                  color: #73818f;
+                }
+              }
+              .p-menuitem-text {
+                opacity: 0;
+                visibility: hidden;
+              }
+            }
+            .title {
+              .p-menuitem-text {
+                left: 1rem;
+              }
+            }
+            .p-menuitem-text {
+              position: absolute;
+              left: 2.5rem;
+              width: 10rem;
+            }
+            .p-menuitem-link {
+              &:hover, &:focus {
+                color: #fff;
+                background: #20a8d8;
+                .p-menuitem-icon, .p-menuitem-text {
+                  color: white;
+                }
+              }
+              .p-menuitem-icon, .p-menuitem-text {
+                color: white;
+              }
+            }
+          }
+        }
+      }
+    }
+    .body {
+      display: flex;
+      flex-direction: row;
+      flex-grow: 1;
+      margin-top: 55px;
+      .content {
+        margin-left: 50px;
+        flex: 1;
+        min-width: 0;
+      }
+    }
+    .footer {
+      margin-left: 0px;
+      flex: 0 0 50px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      padding: 0 1rem;
+      color: #23282c;
+      background: #f0f3f5;
+      border-top: 1px solid #c8ced3;
+    }
+    @media (max-width: 991.98px) {
+      .header {
+        .navbar-brand {
+          position: absolute;
+          top: 0;
+          left: 50%;
+          margin-left: -77.5px;
+        }
+        arc-avatar-section {
+          ::ng-deep {
+            .name-avatar {
+              display: none;
+            }
+            .button-dropdown-group {
+              padding-right: 0;
+            }
+          }
+        }
+      }
+      .sidebar {
+        p-menu {
+          ::ng-deep {
+            .p-menu {
+              &.minimized {
+                margin-left: -200px;
+              }
+              margin-left: 0;
+            }
+          }
+        }
+      }
+      .body {
+        
+        .content {
+          margin-left: 0;
+        }
+      }
+      .footer {
+        margin-left: 0;
+        flex-direction: column;
+        flex: 0;
+      }
+    }
+  }
+  

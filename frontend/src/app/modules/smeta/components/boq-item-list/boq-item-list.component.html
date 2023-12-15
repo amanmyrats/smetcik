@@ -7,8 +7,11 @@
                 {{trade.name_tm}}
             </div>
             <div style="width: 100%;"></div>
-            <p-button icon="pi pi-pencil" severity="info" (onClick)="openUpdateTradeForm(trade)"></p-button>
-            <p-button [style]="{'margin-left': '5px', 'margin-right': 'px'}" icon="pi pi-times" (onClick)="deleteTrade(trade.id!)" severity="danger"></p-button>
+            <p-button icon="pi pi-pencil" severity="info" (onClick)="openUpdateTradeForm(trade)">
+            </p-button>
+            <p-button [style]="{'margin-left': '5px', 'margin-right': 'px'}" icon="pi pi-times" 
+                (onClick)="deleteTrade(trade.id!)" severity="danger">
+            </p-button>
         </ng-template>
         <p-button  icon="pi pi-plus"  label="Add Lot" (onClick)="openCreateLotForm(trade.id!)"></p-button>
 
@@ -18,7 +21,10 @@
                     <ng-template pTemplate="body" let-lot let-expanded="expanded">
                         <tr>
                             <td>
-                                <button type="button" pButton pRipple [pRowToggler]="lot" class="p-button-text p-button-rounded p-button-plain" [icon]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"></button>
+                                <button type="button" pButton pRipple [pRowToggler]="lot" 
+                                    class="p-button-text p-button-rounded p-button-plain" 
+                                    [icon]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'">
+                                </button>
                             </td>
                             <td style="width: 100px; padding: 0;">LOT-{{ lot.id }}</td>
                             <td style="width: 600px; padding: 0;">{{ lot.name_tm }}</td>
@@ -27,10 +33,14 @@
                             <td></td>
                             <td style="width: 50%;"></td>
                             <td>
-                                <p-button icon="pi pi-pencil" severity="info" (onClick)="openUpdateLotForm(trade.id!, lot)"></p-button>
+                                <p-button icon="pi pi-pencil" severity="info" 
+                                    (onClick)="openUpdateLotForm(trade.id!, lot)">
+                                </p-button>
                             </td>
                             <td>
-                                <p-button [style]="{'margin-left': '5px', 'margin-right': 'px'}" icon="pi pi-times" (onClick)="deleteLot(lot.id!)" severity="danger"></p-button>
+                                <p-button [style]="{'margin-left': '5px', 'margin-right': 'px'}" icon="pi pi-times" 
+                                    (onClick)="deleteLot(lot.id!)" severity="danger">
+                                </p-button>
                             </td>
                         </tr>
                     </ng-template>
@@ -49,19 +59,35 @@
                                         <ng-template pTemplate="header">
                                             <tr>
                                                 <th pSortableColumn="id">Id <p-sortIcon field="price"></p-sortIcon></th>
-                                                <th pSortableColumn="customer">Name <p-sortIcon field="customer"></p-sortIcon></th>
-                                                <th pSortableColumn="date">Unit <p-sortIcon field="date"></p-sortIcon></th>
-                                                <th pSortableColumn="amount">Quantity <p-sortIcon field="amount"></p-sortIcon></th>
-                                                <th pSortableColumn="status">Unit Price <p-sortIcon field="status"></p-sortIcon></th>
+                                                <th pSortableColumn="name_tm" style="min-width: 50%;">Name <p-sortIcon field="customer"></p-sortIcon></th>
+                                                <th pSortableColumn="quantity">Quantity <p-sortIcon field="amount"></p-sortIcon></th>
+                                                <th pSortableColumn="unit">Unit <p-sortIcon field="date"></p-sortIcon></th>
+                                                <th pSortableColumn="material_unit_price">Material Unit Price <p-sortIcon field="status"></p-sortIcon></th>
+                                                <th pSortableColumn="labor_unit_price">Labor Unit Price <p-sortIcon field="status"></p-sortIcon></th>
+                                                <!-- <th pSortableColumn="material_total_price">Material Total Price <p-sortIcon field="status"></p-sortIcon></th>
+                                                <th pSortableColumn="labor_total_price">Labor Total Price <p-sortIcon field="status"></p-sortIcon></th>
+                                                <th pSortableColumn="total_price">Total Price <p-sortIcon field="status"></p-sortIcon></th> -->
+                                                <th></th>
+                                                <th></th>
+                                                <th></th>
                       
                                             </tr>
                                         </ng-template>
                                         <ng-template pTemplate="body" let-boq_item>
                                             <tr>
                                                 <td>{{ boq_item.id }}</td>
-                                                <td>{{ boq_item.name_tm }}</td>
-                                                <td>{{ boq_item.unit }}</td>
-                                                <td>{{ boq_item.quantity | currency: 'USD' }}</td>
+                                                <td  style="min-width: 50%;">{{ boq_item.name_tm }}</td>
+                                                <td>{{ boq_item.quantity | number: '2.2-2' }}</td>
+                                                <td>{{ boq_item.unit_object!.code_tm }}</td>
+                                                <td>{{ boq_item.material_unit_price | currency: 'USD' }}</td>
+                                                <td>{{ boq_item.labor_unit_price | currency: 'USD' }}</td>
+                                                <!-- <td>{{ boq_item.material_unit_price * boq_item.quantity | currency: 'USD' }}</td>
+                                                <td>{{ boq_item.labor_unit_price * boq_item.quantity | currency: 'USD' }}</td>
+                                                <td>{{ 
+                                                    boq_item.material_unit_price * boq_item.quantity + 
+                                                    boq_item.labor_unit_price * boq_item.quantity | currency: 'USD' 
+                                                    }}
+                                                </td> -->
                                                 <td>
                                                     <p-button icon="pi pi-pencil" severity="info" 
                                                     (onClick)="openUpdateBoqItemForm(lot.id!, trade.lots,  boq_item)"></p-button>
@@ -69,6 +95,12 @@
                                                 <td>
                                                     <p-button [style]="{'margin-left': '5px', 'margin-right': 'px'}" icon="pi pi-times" 
                                                     (onClick)="deleteBoqItem(boq_item.id!)" severity="danger"></p-button>
+
+                                                </td>
+                                                <td>
+                                                    <p-button [style]="{'margin-left': '5px', 'margin-right': 'px'}" icon="pi pi-list" 
+                                                    (onClick)="openConsumptionList(boq_item)" severity="info" label="Consumptions"></p-button>
+
                                                 </td>
                                             </tr>
                                         </ng-template>
@@ -137,4 +169,16 @@
     >
 
     </app-boq-item-form>
+</p-dialog>
+
+<!-- Consumption List -->
+<p-dialog [(visible)]="showConsumptionList" [style]="{width: '100%', height: '900px'}">
+    <ng-template pTemplate="header">
+        Consumption List for: {{currentBoqItem.name_tm}}
+    </ng-template>
+    <app-consumption-list *ngIf="showConsumptionList" 
+    [boqItemFromParent]="currentBoqItem" 
+    >
+
+    </app-consumption-list>
 </p-dialog>

@@ -5,10 +5,10 @@ from rest_framework.viewsets import ModelViewSet
 from rest_framework.response import Response
 from rest_framework import status
 
-from smeta.models import Boq, BoqItem, Consumption, Material
+from smeta.models import Boq, BoqItem, Consumption, Resource, MaterialExtraInfo
 from smeta.serializers import (
-    BoqItemModelSerializer, ConsumptionModelSerializer, MaterialModelSerializer, 
-    BoqModelSerializer
+    BoqItemModelSerializer, ConsumptionModelSerializer, ResourceModelSerializer, 
+    BoqModelSerializer, MaterialExtraInfoModelSerializer
 )
 
 
@@ -38,6 +38,7 @@ class BoqItemRetrieveUpdateDestroyAPIView(RetrieveUpdateDestroyAPIView):
 class ConsumptionListCreateAPIView(ListCreateAPIView):
     queryset = Consumption.objects.all()
     serializer_class = ConsumptionModelSerializer
+    filterset_fields = ('boq_item', 'resource',)
 
     def create(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
@@ -47,15 +48,27 @@ class ConsumptionListCreateAPIView(ListCreateAPIView):
         return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
 
 
-class MaterialListCreateAPIView(ListCreateAPIView):
-    queryset = Material.objects.all()
-    serializer_class = MaterialModelSerializer
+class ConsumptionRetrieveUpdateDestroyAPIiew(RetrieveUpdateDestroyAPIView):
+    queryset = Consumption.objects.all()
+    serializer_class = ConsumptionModelSerializer
+
+
+class ResourceListCreateAPIView(ListCreateAPIView):
+    queryset = Resource.objects.all()
+    serializer_class = ResourceModelSerializer
 
     def create(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         self.perform_create(serializer)
         return Response(serializer.data, status=status.HTTP_201_CREATED)
+    
+
+class ResourceRetrieveUpdateDestroyAPIView(RetrieveUpdateDestroyAPIView):
+    queryset = Resource.objects.all()
+    serializer_class = ResourceModelSerializer
 
         
-        
+class MaterialExtraInfoModelViewSet(ModelViewSet):
+    queryset = MaterialExtraInfo.objects.all()
+    serializer_class = MaterialExtraInfoModelSerializer

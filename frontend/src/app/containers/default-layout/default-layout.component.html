@@ -1,0 +1,35 @@
+<div class="custom-container">
+
+    <div class="header">
+      <!-- <p-toggleButton [(ngModel)]="minimizedMenu" offIcon="pi pi-bars" onIcon="pi pi-bars"></p-toggleButton> -->
+      <a class="navbar-brand" href="#/">
+        <img src="assets/img/brand/logo.svg" width="120" height="25" alt="AAD" class="navbar-brand-full">
+      </a>
+      <!-- <arc-avatar-section (selectedAction)="executeAction($event)" [currentUser]="currentUser"></arc-avatar-section> -->
+    </div>
+  
+    <div class="body">
+      <div class="sidebar">
+        <!-- <p-menu [appendTo]="'body'" [styleClass]=" minimizedMenu ? 'minimized' : ''" [model]="items"></p-menu> -->
+      </div>
+      <div class="content">
+        <div class="breadcrumb">
+          <!-- <p-breadcrumb [model]="breadcrumbs" [home]="home"></p-breadcrumb> -->
+        </div>
+        <router-outlet></router-outlet>
+      </div>
+    </div>
+  
+    <div class="footer">
+      <span><b>AAD</b> &copy; 2022 Bouygues Construction IT.</span>
+      <span class="ml-auto"> <a href="#">Bouygues Construction IT</a></span>
+      <span class="spacer"></span>
+      <span> &copy; 2023. All rights reserved. QS Team</span>
+    </div>
+    <div class="center footer">
+  </div>
+  </div>
+  
+  <!-- <p-confirmDialog></p-confirmDialog> -->
+  
+  <!-- <p-toast></p-toast> -->

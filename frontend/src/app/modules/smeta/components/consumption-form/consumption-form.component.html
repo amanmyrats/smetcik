@@ -1,0 +1,71 @@
+<form [formGroup]="consumptionForm" (ngSubmit)="onSubmit()">
+
+        <!-- BOQ -->
+        <!-- <p-dropdown [options]="boqs" formControlName="boq" 
+            optionLabel="contract_number" [filter]="true" filterBy="contract_number" 
+            [showClear]="true" placeholder="Select a Boq" 
+            optionValue="id"
+        >
+            <ng-template let-boq pTemplate="item">
+                <div class="flex align-items-center gap-2">
+                    <div>{{ boq.contract_number }}</div>
+                </div>
+            </ng-template>
+        </p-dropdown> -->
+    
+        <!-- MATERIAL -->
+        <p-dropdown [options]="resources" formControlName="resource" 
+            optionLabel="name_tm" [filter]="true" filterBy="name_tm" 
+            [showClear]="true" placeholder="Select a Resource" 
+            optionValue="id"
+        >
+            <ng-template let-material pTemplate="item">
+                <div class="flex align-items-center gap-2">
+                    <div>{{ material.name_tm }}</div>
+                </div>
+            </ng-template>
+        </p-dropdown>
+    
+        <p-button 
+            icon="pi pi-plus" 
+            label="Not in the list? Then Add New Resource"
+            severity="info" 
+            (onClick)="openResourceForm()" 
+            >
+        </p-button>
+
+        <!-- Quantity -->
+        <span class="p-float-label" style="margin: 40px 0;">
+            <p-inputNumber mode="decimal" 
+            formControlName="quantity" 
+            [minFractionDigits]="2" [maxFractionDigits]="2"> </p-inputNumber>
+            <label htmlFor="quantity">Quantity</label>
+        </span>
+    
+        <!-- <span>
+            <p-checkbox formControlName="is_material" [binary]="true" inputId="isMaterial"></p-checkbox>
+            <label for="isMaterial">Is it Material?</label>
+        </span>
+        
+        <span class="p-float-label" style="margin-top: 40px;">
+        </span> -->
+
+        <p-button type="button" pRipple label="Cancel" icon="pi pi-times" 
+            styleClass="p-button-outlined" class="p-button-text"
+            (click)="closeDialog(null)">
+        </p-button>
+        <p-button type="submit" pRipple label="Save" icon="pi pi-check" 
+            styleClass="p-button-outlined" class="p-button-text" 
+            [disabled]="consumptionForm.invalid">
+        </p-button>
+    </form>
+
+
+<!-- Resource Form Dialog -->
+<p-dialog header="Create Resource" [(visible)]="showResourceForm" [style]="{width: '600px', height: '700px'}">
+    <app-resource-form *ngIf="showResourceForm" 
+    (closeDialogEventEmitter)="handleResourceFormCloseEvent($event)" 
+    >
+
+    </app-resource-form>
+</p-dialog>

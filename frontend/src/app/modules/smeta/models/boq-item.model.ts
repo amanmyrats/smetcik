@@ -1,5 +1,6 @@
 import { Lot } from "../../common/models/lot.model";
 import { Trade } from "../../common/models/trade.model";
+import { Unit } from "../../common/models/unit.model";
 
 export class BoqItem {
     public id?: string;
@@ -13,6 +14,7 @@ export class BoqItem {
     public name_original?: string;
     public quantity?: string;
     public unit?: string;
+    public unit_object?: Unit;
     public material_unit_price?: string;
     public labor_unit_price?: string;
     public transport_unit_price?: string;

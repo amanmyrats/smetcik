@@ -8,6 +8,8 @@ import { DialogModule } from 'primeng/dialog';
 import { InputTextModule } from 'primeng/inputtext';
 import { DropdownModule } from 'primeng/dropdown';
 import { InputNumberModule } from 'primeng/inputnumber';
+import { ToastModule } from 'primeng/toast';
+import { CheckboxModule } from 'primeng/checkbox';
 
 import { SmetaRoutingModule } from './smeta-routing.module';
 import { BoqListComponent } from './components/boq-list/boq-list.component';
@@ -17,12 +19,16 @@ import { ButtonModule } from 'primeng/button';
 import { BoqDetailComponent } from './components/boq-detail/boq-detail.component';
 import { BoqItemListComponent } from './components/boq-item-list/boq-item-list.component';
 import { BoqItemDetailComponent } from './components/boq-item-detail/boq-item-detail.component';
-import { ComsumptionListComponent } from './components/comsumption-list/comsumption-list.component';
-import { ComsumptionDetailComponent } from './components/comsumption-detail/comsumption-detail.component';
 import { TradeFormComponent } from './components/trade-form/trade-form.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LotFormComponent } from './components/lot-form/lot-form.component';
 import { BoqItemFormComponent } from './components/boq-item-form/boq-item-form.component';
+import { ConsumptionListComponent } from './components/consumption-list/consumption-list.component';
+import { ConsumptionFormComponent } from './components/consumption-form/consumption-form.component';
+import { ResourceFormComponent } from './components/resource-form/resource-form.component';
+import { BoqMaterialComponent } from './components/boq-material/boq-material.component';
+import { ResourceListComponent } from './components/resource-list/resource-list.component';
+import { SmetaHomeComponent } from './smeta-home/smeta-home.component';
 
 @NgModule({
   declarations: [
@@ -31,11 +37,15 @@ import { BoqItemFormComponent } from './components/boq-item-form/boq-item-form.c
     BoqDetailComponent,
     BoqItemListComponent,
     BoqItemDetailComponent,
-    ComsumptionListComponent,
-    ComsumptionDetailComponent,
     TradeFormComponent,
     LotFormComponent,
-    BoqItemFormComponent
+    BoqItemFormComponent,
+    ConsumptionListComponent,
+    ConsumptionFormComponent,
+    ResourceFormComponent,
+    BoqMaterialComponent,
+    ResourceListComponent,
+    SmetaHomeComponent
   ],
   imports: [
     CommonModule,
@@ -53,6 +63,8 @@ import { BoqItemFormComponent } from './components/boq-item-form/boq-item-form.c
     InputTextModule, 
     DropdownModule, 
     InputNumberModule,
+    ToastModule, 
+    CheckboxModule, 
   ]
 })
 export class SmetaModule { }

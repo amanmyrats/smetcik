@@ -9,7 +9,9 @@ import { environment as env } from 'src/environments/environment';
 })
 export class UnitService {
 
-  public readonly endPoint = '/api/v1/units/'
+  public readonly endPoint: string = '/api/v1/units/'
+  private units: Unit[];
+
   constructor(
     private httpClient: HttpClient,
   ) { }
@@ -32,5 +34,13 @@ export class UnitService {
 
   deleteUnit(id: string): Observable<any> {
     return this.httpClient.delete<any>(`${env.apiUrl}${this.endPoint}${id}`);
+  }
+
+  getCurrentUnits(): Unit[]{
+      return this.units;
+  }
+
+  setCurrentUnits(units: Unit[]): void {
+    this.units = units;
   }
 }

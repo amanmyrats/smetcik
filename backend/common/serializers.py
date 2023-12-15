@@ -1,7 +1,7 @@
 from rest_framework.serializers import ModelSerializer, StringRelatedField
 
 from common.models import Unit, Trade, Lot, Currency, Country
-from smeta.serializers import BoqItemModelSerializer
+# from smeta.serializers import BoqItemModelSerializer
 
 
 class UnitModelSerializer(ModelSerializer):
@@ -11,7 +11,11 @@ class UnitModelSerializer(ModelSerializer):
 
 
 class LotModelSerializer(ModelSerializer):
-    boq_items = BoqItemModelSerializer(many=True, read_only=True)
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        from smeta.serializers import BoqItemModelSerializer
+        self.fields['boq_items'] = BoqItemModelSerializer(many=True, read_only=True)
+
     class Meta:
         model = Lot
         fields = '__all__'

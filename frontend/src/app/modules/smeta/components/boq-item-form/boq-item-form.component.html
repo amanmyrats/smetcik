@@ -38,8 +38,10 @@
     </span>
 
     <!-- Quantity -->
-    <span class="p-float-label">
-        <p-inputNumber mode="decimal" formControlName="quantity"> </p-inputNumber>
+    <span class="p-float-label"  style="margin: 40px 0;">
+        <p-inputNumber mode="decimal" formControlName="quantity"
+        [minFractionDigits]="2" [maxFractionDigits]="2"
+        > </p-inputNumber>
         <label htmlFor="quantity">Quantity</label>
     </span>
 
@@ -57,14 +59,19 @@
     </p-dropdown>
 
     <!-- Material Unit Price -->
-    <span class="p-float-label">
-        <p-inputNumber mode="decimal" formControlName="material_unit_price"> </p-inputNumber>
+    <span class="p-float-label"  style="margin: 40px 0;">
+        <p-inputNumber mode="decimal" 
+        formControlName="material_unit_price"
+        [minFractionDigits]="2" [maxFractionDigits]="2"
+        > </p-inputNumber>
         <label htmlFor="material_unit_price">Material Unit Price</label>
     </span>
 
     <!-- Labor Unit Price -->
     <span class="p-float-label">
-        <p-inputNumber mode="decimal" formControlName="labor_unit_price"> </p-inputNumber>
+        <p-inputNumber mode="decimal" formControlName="labor_unit_price"
+        [minFractionDigits]="2" [maxFractionDigits]="2"
+        > </p-inputNumber>
         <label htmlFor="labor_unit_price">Labor Unit Price</label>
     </span>
 

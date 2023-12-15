@@ -1,11 +1,33 @@
-<div>
-  <h1>
-    HEADER
-  </h1>
-  <a routerLink="/smeta/boqs">Goto BOQs</a>
-</div>
-<router-outlet></router-outlet>
+<div class="custom-container">
 
-<div>
-  FOOTER
+  <!-- <div class="header"> -->
+    <!-- <p-toggleButton [(ngModel)]="minimizedMenu" offIcon="pi pi-bars" onIcon="pi pi-bars"></p-toggleButton> -->
+    <!-- <a class="navbar-brand" href="#/">
+      <img src="assets/img/brand/logo.svg" width="120" height="25" alt="AAD" class="navbar-brand-full">
+    </a> -->
+    <!-- <arc-avatar-section (selectedAction)="executeAction($event)" [currentUser]="currentUser"></arc-avatar-section> -->
+    <app-header-toolbar></app-header-toolbar>
+  <!-- </div> -->
+
+  <div class="body">
+    <div class="sidebar">
+      <!-- <p-menu [appendTo]="'body'" [styleClass]=" minimizedMenu ? 'minimized' : ''" [model]="items"></p-menu> -->
+    </div>
+    <div class="content">
+      <div class="breadcrumb">
+        <!-- <p-breadcrumb [model]="breadcrumbs" [home]="home"></p-breadcrumb> -->
+      </div>
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+
+  <div class="footer">
+    <span><b>BC</b> &copy; 2023 Business Club IT.</span>
+    <span class="spacer"></span>
+    <span> &copy; 2023. All rights reserved. Business Club</span>
+  </div>
 </div>
+
+<p-confirmDialog></p-confirmDialog>
+
+<p-toast></p-toast>

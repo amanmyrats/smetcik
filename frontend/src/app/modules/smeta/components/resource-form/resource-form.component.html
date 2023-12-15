@@ -1,0 +1,44 @@
+<form [formGroup]="resourceForm" (ngSubmit)="onSubmit()">
+
+    <span class="p-float-label" style="margin-top: 40px;margin-bottom: 40px;">
+        <input pInputText id="name_tm" formControlName="name_tm" />
+        <label htmlFor="name_tm">Resource Name TM</label>
+    </span>
+
+    
+        <!-- Unit -->
+        <p-dropdown [options]="units" formControlName="unit" 
+            optionLabel="code_tm" [filter]="true" filterBy="code_tm" 
+            [showClear]="true" placeholder="Select a Unit" 
+            optionValue="id"
+        >
+            <ng-template let-unit pTemplate="item">
+                <div class="flex align-items-center gap-2">
+                    <div>{{ unit.code_tm }}</div>
+                </div>
+            </ng-template>
+        </p-dropdown>
+    
+        <!-- Material Unit Price -->
+        <span class="p-float-label" style="margin: 40px 0;">
+            <p-inputNumber mode="decimal" [minFractionDigits]="2" [maxFractionDigits]="2" formControlName="unit_price"> </p-inputNumber>
+            <label htmlFor="unit_price">Unit Price</label>
+        </span>
+
+    <span>
+        <p-checkbox formControlName="is_material" [binary]="true" inputId="isMaterial"></p-checkbox>
+        <label for="isMaterial">Is it Material?</label>
+    </span>
+    
+    <span class="p-float-label" style="margin-top: 40px;">
+    </span>
+
+    <p-button type="button" pRipple label="Cancel" icon="pi pi-times" 
+        styleClass="p-button-outlined" class="p-button-text"
+        (click)="closeDialog(null)">
+    </p-button>
+    <p-button type="submit" pRipple label="Save" icon="pi pi-check" 
+        styleClass="p-button-outlined" class="p-button-text" 
+        [disabled]="resourceForm.invalid">
+    </p-button>
+</form>

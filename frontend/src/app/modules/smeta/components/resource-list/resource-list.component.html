@@ -1,0 +1,61 @@
+<div style="font-size: xx-large; font-weight: bold;">Materials</div>
+<p-button label="Add Resource" icon="pi pi-plus" (onClick)="openCreateResourceForm()"></p-button>
+
+<p-table [value]="resources" (sortFunction)="customSort($event)" 
+        [customSort]="true" 
+        [tableStyle]="{'min-width': '60rem'}"
+    >
+    <ng-template pTemplate="header">
+        <tr>
+            <th pSortableColumn="id" style="width:5%">ID 
+                <p-sortIcon field="id"></p-sortIcon></th>
+            <th pSortableColumn="name_tm" style="width:20%">Name 
+                <p-sortIcon field="name_tm"></p-sortIcon></th>
+            <th pSortableColumn="name_tm" style="width:10%">Brand
+                <p-sortIcon field="name_tm"></p-sortIcon></th>
+            <th pSortableColumn="name_tm" style="width:10%">Country
+                <p-sortIcon field="name_tm"></p-sortIcon></th>
+            <th pSortableColumn="quantity" style="width:10%">Quantity 
+                <p-sortIcon field="quantity"></p-sortIcon></th>
+            <th pSortableColumn="unit" style="width:10%">Unit 
+                <p-sortIcon field="unit"></p-sortIcon></th>
+            <th pSortableColumn="unit_price" style="width:10%">Unit Price 
+                <p-sortIcon field="unit_price"></p-sortIcon></th>
+            <th pSortableColumn="unit_price" style="width:10%">Total Price 
+                <p-sortIcon field="unit_price"></p-sortIcon></th>
+            <th></th>
+            <th></th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-resource>
+        <tr>
+            <td>{{resource.id}}</td>
+            <td>{{resource.name_tm}}</td>
+            <td>{{resource.brand}}</td>
+            <td>{{resource.country_object?.name_tm}}</td>
+            <td>{{resource.quantity | number: '2.2-2'}}</td>
+            <td>{{resource.unit_object?.code_tm}}</td>
+            <td>{{resource.unit_price | currency: 'USD'}}</td>
+            <td>{{resource.quantity * resource.unit_price | currency: 'USD'}}</td>
+            <td>
+                <p-button icon="pi pi-pencil" severity="info" 
+                (onClick)="openUpdateResourceForm(resource)"></p-button>
+            </td>
+            <td>
+                <p-button [style]="{'margin-left': '5px', 'margin-right': 'px'}" icon="pi pi-times" 
+                (onClick)="deleteResource(resource.id!)" severity="danger"></p-button>
+            </td>
+        </tr>
+    </ng-template>
+</p-table>
+
+
+<!-- Resource Form Dialog -->
+<p-dialog header="Create Resource" [(visible)]="showResourceForm" [style]="{width: '600px', height: '700px'}">
+    <app-resource-form *ngIf="showResourceForm" 
+    (closeDialogEventEmitter)="handleResourceFormCloseEvent($event)" 
+    [resourceFromParent]="resourceToUpdate" 
+    >
+
+    </app-resource-form>
+</p-dialog>
