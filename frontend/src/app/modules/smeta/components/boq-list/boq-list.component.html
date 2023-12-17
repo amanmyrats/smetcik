@@ -1,6 +1,24 @@
 
-<p-card *ngFor="let boq of boqs" title="BOQ">
+<!-- <p-card *ngFor="let boq of boqs" title="BOQ">
     Registered BOQ - {{boq.contract_number}}
     <p-button label="See BOQ Items" [rounded]="true" severity="info" (onClick)="gotoBoqItems(boq.id!)"></p-button>
     <p-button label="See BOQ Materials" [rounded]="true" severity="info" (onClick)="gotoBoqMaterials(boq.id!)"></p-button>
+</p-card> -->
+
+<p-card  *ngFor="let boq of boqs" title="BOQ" 
+header="{{boq.project_object?.name_tm}}" 
+subheader="Registered BOQ" [style]="{ width: '360px' }">
+    <!-- <ng-template pTemplate="header"> -->
+        <!-- {{boq.contract_number}} -->
+        <!-- <img alt="Card" src="https://primefaces.org/cdn/primeng/images/usercard.png" /> -->
+    <!-- </ng-template> -->
+    <p>
+        Registered BOQ - {{boq.contract_number}}
+    </p>
+    <ng-template pTemplate="footer">
+        <p-button label="Detail" icon="pi pi-list" (onClick)="gotoBoqItems(boq.id!)"></p-button>
+        <p-button label="Materials" icon="pi pi-truck" styleClass="p-button-secondary" 
+        (onClick)="gotoBoqMaterials(boq.id!)"
+        [style]="{ 'margin-left': '.5em' }"></p-button>
+    </ng-template>
 </p-card>

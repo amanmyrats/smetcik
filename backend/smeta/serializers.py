@@ -6,6 +6,10 @@ from smeta.models import Boq, BoqItem, Consumption, Resource, MaterialExtraInfo
 
 
 class BoqModelSerializer(ModelSerializer):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        from company.serializers import ProjectModelSerializer
+        self.fields['project_object'] = ProjectModelSerializer(source='project', read_only=True)
     class Meta:
         model = Boq
         fields = '__all__'
