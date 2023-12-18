@@ -1,10 +1,26 @@
 <div style="font-size: xx-large; font-weight: bold;">Materials</div>
-<p-button label="Add Resource" icon="pi pi-plus" (onClick)="openCreateResourceForm()"></p-button>
 
 <p-table [value]="resources" (sortFunction)="customSort($event)" 
-        [customSort]="true" 
-        [tableStyle]="{'min-width': '60rem'}"
-    >
+[customSort]="true" 
+[tableStyle]="{'min-width': '60rem'}"
+>
+<ng-template pTemplate="caption">
+    <p-toolbar>
+        <div class="p-toolbar-group-start">
+            <p-button label="Add Resource" icon="pi pi-plus" (onClick)="openCreateResourceForm()"></p-button>
+        </div>
+        <div class="p-toolbar-group-end">
+            <button type="button" pButton pRipple icon="pi pi-file-excel" (click)="exportExcel()"
+                class="p-button-success mr-2" pTooltip="XLS" tooltipPosition="bottom" label="Export To Excel">
+            </button>
+            <button type="button" pButton pRipple icon="pi pi-upload" (click)="importFromExcel()"
+                class="p-button-warning  ml-auto" pTooltip="PDF" tooltipPosition="bottom" label="Import From Excel">
+            </button>
+        </div>
+
+    </p-toolbar>
+</ng-template>
+
     <ng-template pTemplate="header">
         <tr>
             <th pSortableColumn="id" style="width:5%">ID 

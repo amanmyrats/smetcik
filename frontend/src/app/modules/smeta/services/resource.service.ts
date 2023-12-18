@@ -34,4 +34,10 @@ export class ResourceService {
   deleteResource(id: string): Observable<any> {
     return this.httpClient.delete<any>(`${env.apiUrl}${this.endPoint}${id}/`);
   }
+
+  exportToExcel(queryParams?: string): Observable<any>{
+    return this.httpClient.get<any>(`${env.apiUrl}${this.endPoint}exporttoexcel/`);
+  }
+
+  // importFromExcel()
 }

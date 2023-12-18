@@ -13,6 +13,6 @@ export class SmetaHomeComponent implements OnInit {
   ){}
 
   ngOnInit(): void {
-      this.router.navigateByUrl('smeta/boqs');
+      // this.router.navigateByUrl('smeta/boqs');
   }
 }

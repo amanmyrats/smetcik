@@ -17,7 +17,7 @@ export class HeaderToolbarComponent {
   }
 
   navigateToBoq(): void {
-    this.router.navigate(['smeta']);
+    this.router.navigate(['smeta', 'boqs']);
   }
 
   navigateToPayment(): void {

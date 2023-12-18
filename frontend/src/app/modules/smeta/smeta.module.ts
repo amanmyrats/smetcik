@@ -10,6 +10,7 @@ import { DropdownModule } from 'primeng/dropdown';
 import { InputNumberModule } from 'primeng/inputnumber';
 import { ToastModule } from 'primeng/toast';
 import { CheckboxModule } from 'primeng/checkbox';
+import { ToolbarModule } from 'primeng/toolbar';
 
 import { SmetaRoutingModule } from './smeta-routing.module';
 import { BoqListComponent } from './components/boq-list/boq-list.component';
@@ -65,6 +66,7 @@ import { SmetaHomeComponent } from './smeta-home/smeta-home.component';
     InputNumberModule,
     ToastModule, 
     CheckboxModule, 
+    ToolbarModule, 
   ]
 })
 export class SmetaModule { }

@@ -83,4 +83,11 @@ export class ResourceListComponent implements OnInit{
       });
 }
 
+exportExcel(): void {
+
+}
+
+importFromExcel(): void {
+  
+}
 }
