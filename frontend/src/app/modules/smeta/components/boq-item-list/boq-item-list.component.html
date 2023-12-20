@@ -1,6 +1,97 @@
+<p-table
+    [value]="boqItems"
+    [paginator]="true"
+    [rows]="10"
+    [showCurrentPageReport]="true"
+    [tableStyle]="{ 'min-width': '50rem' }"
+    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+    [rowsPerPageOptions]="[5, 10, 20, 50, 100]"
+>
+
+<ng-template pTemplate="caption">
+    <p-toolbar>
+        <div class="p-toolbar-group-start">
+            <p-button label="Add Boq Item" icon="pi pi-plus" (onClick)="openCreateBoqItemForm()"></p-button>
+
+        </div>
+        <div class="p-toolbar-group-end">
+            <button type="button" pButton pRipple icon="pi pi-file-excel" (click)="exportExcel()"
+                class="p-button-success mr-2" pTooltip="XLS" tooltipPosition="bottom" label="Export To Excel">
+            </button>
+
+            <button type="button" pButton pRipple icon="pi pi-upload" (click)="openBoqItemImportForm()"
+                class="p-button-warning  ml-auto" pTooltip="PDF" tooltipPosition="bottom" label="Import From Excel">
+            </button>
+        </div>
+
+    </p-toolbar>
+</ng-template>
+
+
+    <ng-template pTemplate="header">
+        <tr>
+            <th style="width:5%">Id</th>
+            <th style="width:25%">Name</th>
+            <th style="width:5%">Quantity</th>
+            <th style="width:5%">Unit</th>
+            <th style="width:10%">Material Unit Price</th>
+            <th style="width:10%">Labor Unit Price</th>
+            <th style="width:3%"></th>
+            <th style="width:3%"></th>
+            <th style="width:3%"></th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-boqItem>
+        <tr>
+            <td>{{ boqItem.id }}</td>
+            <td>{{ boqItem.name_tm }}</td>
+            <td>{{ boqItem.quantity }}</td>
+            <td>{{ boqItem.unit_object?.code_tm }}</td>
+            <td>{{ boqItem.material_unit_price }}</td>
+            <td>{{ boqItem.labor_unit_price }}</td>
+            <td>
+                <p-button icon="pi pi-pencil" severity="info" 
+                (onClick)="openUpdateBoqItemForm(boqItem)"></p-button>
+            </td>
+            <td>
+                <p-button [style]="{'margin-left': '5px', 'margin-right': 'px'}" icon="pi pi-times" 
+                (onClick)="deleteBoqItem(boqItem.id!)" severity="danger"></p-button>
+
+            </td>
+            <td>
+                <p-button [style]="{'margin-left': '5px', 'margin-right': 'px'}" icon="pi pi-list" 
+                (onClick)="openConsumptionList(boqItem)" severity="info" label="Consumptions"></p-button>
+
+            </td>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="paginatorleft">
+        <p-button type="button" icon="pi pi-plus" styleClass="p-button-text"></p-button>
+    </ng-template>
+    <ng-template pTemplate="paginatorright">
+        <p-button type="button" icon="pi pi-cloud" styleClass="p-button-text"></p-button>
+    </ng-template>
+</p-table>
+
+
 <!-- Trade -->
 <p-accordion [activeIndex]="0">
-    <p-button label="Add Trade" icon="pi pi-plus" (onClick)="openCreateTradeForm()"></p-button>
+    <p-toolbar>
+        <div class="p-toolbar-group-start">
+            <p-button label="Add Trade" icon="pi pi-plus" (onClick)="openCreateTradeForm()"></p-button>
+            
+        </div>
+        <div class="p-toolbar-group-end">
+            <button type="button" pButton pRipple icon="pi pi-file-excel" (click)="exportExcel()"
+                class="p-button-success mr-2" pTooltip="XLS" tooltipPosition="bottom" label="Export To Excel">
+            </button>
+
+            <button type="button" pButton pRipple icon="pi pi-upload" (click)="openBoqItemImportForm()"
+                class="p-button-warning  ml-auto" pTooltip="PDF" tooltipPosition="bottom" label="Import From Excel">
+            </button>
+        </div>
+
+    </p-toolbar>
     <p-accordionTab *ngFor="let trade of trades">
         <ng-template pTemplate="header">
             <div style="width: 30%;">
@@ -53,7 +144,7 @@
                                     <!-- BoqItems -->
                                     <!-- BoqItems -->
                                     <!-- BoqItems -->
-                                    <p-button  icon="pi pi-plus"  label="Add BoqItem" (onClick)="openCreateBoqItemForm(lot.id!, trade.lots)"></p-button>
+                                    <!-- <p-button  icon="pi pi-plus"  label="Add BoqItem" (onClick)="openCreateBoqItemForm(lot.id!, trade.lots)"></p-button> -->
 
                                     <p-table [value]="lot.boq_items" dataKey="id">
                                         <ng-template pTemplate="header">
@@ -89,8 +180,8 @@
                                                     }}
                                                 </td> -->
                                                 <td>
-                                                    <p-button icon="pi pi-pencil" severity="info" 
-                                                    (onClick)="openUpdateBoqItemForm(lot.id!, trade.lots,  boq_item)"></p-button>
+                                                    <!-- <p-button icon="pi pi-pencil" severity="info" 
+                                                    (onClick)="openUpdateBoqItemForm(lot.id!, trade.lots,  boq_item)"></p-button> -->
                                                 </td>
                                                 <td>
                                                     <p-button [style]="{'margin-left': '5px', 'margin-right': 'px'}" icon="pi pi-times" 
@@ -136,6 +227,8 @@
     </p-accordionTab>
 </p-accordion>
 
+
+
 <!-- Trade Form Dialog -->
 <p-dialog header="Create Trade" [(visible)]="showTradeForm" [style]="{width: '600px'}">
     <app-trade-form *ngIf="showTradeForm" 
@@ -164,8 +257,6 @@
     (closeDialogEventEmitter)="handleBoqItemFormCloseEvent($event)" 
     [boqItemFromParent]="boqItemToEdit" 
     [boqIdFromParent]="boqIdFromUrl" 
-    [lotIdFromParent]="currentLotId" 
-    [lots]="lots"
     >
 
     </app-boq-item-form>
@@ -181,4 +272,15 @@
     >
 
     </app-consumption-list>
+</p-dialog>
+
+
+<p-dialog header="Import BoqItem" 
+    [(visible)]="showBoqItemImportForm" 
+    [style]="{width: '600px', height: '700px'}" 
+    (onHide)="handleBoqItemImportFormCloseEvent()"
+    >
+<app-boq-item-import
+    >
+</app-boq-item-import>
 </p-dialog>

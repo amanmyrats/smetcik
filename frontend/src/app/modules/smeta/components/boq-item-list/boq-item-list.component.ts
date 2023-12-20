@@ -6,6 +6,9 @@ import { BoqItemService } from '../../services/boq-item.service';
 import { Lot } from 'src/app/modules/common/models/lot.model';
 import { LotService } from 'src/app/modules/common/services/lot.service';
 import { ActivatedRoute } from '@angular/router';
+import { CommonService } from 'src/app/services/common.service';
+import { LazyLoadEvent } from 'primeng/api';
+import { Paginated } from 'src/app/models/paginated.model';
 
 @Component({
   selector: 'app-boq-item-list',
@@ -24,6 +27,7 @@ export class BoqItemListComponent {
   showLotForm: boolean = false;
   showBoqItemForm: boolean = false;
   showConsumptionList: boolean = false;
+  showBoqItemImportForm: boolean = false;
 
   lotToEdit: Lot | null = null;
   boqItemToEdit: BoqItem | null = null;
@@ -33,14 +37,35 @@ export class BoqItemListComponent {
   currentLotId: string;
   currentBoqItem: BoqItem;
 
+
   constructor(
     private tradeService: TradeService, 
     private boqItemService: BoqItemService, 
     private lotService: LotService, 
     private route: ActivatedRoute, 
+    private commonService: CommonService
   ){
-    this.getTrades();
     this.boqIdFromUrl = this.route.snapshot.paramMap.get('boqId');
+    this.getBoqItems();
+  }
+
+  getBoqItems(): void {
+    var event: LazyLoadEvent ={
+
+      filters: {'boq': {value: this.boqIdFromUrl}},
+    } 
+    let queryParams: string = this.commonService.buildPaginationParams(event);
+    this.boqItemService.getBoqItems(queryParams).subscribe({
+      next: (paginatedBoqItems: Paginated<BoqItem>) => {
+        console.log("Successfully fetched BoqItems.");
+        console.log(paginatedBoqItems);
+        this.boqItems = paginatedBoqItems.results!;
+      }, 
+      error: (err: any) => {
+        console.log("Error when fetching BoqItems.");
+        console.log(err);
+      }
+    });
   }
 
   getTrades(): void {
@@ -120,16 +145,12 @@ export class BoqItemListComponent {
     this.showLotForm = false;
   }
 
-  openCreateBoqItemForm(lotId: string, lots: Lot[]): void {
-    this.currentLotId = lotId;
-    this.lots = lots;
+  openCreateBoqItemForm(): void {
     this.boqItemToEdit = null;
     this.showBoqItemForm = true;
   }
 
-  openUpdateBoqItemForm(lotId: string, lots: Lot[], boqItemToEdit: BoqItem): void {
-    this.currentLotId = lotId;
-    this.lots = lots;
+  openUpdateBoqItemForm(boqItemToEdit: BoqItem): void {
     this.boqItemToEdit = boqItemToEdit;
     this.showBoqItemForm = true;
   }
@@ -139,7 +160,8 @@ export class BoqItemListComponent {
       next: (data: any) => {
         console.log("BoqItem was deteled successfully.");
         console.log(data);
-        this.removeFromTrades(null, null, id);
+        this.getBoqItems();
+        // this.removeFromTrades(null, null, id);
       },
       error: (err: any) => {
         console.log("Failed to delete BoqItem.");
@@ -151,7 +173,8 @@ export class BoqItemListComponent {
   handleBoqItemFormCloseEvent(boqItem: BoqItem | null): void {
     console.log("received:");
     console.log(boqItem);
-    this.updateTrades(null, null, boqItem);
+    // this.updateTrades(null, null, boqItem);
+    this.getBoqItems();
     this.showBoqItemForm = false;
   }
 
@@ -254,4 +277,37 @@ export class BoqItemListComponent {
     }
   }
   
+  exportExcel(): void {
+    this.boqItemService.exportToExcel().subscribe({
+      next: (data: Blob) => {
+        console.log("Succussfully exported BoqItems.");
+        console.log(data);
+        // Create a Blob from the response
+      const blob = new Blob([data], { type: 'application/vnd.ms-excel' });
+      
+      // Create a link element, set the download attribute, and simulate a click
+      const link = document.createElement('a');
+      link.href = window.URL.createObjectURL(blob);
+      link.download = 'boq_items.xlsx';
+      link.click();
+      
+      // Release the URL object
+      window.URL.revokeObjectURL(link.href);
+      }, 
+      error: (err: any) => {
+        console.log("Error happened when exporting BoqItems");
+        console.log(err);
+      }
+    });
+  }
+
+  openBoqItemImportForm(): void {
+    this.showBoqItemImportForm = true;
+  }
+
+  handleBoqItemImportFormCloseEvent(): void {
+    this.getTrades();
+  }
+
+
 }

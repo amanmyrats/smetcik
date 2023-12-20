@@ -1,0 +1,25 @@
+<div class="wrapper">
+    <div class="wrapper">
+        
+        <p-fileUpload #fileUpload mode="basic" accept=".xlsx" 
+        chooseLabel="Select Excel" 
+        [maxFileSize]="+1000000"
+        (onSelect)="onUserSelect($event)"
+        
+        >
+        
+    </p-fileUpload>
+    <p-button [disabled]="!fileSelected" 
+    [ngStyle]="{'margin-left': '1px'}" icon="pi pi-times" 
+    label="Clear Selection"
+    (click)="onClearSelectionClick()"
+    ></p-button>
+</div>
+
+<p-button [disabled]="!fileSelected" icon="pi pi-upload" 
+    label="Import"
+    (click)="onImport()"
+    >
+</p-button>
+
+</div>

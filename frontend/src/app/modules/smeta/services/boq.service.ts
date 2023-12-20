@@ -9,7 +9,7 @@ import { environment as env } from 'src/environments/environment';
 })
 export class BoqService {
 
-  public readonly endPoint: string = '/api/v1/boqs'
+  public readonly endPoint: string = '/api/v1/boqs/'
 
   constructor(
     private httpClient: HttpClient
@@ -17,5 +17,9 @@ export class BoqService {
 
   getBoqs(): Observable<Boq[]> {
     return this.httpClient.get<Boq[]>(`${env.apiUrl}${this.endPoint}`);
+  }
+
+  createBoq(boq: Boq): Observable<Boq> {
+    return this.httpClient.post<Boq>(`${env.apiUrl}${this.endPoint}`, boq);
   }
 }

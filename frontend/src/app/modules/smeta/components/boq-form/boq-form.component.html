@@ -1,0 +1,44 @@
+<form [formGroup]="boqForm" (ngSubmit)="onSubmit()">
+
+    
+        <!-- Project -->
+        <p-dropdown [options]="projects" formControlName="project" 
+            optionLabel="name_tm" [filter]="true" filterBy="name_tm" 
+            [showClear]="true" placeholder="Select a Project" 
+            optionValue="id"
+        >
+            <ng-template let-project pTemplate="item">
+                <div class="flex align-items-center gap-2">
+                    <div>{{ project.name_tm }}</div>
+                </div>
+            </ng-template>
+        </p-dropdown>
+    
+
+        <span class="p-float-label" style="margin-top: 40px;margin-bottom: 40px;">
+            <input pInputText id="contract_number" formControlName="contract_number" />
+            <label htmlFor="contract_number">Contract Number</label>
+        </span>
+
+        <span class="p-float-label" style="margin-top: 40px;margin-bottom: 40px;">
+            <input pInputText id="description" formControlName="description" />
+            <label htmlFor="description">Description</label>
+        </span>
+
+        <span class="p-float-label" style="margin-top: 40px;margin-bottom: 40px;">
+            <input pInputText id="boq_version" formControlName="boq_version" />
+            <label htmlFor="boq_version">Version</label>
+        </span>
+        
+    <span class="p-float-label" style="margin-top: 40px;">
+    </span>
+
+    <p-button type="button" pRipple label="Cancel" icon="pi pi-times" 
+        styleClass="p-button-outlined" class="p-button-text"
+        (click)="gotoBoqList()">
+    </p-button>
+    <p-button type="submit" pRipple label="Save" icon="pi pi-check" 
+        styleClass="p-button-outlined" class="p-button-text" 
+        [disabled]="boqForm.invalid">
+    </p-button>
+</form>

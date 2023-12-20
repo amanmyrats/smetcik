@@ -1,0 +1,6 @@
+angular
+- trades list, create, edit, delete
+- lots list, create, edit, delete
+
+django
+- base boqitem, consumption, resources, trades, lots

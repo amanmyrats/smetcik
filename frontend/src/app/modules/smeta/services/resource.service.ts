@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment as env } from 'src/environments/environment';
@@ -35,9 +35,19 @@ export class ResourceService {
     return this.httpClient.delete<any>(`${env.apiUrl}${this.endPoint}${id}/`);
   }
 
-  exportToExcel(queryParams?: string): Observable<any>{
-    return this.httpClient.get<any>(`${env.apiUrl}${this.endPoint}exporttoexcel/`);
+  exportToExcel(queryParams?: string): Observable<Blob>{
+    // const headers = new HttpHeaders({
+    //   'Content-Type': 'application/vnd.ms-excel',
+    //   'Accept': 'application/vnd.ms-excel'
+    // });
+
+    return this.httpClient.get(`${env.apiUrl}${this.endPoint}exporttoexcel/`, {
+
+      responseType: 'blob'
+    });
   }
 
-  // importFromExcel()
+  importFromExcel(data: FormData): Observable<any> {
+    return this.httpClient.post(`${env.apiUrl}${this.endPoint}importfromexcel/`, data)
+  }
 }

@@ -14,6 +14,7 @@ export class ResourceListComponent implements OnInit{
   resources: Resource[];
   resourceToUpdate: Resource | null;
   showResourceForm: boolean = false;
+  showResourceImportForm: boolean = false;
 
   constructor(
     private resourceService: ResourceService, 
@@ -84,10 +85,42 @@ export class ResourceListComponent implements OnInit{
 }
 
 exportExcel(): void {
+  this.resourceService.exportToExcel().subscribe({
 
+    next: (response: any) => {
+      // Create a Blob from the response
+      const blob = new Blob([response], { type: 'application/vnd.ms-excel' });
+      
+      // Create a link element, set the download attribute, and simulate a click
+      const link = document.createElement('a');
+      link.href = window.URL.createObjectURL(blob);
+      link.download = 'resources.xlsx';
+      link.click();
+      
+      // Release the URL object
+      window.URL.revokeObjectURL(link.href);
+    },
+    error: (error: any) => {
+      console.error('Error exporting to Excel', error);
+      // Handle error, e.g., show an error message
+    }
+  }
+  );
 }
 
-importFromExcel(): void {
-  
+importFromExcel(event: any): void {
+  console.log("event: " + event);
+  console.log(event);
 }
+
+
+openResourceImportForm(): void {
+  this.showResourceImportForm = true;
+}
+
+handleResourceImportFormCloseEvent(): void {
+  this.getResources();
+  this.showResourceImportForm = false;
+}
+
 }

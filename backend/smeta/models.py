@@ -55,8 +55,8 @@ class Resource(models.Model):
     quantity = models.DecimalField(max_digits=12, decimal_places=2)
     unit = models.ForeignKey(Unit, on_delete=models.PROTECT, null=True)
     unit_price = models.DecimalField(max_digits=12, decimal_places=2, default=0.00)
-    brand = models.CharField(max_length=255)
-    country = models.ForeignKey(Country, on_delete=models.PROTECT)
+    brand = models.CharField(max_length=255, null=True)
+    country = models.ForeignKey(Country, on_delete=models.PROTECT, null=True)
     is_material = models.BooleanField(default=True)
     is_mincons = models.BooleanField(default=False)
 

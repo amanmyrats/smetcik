@@ -6,6 +6,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { UnitService } from 'src/app/modules/common/services/unit.service';
 import { BoqItem } from '../../models/boq-item.model';
 import { BoqItemService } from '../../services/boq-item.service';
+import { LotService } from 'src/app/modules/common/services/lot.service';
 
 @Component({
   selector: 'app-boq-item-form',
@@ -14,23 +15,23 @@ import { BoqItemService } from '../../services/boq-item.service';
 })
 export class BoqItemFormComponent implements OnInit {
 
-  @Input() boqs: Boq[];
-  @Input() lots: Lot[];
   @Input() boqItemFromParent: Boq | null = null;
   @Input() boqIdFromParent: string | null = null;
-  @Input() lotIdFromParent: string | null = null;
-
+  
   @Output() closeDialogEventEmitter = new EventEmitter<BoqItem>();
-
+  
   units: Unit[];
   boqItemForm: FormGroup;
+  lots: Lot[];
 
   constructor(
     private fb: FormBuilder, 
     private unitService: UnitService, 
-    private boqItemService: BoqItemService
+    private boqItemService: BoqItemService, 
+    private lotService: LotService, 
   ){
     this.getUnits();
+    this.getLots();
     this.boqItemForm = this.fb.group({
       id: '',
       boq: '',
@@ -48,7 +49,6 @@ export class BoqItemFormComponent implements OnInit {
         this.boqItemForm.patchValue(this.boqItemFromParent)
       } else {
         this.boqItemForm.controls['boq'].setValue(this.boqIdFromParent);
-        this.boqItemForm.controls['lot'].setValue(this.lotIdFromParent);
       }
   }
 
@@ -113,6 +113,20 @@ export class BoqItemFormComponent implements OnInit {
       }, 
       error: (err: any) => {
         console.log("Error when fetching Units.");
+        console.log(err);
+      }
+    });
+  }
+
+  getLots(): void {
+    this.lotService.getLots().subscribe({
+      next: (lots: Lot[]) => {
+        console.log("Successfully fetched Lots.");
+        console.log(lots);
+        this.lots = lots;
+      }, 
+      error: (err: any) => {
+        console.log("Failed to fetch Lots.");
         console.log(err);
       }
     });

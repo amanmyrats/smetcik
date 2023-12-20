@@ -7,7 +7,8 @@ from smeta.views import (
     BoqModelViewSet, BoqItemRetrieveUpdateDestroyAPIView, 
     ConsumptionRetrieveUpdateDestroyAPIiew, 
     ResourceRetrieveUpdateDestroyAPIView, 
-    MaterialExtraInfoModelViewSet
+    MaterialExtraInfoModelViewSet, ResourceImportAPIView, ResourceExportAPIView, 
+    BoqItemImportAPIView, BoqItemExportAPIView
 )
 
 
@@ -22,6 +23,12 @@ urlpatterns = [
     path('consumptions/<int:pk>/', ConsumptionRetrieveUpdateDestroyAPIiew.as_view(), name='consumption-retrieve-update-delete'),
     path('resources/', ResourceListCreateAPIView.as_view(), name='resource-list-create'), 
     path('resources/<int:pk>/', ResourceRetrieveUpdateDestroyAPIView.as_view(), name='resource-retrieve-update-delete'),
+    
+    # Import Export
+    path('resources/importfromexcel/', ResourceImportAPIView.as_view(), name="resource-import-from-excel"),
+    path('resources/exporttoexcel/', ResourceExportAPIView.as_view(), name="resource-export-to-excel"),
+    path('boqitems/importfromexcel/', BoqItemImportAPIView.as_view(), name="boqitem-import-from-excel"),
+    path('boqitems/exporttoexcel/', BoqItemExportAPIView.as_view(), name="boqitem-export-to-excel"),
 ]
 
 urlpatterns += router.urls

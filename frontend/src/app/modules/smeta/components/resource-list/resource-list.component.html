@@ -13,7 +13,8 @@
             <button type="button" pButton pRipple icon="pi pi-file-excel" (click)="exportExcel()"
                 class="p-button-success mr-2" pTooltip="XLS" tooltipPosition="bottom" label="Export To Excel">
             </button>
-            <button type="button" pButton pRipple icon="pi pi-upload" (click)="importFromExcel()"
+
+            <button type="button" pButton pRipple icon="pi pi-upload" (click)="openResourceImportForm()"
                 class="p-button-warning  ml-auto" pTooltip="PDF" tooltipPosition="bottom" label="Import From Excel">
             </button>
         </div>
@@ -74,4 +75,14 @@
     >
 
     </app-resource-form>
+</p-dialog>
+
+<p-dialog header="Import Resource" 
+    [(visible)]="showResourceImportForm" 
+    [style]="{width: '600px', height: '700px'}" 
+    (onHide)="handleResourceImportFormCloseEvent()"
+    >
+<app-resource-import
+    >
+</app-resource-import>
 </p-dialog>

@@ -19,13 +19,6 @@ export class CommonService {
   }
 
   public buildFilter(filters?: any): string {
-    console.log("inside buildFilter");
-    console.log("inside buildFilter");
-    console.log("inside buildFilter");
-    console.log("inside buildFilter");
-    console.log("inside buildFilter");
-    console.log("inside buildFilter");
-    console.log(filters);
     let result: string = '';
     for (const attr in filters) {
       if (attr) {
@@ -61,6 +54,6 @@ export class CommonService {
     const page: string = ((event?.first || 0) / (event?.rows || 1) + 1 ? (event?.first || 0) / (event?.rows || 1) + 1 : 1).toString();
 
 
-    return `?page=${page}&pageSize=${event.rows}&sort=${event.sortField}&order=${direction}${filter}`;
+    return `?page=${page}&page_size=${event.rows}&sort=${event.sortField}&order=${direction}${filter}`;
   }
 }

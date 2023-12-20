@@ -7,6 +7,7 @@ import { BoqItemListComponent } from './components/boq-item-list/boq-item-list.c
 import { BoqMaterialComponent } from './components/boq-material/boq-material.component';
 import { ResourceListComponent } from './components/resource-list/resource-list.component';
 import { SmetaHomeComponent } from './smeta-home/smeta-home.component';
+import { BoqFormComponent } from './components/boq-form/boq-form.component';
 
 const routes: Routes = [
   {
@@ -25,6 +26,10 @@ const routes: Routes = [
       {
         path: 'boqs/:boqId/materials',
         component: ResourceListComponent,
+      },
+      {
+        path: 'boqs/create',
+        component: BoqFormComponent,
       },
       {
         path: 'boqs/:boqId',

@@ -11,6 +11,7 @@ import { InputNumberModule } from 'primeng/inputnumber';
 import { ToastModule } from 'primeng/toast';
 import { CheckboxModule } from 'primeng/checkbox';
 import { ToolbarModule } from 'primeng/toolbar';
+import { FileUploadModule } from 'primeng/fileupload';
 
 import { SmetaRoutingModule } from './smeta-routing.module';
 import { BoqListComponent } from './components/boq-list/boq-list.component';
@@ -30,6 +31,9 @@ import { ResourceFormComponent } from './components/resource-form/resource-form.
 import { BoqMaterialComponent } from './components/boq-material/boq-material.component';
 import { ResourceListComponent } from './components/resource-list/resource-list.component';
 import { SmetaHomeComponent } from './smeta-home/smeta-home.component';
+import { ResourceImportComponent } from './components/resource-import/resource-import.component';
+import { BoqItemImportComponent } from './components/boq-item-import/boq-item-import.component';
+import { BoqFormComponent } from './components/boq-form/boq-form.component';
 
 @NgModule({
   declarations: [
@@ -46,7 +50,10 @@ import { SmetaHomeComponent } from './smeta-home/smeta-home.component';
     ResourceFormComponent,
     BoqMaterialComponent,
     ResourceListComponent,
-    SmetaHomeComponent
+    SmetaHomeComponent,
+    ResourceImportComponent,
+    BoqItemImportComponent,
+    BoqFormComponent
   ],
   imports: [
     CommonModule,
@@ -67,6 +74,7 @@ import { SmetaHomeComponent } from './smeta-home/smeta-home.component';
     ToastModule, 
     CheckboxModule, 
     ToolbarModule, 
+    FileUploadModule, 
   ]
 })
 export class SmetaModule { }
