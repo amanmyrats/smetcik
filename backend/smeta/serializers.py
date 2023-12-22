@@ -2,7 +2,49 @@ from django.db import models
 
 from rest_framework.serializers import ModelSerializer, SerializerMethodField
 
-from smeta.models import Boq, BoqItem, Consumption, Resource, MaterialExtraInfo
+from smeta.models import (
+    Boq, BoqItem, Consumption, Resource, 
+    Trade, Lot, Country, Currency, Unit
+)
+
+
+class UnitModelSerializer(ModelSerializer):
+    class Meta:
+        model = Unit
+        fields = '__all__'
+
+
+class LotModelSerializer(ModelSerializer):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        from smeta.serializers import BoqItemModelSerializer
+        self.fields['boq_items'] = BoqItemModelSerializer(many=True, read_only=True)
+
+    class Meta:
+        model = Lot
+        fields = '__all__'
+        
+
+class TradeModelSerializer(ModelSerializer):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        from smeta.serializers import LotModelSerializer
+        self.fields['lots'] = LotModelSerializer(many=True, read_only=True)
+    class Meta:
+        model = Trade
+        fields = '__all__'
+
+
+class CurrencyModelSerializer(ModelSerializer):
+    class Meta:
+        model = Currency
+        fields = '__all__'
+
+
+class CountryModelSerializer(ModelSerializer):
+    class Meta:
+        model = Country
+        fields = '__all__'
 
 
 class BoqModelSerializer(ModelSerializer):
@@ -16,35 +58,17 @@ class BoqModelSerializer(ModelSerializer):
 
 
 class BoqItemModelSerializer(ModelSerializer):
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        from common.serializers import UnitModelSerializer
-        self.fields['unit_object'] = UnitModelSerializer(source='unit', read_only=True)
+    unit_object = UnitModelSerializer(source='unit', read_only=True)
         
     class Meta:
         model = BoqItem
         fields = '__all__'
 
 
-class MaterialExtraInfoModelSerializer(ModelSerializer):
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        from common.serializers import CountryModelSerializer
-        self.fields['country_object'] = CountryModelSerializer(source='country', read_only=True)
-        
-    class Meta:
-        model = MaterialExtraInfo
-        fields = '__all__'
-
-
 class ResourceModelSerializer(ModelSerializer):
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        from common.serializers import UnitModelSerializer, CountryModelSerializer
-        self.fields['unit_object'] = UnitModelSerializer(source='unit', read_only=True)
-        self.fields['country_object'] = CountryModelSerializer(source='country', read_only=True)
+    unit_object = UnitModelSerializer(source='unit', read_only=True)
+    country_object = CountryModelSerializer(source='country', read_only=True)
     quantity = SerializerMethodField()
-    extra_infos = MaterialExtraInfoModelSerializer(many=True, read_only=True)
     class Meta:
         model = Resource
         fields = '__all__'
@@ -59,3 +83,4 @@ class ConsumptionModelSerializer(ModelSerializer):
     class Meta:
         model = Consumption
         fields = '__all__'
+

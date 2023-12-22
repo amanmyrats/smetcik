@@ -1,40 +1,62 @@
 from rest_framework.serializers import ModelSerializer, StringRelatedField
 
-from common.models import Unit, Trade, Lot, Currency, Country
-# from smeta.serializers import BoqItemModelSerializer
+from common.models import (
+    BaseUnit, BaseTrade, BaseLot, BaseCurrency, BaseCountry, 
+    BaseBoqItem, BaseResource, BaseConsumption
+)
 
 
-class UnitModelSerializer(ModelSerializer):
+class BaseUnitModelSerializer(ModelSerializer):
+    
     class Meta:
-        model = Unit
+        model = BaseUnit
         fields = '__all__'
 
 
-class LotModelSerializer(ModelSerializer):
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        from smeta.serializers import BoqItemModelSerializer
-        self.fields['boq_items'] = BoqItemModelSerializer(many=True, read_only=True)
-
+class BaseLotModelSerializer(ModelSerializer):
+    
     class Meta:
-        model = Lot
+        model = BaseLot
         fields = '__all__'
         
 
-class TradeModelSerializer(ModelSerializer):
-    lots = LotModelSerializer(many=True, read_only=True)
+class BaseTradeModelSerializer(ModelSerializer):
+    
     class Meta:
-        model = Trade
+        model = BaseTrade
         fields = '__all__'
 
 
-class CurrencyModelSerializer(ModelSerializer):
+class BaseCurrencyModelSerializer(ModelSerializer):
+    
     class Meta:
-        model = Currency
+        model = BaseCurrency
         fields = '__all__'
 
 
-class CountryModelSerializer(ModelSerializer):
+class BaseCountryModelSerializer(ModelSerializer):
     class Meta:
-        model = Country
+        model = BaseCountry
         fields = '__all__'
+
+
+class BaseBoqItemModelSerializer(ModelSerializer):
+    
+    class Meta:
+        model = BaseBoqItem
+        fields = '__all__'
+
+
+class BaseResourceModelSerializer(ModelSerializer):
+    
+    class Meta:
+        model = BaseResource
+        fields = '__all__'
+
+
+class BaseConsumptionModelSerializer(ModelSerializer):
+    
+    class Meta:
+        model = BaseConsumption
+        fields = '__all__'
+

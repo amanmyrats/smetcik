@@ -7,14 +7,20 @@ from smeta.views import (
     BoqModelViewSet, BoqItemRetrieveUpdateDestroyAPIView, 
     ConsumptionRetrieveUpdateDestroyAPIiew, 
     ResourceRetrieveUpdateDestroyAPIView, 
-    MaterialExtraInfoModelViewSet, ResourceImportAPIView, ResourceExportAPIView, 
-    BoqItemImportAPIView, BoqItemExportAPIView
+    ResourceImportAPIView, ResourceExportAPIView, 
+    BoqItemImportAPIView, BoqItemExportAPIView, 
+    UnitModelViewSet, LotModelViewSet, TradeModelViewSet, 
+    CurrencyModelViewSet, CountryModelViewSet
 )
 
 
 router = DefaultRouter()
 router.register(r'boqs', BoqModelViewSet, basename='boq')
-router.register(r'materialextrainfos', MaterialExtraInfoModelViewSet, basename='materialextrainfo')
+router.register(r'units', UnitModelViewSet, basename='unit')
+router.register(r'lots', LotModelViewSet, basename='lot')
+router.register(r'trades', TradeModelViewSet, basename='trade')
+router.register(r'currencies', CurrencyModelViewSet, basename='currency')
+router.register(r'countries', CountryModelViewSet, basename='country')
 
 urlpatterns = [
     path('boqitems/', BoqItemListCreateAPIView.as_view(), name='boqitem-list-create'),

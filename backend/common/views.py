@@ -1,32 +1,51 @@
 from rest_framework.viewsets import ModelViewSet
 
-from common.models import Unit, Trade, Lot, Currency, Country
+from common.models import (
+    BaseUnit, BaseTrade, BaseLot, BaseCurrency, BaseCountry, 
+    BaseBoqItem, BaseConsumption, BaseResource
+)
 from common.serializers import (
-    UnitModelSerializer, TradeModelSerializer, LotModelSerializer, 
-    CurrencyModelSerializer, CountryModelSerializer
+    BaseUnitModelSerializer, BaseTradeModelSerializer, BaseLotModelSerializer, 
+    BaseCurrencyModelSerializer, BaseCountryModelSerializer, 
+    BaseBoqItemModelSerializer, BaseConsumptionModelSerializer, BaseResourceModelSerializer
 )
 
 
-class UnitModelViewSet(ModelViewSet):
-    queryset = Unit.objects.all()
-    serializer_class = UnitModelSerializer
+class BaseUnitModelViewSet(ModelViewSet):
+    queryset = BaseUnit.objects.all()
+    serializer_class = BaseUnitModelSerializer
     
 
-class TradeModelViewSet(ModelViewSet):
-    queryset = Trade.objects.all()
-    serializer_class = TradeModelSerializer
+class BaseTradeModelViewSet(ModelViewSet):
+    queryset = BaseTrade.objects.all()
+    serializer_class = BaseTradeModelSerializer
     
 
-class LotModelViewSet(ModelViewSet):
-    queryset = Lot.objects.all()
-    serializer_class = LotModelSerializer
+class BaseLotModelViewSet(ModelViewSet):
+    queryset = BaseLot.objects.all()
+    serializer_class = BaseLotModelSerializer
     
 
-class CurrencyModelViewSet(ModelViewSet):
-    queryset = Currency.objects.all()
-    serializer_class = CurrencyModelSerializer
+class BaseCurrencyModelViewSet(ModelViewSet):
+    queryset = BaseCurrency.objects.all()
+    serializer_class = BaseCurrencyModelSerializer
     
 
-class CountryModelViewSet(ModelViewSet):
-    queryset = Country.objects.all()
-    serializer_class = CountryModelSerializer
+class BaseCountryModelViewSet(ModelViewSet):
+    queryset = BaseCountry.objects.all()
+    serializer_class = BaseCountryModelSerializer
+
+
+class BaseBoqItemModelViewset(ModelViewSet):
+    queryset = BaseBoqItem.objects.all()
+    serializer_class = BaseBoqItemModelSerializer
+
+
+class BaseConsumptionModelViewSet(ModelViewSet):
+    queryset = BaseConsumption.objects.all()
+    serializer_class = BaseConsumptionModelSerializer
+
+
+class BaseResourceModelViewSet(ModelViewSet):
+    queryset = BaseResource.objects.all()
+    serializer_class = BaseResourceModelSerializer

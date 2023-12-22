@@ -15,10 +15,14 @@ from rest_framework import status
 from rest_framework.parsers import MultiPartParser
 
 from common.pagination import CustomPagination
-from smeta.models import Boq, BoqItem, Consumption, Resource, MaterialExtraInfo
+from smeta.models import (
+    Boq, BoqItem, Consumption, Resource, Trade, Lot, Unit, Country, Currency
+)
 from smeta.serializers import (
     BoqItemModelSerializer, ConsumptionModelSerializer, ResourceModelSerializer, 
-    BoqModelSerializer, MaterialExtraInfoModelSerializer
+    BoqModelSerializer, 
+    UnitModelSerializer, TradeModelSerializer, LotModelSerializer, 
+    CountryModelSerializer, CurrencyModelSerializer
 )
 from smeta.resources import ResourceResource, BoqItemResource
 from smeta.filtersets import BoqItemFilterSet
@@ -27,6 +31,12 @@ from smeta.filtersets import BoqItemFilterSet
 class BoqModelViewSet(ModelViewSet):
     queryset = Boq.objects.all()
     serializer_class = BoqModelSerializer
+
+    def create(self, request, *args, **kwargs):
+        response = super().create(request, *args, **kwargs)
+
+
+        return response
 
 
 class BoqItemListCreateAPIView(ListCreateAPIView):
@@ -82,11 +92,6 @@ class ResourceRetrieveUpdateDestroyAPIView(RetrieveUpdateDestroyAPIView):
     queryset = Resource.objects.all()
     serializer_class = ResourceModelSerializer
 
-        
-class MaterialExtraInfoModelViewSet(ModelViewSet):
-    queryset = MaterialExtraInfo.objects.all()
-    serializer_class = MaterialExtraInfoModelSerializer
-
 
 class ResourceImportAPIView(GenericAPIView):
     parser_classes = [MultiPartParser]
@@ -141,3 +146,28 @@ class BoqItemExportAPIView(GenericAPIView):
         response = HttpResponse(dataset.xlsx, content_type='application/vnd.ms-excel')
         response['Content-Disposition'] = 'attachment; filename="boq_items.xlsx"'
         return response
+
+
+class UnitModelViewSet(ModelViewSet):
+    queryset = Unit.objects.all()
+    serializer_class = UnitModelSerializer
+    
+
+class TradeModelViewSet(ModelViewSet):
+    queryset = Trade.objects.all()
+    serializer_class = TradeModelSerializer
+    
+
+class LotModelViewSet(ModelViewSet):
+    queryset = Lot.objects.all()
+    serializer_class = LotModelSerializer
+    
+
+class CurrencyModelViewSet(ModelViewSet):
+    queryset = Currency.objects.all()
+    serializer_class = CurrencyModelSerializer
+    
+
+class CountryModelViewSet(ModelViewSet):
+    queryset = Country.objects.all()
+    serializer_class = CountryModelSerializer

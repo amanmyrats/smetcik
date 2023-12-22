@@ -3,4 +3,5 @@ angular
 - lots list, create, edit, delete
 
 django
+- write duplication functions to company and smeta
 - base boqitem, consumption, resources, trades, lots

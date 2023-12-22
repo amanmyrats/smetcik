@@ -31,7 +31,7 @@
 </p-table>
 
 <!-- Consumption Form Dialog -->
-<p-dialog header="Create Consumption" [(visible)]="showConsumptionForm" [style]="{width: '600px', height: '700px'}">
+<p-dialog header="Create Consumption" [(visible)]="showConsumptionForm" [style]="{width: '100%', height: '700px'}">
     <app-consumption-form *ngIf="showConsumptionForm" 
     (closeDialogEventEmitter)="handleConsumptionFormCloseEvent($event)" 
     [boqItemIdFromParent]="boqItemFromParent.id!" 
