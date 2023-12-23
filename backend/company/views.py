@@ -16,6 +16,11 @@ from company.serializers import (
     BaseCompanyBoqItemModelSerializer, BaseCompanyResourceModelSerializer, 
     BaseCompanyConsumptionModelSerializer
 )
+from company.utils import (
+    duplicate_units_to_company, duplicate_trades_to_company, 
+    duplicate_countries_to_company, duplicate_currencies_to_company, 
+    duplicate_resources_to_company, duplicate_boq_items_to_company
+)
 
 
 class CompanyModelViewSet(ModelViewSet):
@@ -24,26 +29,15 @@ class CompanyModelViewSet(ModelViewSet):
 
     def create(self, request, *args, **kwargs):
         response = super().create(request, *args, **kwargs)
-
-        base_boq_items = BaseBoqItem.objects.all()
-        for base_boq_item in base_boq_items:
-            new_company_boq_item = BaseCompanyBoqItem()
-
-            unit = BaseCompanyUnit.objects.all().first()
-            lot = BaseCompanyLot.objects.all().first()
-            new_company_boq_item.lot = lot
-            new_company_boq_item.unit = unit
-            new_company_boq_item.code = base_boq_item.code
-            new_company_boq_item.name_tm = base_boq_item.name_tm
-            new_company_boq_item.name_ru = base_boq_item.name_ru
-            new_company_boq_item.name_en = base_boq_item.name_en
-            new_company_boq_item.name_original = base_boq_item.name_original
-            new_company_boq_item.quantity = base_boq_item.quantity
-            new_company_boq_item.material_unit_price = base_boq_item.material_unit_price
-            new_company_boq_item.labor_unit_price = base_boq_item.labor_unit_price
-            new_company_boq_item.transport_unit_price = base_boq_item.transport_unit_price
-            new_company_boq_item.save()
-
+        company_id = response.data.get('id')
+        duplicate_units_to_company(company_id)
+        duplicate_trades_to_company(company_id)
+        # Lots will be added automatically after trades
+        duplicate_countries_to_company(company_id)
+        duplicate_currencies_to_company(company_id)
+        duplicate_resources_to_company(company_id)
+        duplicate_boq_items_to_company(company_id)
+        # Consumptions will be added automatically after boq items
         return response
 
 

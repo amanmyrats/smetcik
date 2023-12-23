@@ -1,11 +1,14 @@
 from django.contrib import admin
 
 from company.models import (
-    BaseCompanyUnit, 
+    Company, Project, BaseCompanyUnit, 
     BaseCompanyTrade, BaseCompanyCurrency, BaseCompanyCountry, BaseCompanyLot, 
     BaseCompanyBoqItem, BaseCompanyConsumption, BaseCompanyResource
 )
 
+
+admin.site.register(Company)
+admin.site.register(Project)
 
 admin.site.register(BaseCompanyUnit)
 admin.site.register(BaseCompanyTrade)

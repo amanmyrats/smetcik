@@ -55,6 +55,17 @@ const routes: Routes = [
         component: HomeComponent,
       },
 
+      // Company
+      {
+        path: 'company',
+        // canActivate: [() => checkLoggedIn()],
+        data: {
+          title: 'Company',
+          breadcrumb: 'Company'
+        }, 
+        loadChildren: () => import('./modules/company/company.module').then(m => m.CompanyModule)
+      },
+
       // Tender
       {
         path: 'tender',
@@ -87,6 +98,15 @@ const routes: Routes = [
         },
         loadChildren: () => import('./modules/payment/payment.module').then(m => m.PaymentModule)
       },
+      {
+        path: 'admin', 
+        // canActivate: [() => checkLoggedIn()],
+        data: {
+          title: 'Admin',
+          breadcrumb: 'Admin'
+        },
+        loadChildren: () => import('./modules/admin/admin.module').then(m => m.AdminModule)
+      }
 
     ],
   },

@@ -26,6 +26,15 @@ from smeta.serializers import (
 )
 from smeta.resources import ResourceResource, BoqItemResource
 from smeta.filtersets import BoqItemFilterSet
+from smeta.utils import (
+    duplicate_company_units_to_boq, 
+    duplicate_company_trades_to_boq, 
+    duplicate_company_countries_to_boq, 
+    duplicate_company_currencies_to_boq, 
+    duplicate_company_resources_to_boq, 
+    duplicate_company_boq_items_to_boq, 
+)
+
 
 
 class BoqModelViewSet(ModelViewSet):
@@ -34,7 +43,15 @@ class BoqModelViewSet(ModelViewSet):
 
     def create(self, request, *args, **kwargs):
         response = super().create(request, *args, **kwargs)
-
+        boq_id = response.data.get('id')
+        duplicate_company_units_to_boq(boq_id) 
+        duplicate_company_trades_to_boq(boq_id) 
+        # Lots will be duplicated automatically with trades
+        duplicate_company_countries_to_boq(boq_id) 
+        duplicate_company_currencies_to_boq(boq_id) 
+        duplicate_company_resources_to_boq(boq_id) 
+        duplicate_company_boq_items_to_boq(boq_id) 
+        # Consumptions will be duplicated automatically with boq items
 
         return response
 

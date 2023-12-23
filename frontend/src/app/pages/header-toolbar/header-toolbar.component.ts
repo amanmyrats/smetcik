@@ -12,6 +12,10 @@ export class HeaderToolbarComponent {
     private router: Router, 
   ){}
 
+  navigateToCompany(): void {
+    this.router.navigate(['company', 'dashboard']);
+  }
+
   navigateToTender(): void {
     this.router.navigate(['tender']);
   }
@@ -22,6 +26,10 @@ export class HeaderToolbarComponent {
 
   navigateToPayment(): void {
     this.router.navigate(['payment']);
+  }
+
+  navigateToAdmin(): void {
+    this.router.navigate(['admin', 'dashboard']);
   }
 
 }

@@ -4,6 +4,7 @@ from company.models import Project
 
 
 class Unit(models.Model):
+    boq = models.ForeignKey('Boq', on_delete=models.CASCADE, related_name='units')
     index = models.IntegerField()
     code_tm = models.CharField(max_length=10)
     code_ru = models.CharField(max_length=10)
@@ -19,6 +20,7 @@ class Unit(models.Model):
     
 
 class Trade(models.Model):
+    boq = models.ForeignKey('Boq', on_delete=models.CASCADE, related_name='trades')
     index = models.IntegerField(null=True)
     code_tm = models.CharField(max_length=10, null=True)
     code_ru = models.CharField(max_length=10, null=True)
@@ -34,7 +36,7 @@ class Trade(models.Model):
     
 
 class Lot(models.Model):
-    trade = models.ForeignKey(Trade, on_delete=models.PROTECT, related_name='lots')
+    trade = models.ForeignKey(Trade, on_delete=models.CASCADE, related_name='lots')
     index = models.IntegerField(null=True)
     code = models.CharField(max_length=10, null=True)
     name_tm = models.CharField(max_length=30)
@@ -47,6 +49,7 @@ class Lot(models.Model):
     
 
 class Currency(models.Model):
+    boq = models.ForeignKey('Boq', on_delete=models.CASCADE, related_name='currencies')
     code = models.CharField(max_length=3)
     short_name_tm = models.CharField(max_length=20)
     short_name_ru = models.CharField(max_length=20)
@@ -62,6 +65,7 @@ class Currency(models.Model):
 
 
 class Country(models.Model):
+    boq = models.ForeignKey('Boq', on_delete=models.CASCADE, related_name='countries')
     code = models.CharField(max_length=2)   
     code_3_letter = models.CharField(max_length=3)    
     numeric_code = models.IntegerField()    
@@ -120,6 +124,7 @@ class Consumption(models.Model):
 
 
 class Resource(models.Model):
+    boq = models.ForeignKey(Boq, on_delete=models.PROTECT)
     name_tm = models.CharField(max_length=255)
     name_ru = models.CharField(max_length=255, null=True)
     name_en = models.CharField(max_length=255, null=True)
