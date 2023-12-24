@@ -115,6 +115,24 @@ class BaseCompanyCountry(models.Model):
         return self.name_tm
 
 
+class BaseCompanyResource(models.Model):
+    company = models.ForeignKey(Company, on_delete=models.CASCADE, related_name='company_resources')
+    name_tm = models.CharField(max_length=255)
+    name_ru = models.CharField(max_length=255, null=True)
+    name_en = models.CharField(max_length=255, null=True)
+    name_original = models.CharField(max_length=255, null=True)
+    quantity = models.DecimalField(max_digits=12, decimal_places=2)
+    unit = models.ForeignKey(BaseCompanyUnit, on_delete=models.CASCADE, null=True)
+    unit_price = models.DecimalField(max_digits=12, decimal_places=2, default=0.00)
+    brand = models.CharField(max_length=255, null=True)
+    country = models.ForeignKey(BaseCompanyCountry, on_delete=models.CASCADE, null=True)
+    is_material = models.BooleanField(default=True)
+    is_mincons = models.BooleanField(default=False)
+
+    def __str__(self) -> str:
+        return self.name_tm
+
+
 class BaseCompanyBoqItem(models.Model):
     company = models.ForeignKey(Company, on_delete=models.CASCADE, related_name='company_boq_items')
     # boq = models.ForeignKey(Boq, on_delete=models.CASCADE)
@@ -147,24 +165,5 @@ class BaseCompanyConsumption(models.Model):
     def save(self, *args, **kwargs):
         self.total_quantity = self.boq_item.quantity * self.quantity
         super().save(*args, **kwargs)
-
-
-class BaseCompanyResource(models.Model):
-    company = models.ForeignKey(Company, on_delete=models.CASCADE, related_name='company_resources')
-    name_tm = models.CharField(max_length=255)
-    name_ru = models.CharField(max_length=255, null=True)
-    name_en = models.CharField(max_length=255, null=True)
-    name_original = models.CharField(max_length=255, null=True)
-    quantity = models.DecimalField(max_digits=12, decimal_places=2)
-    unit = models.ForeignKey(BaseCompanyUnit, on_delete=models.CASCADE, null=True)
-    unit_price = models.DecimalField(max_digits=12, decimal_places=2, default=0.00)
-    brand = models.CharField(max_length=255, null=True)
-    country = models.ForeignKey(BaseCompanyCountry, on_delete=models.CASCADE, null=True)
-    is_material = models.BooleanField(default=True)
-    is_mincons = models.BooleanField(default=False)
-
-    def __str__(self) -> str:
-        return self.name_tm
-
 
     

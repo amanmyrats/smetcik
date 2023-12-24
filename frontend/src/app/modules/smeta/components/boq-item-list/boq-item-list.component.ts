@@ -307,6 +307,7 @@ export class BoqItemListComponent {
 
   handleBoqItemImportFormCloseEvent(): void {
     this.getTrades();
+    this.showBoqItemImportForm = false;
   }
 
 

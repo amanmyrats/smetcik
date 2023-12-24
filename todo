@@ -7,5 +7,6 @@ angular
 django
 + write duplication functions to company and smeta
 + base boqitem, consumption, resources, trades, lots
++ urls, views, serializers for base and base_company models
 
-- urls, views, serializers for base and base_company models
+- 

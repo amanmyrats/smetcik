@@ -80,9 +80,15 @@
 <p-dialog header="Import Resource" 
     [(visible)]="showResourceImportForm" 
     [style]="{width: '600px', height: '700px'}" 
-    (onHide)="handleResourceImportFormCloseEvent()"
+    (onHide)="handleResourceImportFormCloseEvent()" 
     >
-<app-resource-import
+<!-- <app-resource-import
+    [whichResource]="'resource'"
     >
-</app-resource-import>
+</app-resource-import> -->
+<app-import
+[whichResource]="'resource'"
+>
+
+</app-import>
 </p-dialog>

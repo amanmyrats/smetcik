@@ -1,13 +1,13 @@
 import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { FileUpload } from 'primeng/fileupload';
-import { ResourceService } from '../../services/resource.service';
+import { ResourceService } from 'src/app/modules/smeta/services/resource.service';
 import { UnitService } from 'src/app/modules/common/services/unit.service';
 import { TradeService } from 'src/app/modules/common/services/trade.service';
 import { LotService } from 'src/app/modules/common/services/lot.service';
-import { CountryService } from '../../services/country.service';
-import { CurrencyService } from '../../services/currency.service';
-import { BoqItemService } from '../../services/boq-item.service';
-import { ConsumptionService } from '../../services/consumption.service';
+import { CountryService } from 'src/app/modules/smeta/services/country.service';
+import { CurrencyService } from 'src/app/modules/smeta/services/currency.service';
+import { BoqItemService } from 'src/app/modules/smeta/services/boq-item.service';
+import { ConsumptionService } from 'src/app/modules/smeta/services/consumption.service';
 import { BaseUnitService } from 'src/app/modules/admin/services/base-unit.service';
 import { BaseTradeService } from 'src/app/modules/admin/services/base-trade.service';
 import { BaseLotService } from 'src/app/modules/admin/services/base-lot.service';
@@ -26,15 +26,17 @@ import { BaseCompanyResourceService } from 'src/app/modules/company/services/bas
 import { BaseCompanyConsumptionService } from 'src/app/modules/company/services/base-company-consumption.service';
 
 @Component({
-  selector: 'app-resource-import',
-  templateUrl: './resource-import.component.html',
-  styleUrls: ['./resource-import.component.scss']
+  selector: 'app-import',
+  templateUrl: './import.component.html',
+  styleUrls: ['./import.component.scss']
 })
-export class ResourceImportComponent implements OnInit{
-
+export class ImportComponent implements OnInit{
+  
   @ViewChild('fileUpload', {static: false}) fileUpload: FileUpload;
   @Input() whichResource: string;
-
+  
+  fileSelected: File | null = null;
+  
   constructor(
     private baseUnitService: BaseUnitService, 
     private baseTradeService: BaseTradeService,
@@ -67,7 +69,6 @@ export class ResourceImportComponent implements OnInit{
 
   }
 
-  fileSelected: File | null = null;
 
   ngOnInit(): void {
     
@@ -105,7 +106,7 @@ export class ResourceImportComponent implements OnInit{
           
           break;
         case 'baseboqitem':
-          
+          this.baseBoqItemImportFromExcel(formData);
           break;
         case 'baseresource':
           
@@ -192,7 +193,17 @@ export class ResourceImportComponent implements OnInit{
   }
 
   baseBoqItemImportFromExcel(formData: FormData): void {
-
+    this.baseBoqItemService.importFromExcel(formData).subscribe({
+      next: (data: any) => {
+        console.log("Successfully imported Base BOQ Items.");
+        console.log(data)
+        this.onClearSelectionClick();
+      }, 
+      error: (err: any) => {
+        console.log("Failed to import Base Boq Items.");
+        console.log(err);
+      }
+    });
   }
 
   baseResourceImportFromExcel(formData: FormData): void {

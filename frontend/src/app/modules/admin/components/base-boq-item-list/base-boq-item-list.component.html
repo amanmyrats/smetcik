@@ -1,1 +1,87 @@
-<p>base-boq-item-list works!</p>
+<p-table
+    [value]="baseBoqItems"
+    [paginator]="true"
+    [rows]="10"
+    [showCurrentPageReport]="true"
+    [tableStyle]="{ 'min-width': '50rem' }"
+    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+    [rowsPerPageOptions]="[5, 10, 20, 50, 100]"
+>
+
+<ng-template pTemplate="caption">
+    <p-toolbar>
+        <div class="p-toolbar-group-start">
+            <p-button label="Add Boq Item" icon="pi pi-plus" (onClick)="openCreateBaseBoqItemForm()"></p-button>
+
+        </div>
+        <div class="p-toolbar-group-end">
+            <button type="button" pButton pRipple icon="pi pi-file-excel" (click)="exportExcel()"
+                class="p-button-success mr-2" pTooltip="XLS" tooltipPosition="bottom" label="Export To Excel">
+            </button>
+
+            <button type="button" pButton pRipple icon="pi pi-upload" (click)="openBaseBoqItemImportForm()"
+                class="p-button-warning  ml-auto" pTooltip="PDF" tooltipPosition="bottom" label="Import From Excel">
+            </button>
+        </div>
+
+    </p-toolbar>
+</ng-template>
+
+
+    <ng-template pTemplate="header">
+        <tr>
+            <th style="width:5%">Id</th>
+            <th style="width:25%">Name</th>
+            <th style="width:5%">Quantity</th>
+            <th style="width:5%">Unit</th>
+            <th style="width:10%">Material Unit Price</th>
+            <th style="width:10%">Labor Unit Price</th>
+            <th style="width:3%"></th>
+            <th style="width:3%"></th>
+            <th style="width:3%"></th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-baseBoqItem>
+        <tr>
+            <td>{{ baseBoqItem.id }}</td>
+            <td>{{ baseBoqItem.name_tm }}</td>
+            <td>{{ baseBoqItem.quantity }}</td>
+            <td>{{ baseBoqItem.unit_object?.code_tm }}</td>
+            <td>{{ baseBoqItem.material_unit_price }}</td>
+            <td>{{ baseBoqItem.labor_unit_price }}</td>
+            <td>
+                <p-button icon="pi pi-pencil" severity="info" 
+                (onClick)="openUpdateBaseBoqItemForm(baseBoqItem)"></p-button>
+            </td>
+            <td>
+                <p-button [style]="{'margin-left': '5px', 'margin-right': 'px'}" icon="pi pi-times" 
+                (onClick)="deleteBaseBoqItem(baseBoqItem.id!)" severity="danger"></p-button>
+
+            </td>
+            <td>
+                <p-button [style]="{'margin-left': '5px', 'margin-right': 'px'}" icon="pi pi-list" 
+                (onClick)="openConsumptionList(baseBoqItem)" severity="info" label="Consumptions"></p-button>
+
+            </td>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="paginatorleft">
+        <p-button type="button" icon="pi pi-plus" styleClass="p-button-text"></p-button>
+    </ng-template>
+    <ng-template pTemplate="paginatorright">
+        <p-button type="button" icon="pi pi-cloud" styleClass="p-button-text"></p-button>
+    </ng-template>
+</p-table>
+
+<p-dialog header="Import Base Boq Item" 
+    [(visible)]="showBaseBoqItemImportForm" 
+    [style]="{width: '600px', height: '700px'}" 
+    (onHide)="handleBaseBoqItemImportFormCloseEvent()" 
+    >
+    <app-import
+        [whichResource]="'baseboqitem'"
+        >
+
+    </app-import>
+
+</p-dialog>

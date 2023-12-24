@@ -1,6 +1,18 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ButtonModule } from 'primeng/button';
+import { TableModule } from 'primeng/table';
+import { TagModule } from 'primeng/tag';
+import { TreeModule } from 'primeng/tree';
+import { DialogModule } from 'primeng/dialog';
+import { InputTextModule } from 'primeng/inputtext';
+import { DropdownModule } from 'primeng/dropdown';
+import { InputNumberModule } from 'primeng/inputnumber';
+import { ToastModule } from 'primeng/toast';
+import { CheckboxModule } from 'primeng/checkbox';
+import { ToolbarModule } from 'primeng/toolbar';
+import { FileUploadModule } from 'primeng/fileupload';
+
 
 import { AdminRoutingModule } from './admin-routing.module';
 import { AdminHomeComponent } from './admin-home/admin-home.component';
@@ -12,6 +24,10 @@ import { BaseCurrencyListComponent } from './components/base-currency-list/base-
 import { BaseBoqItemListComponent } from './components/base-boq-item-list/base-boq-item-list.component';
 import { BaseResourceListComponent } from './components/base-resource-list/base-resource-list.component';
 import { CompanyListComponent } from './components/company-list/company-list.component';
+import { CardModule } from 'primeng/card';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ResourceImportComponent } from '../smeta/components/resource-import/resource-import.component';
+import { SharedModule } from '../shared/shared.module';
 
 
 @NgModule({
@@ -27,10 +43,9 @@ import { CompanyListComponent } from './components/company-list/company-list.com
     CompanyListComponent
   ],
   imports: [
-    CommonModule,
     AdminRoutingModule, 
-
-    ButtonModule, 
+    
+    SharedModule, 
   ]
 })
 export class AdminModule { }

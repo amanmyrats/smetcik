@@ -49,17 +49,17 @@ class BaseCompanyCountryModelSerializer(ModelSerializer):
         fields = '__all__'
 
 
-class BaseCompanyBoqItemModelSerializer(ModelSerializer):
-    
-    class Meta:
-        model = BaseCompanyBoqItem
-        fields = '__all__'
-
-
 class BaseCompanyResourceModelSerializer(ModelSerializer):
     
     class Meta:
         model = BaseCompanyResource
+        fields = '__all__'
+
+
+class BaseCompanyBoqItemModelSerializer(ModelSerializer):
+    
+    class Meta:
+        model = BaseCompanyBoqItem
         fields = '__all__'
 
 
