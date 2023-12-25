@@ -5,6 +5,7 @@ import { ProjectService } from 'src/app/modules/company/services/project.service
 import { BoqService } from '../../services/boq.service';
 import { Boq } from '../../models/boq.model';
 import { Router } from '@angular/router';
+import { Paginated } from 'src/app/models/paginated.model';
 
 @Component({
   selector: 'app-boq-form',
@@ -68,10 +69,10 @@ export class BoqFormComponent implements OnInit {
 
   getProjects(): void {
     this.projectService.getProjects().subscribe({
-        next: (projects: Project[]) => {
+        next: (paginatedProjects: Paginated<Project>) => {
           console.log("Projects fetched from server successfully.");
-          console.log(projects);
-          this.projects = projects;
+          console.log(paginatedProjects);
+          this.projects = paginatedProjects.results!;
         }, 
         error: (err: any) => {
           console.log("Failed to fetch Projects from server.");

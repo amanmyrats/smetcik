@@ -1,0 +1,28 @@
+<app-shared-lot-list
+    [lots]="baseLots"
+    (getLotsEventEmitter) = (getBaseLots())
+    (deleteLotEventEmitter) = (deleteBaseLot($event))
+    (openCreateLotFormEventEmitter) = (openCreateBaseLotForm())
+    (openUpdateLotFormEventEmitter) = (openUpdateBaseLotForm($event))
+    (handleLotFormCloseEventEventEmitter) = (handleBaseLotFormCloseEvent($event))
+    (exportExcelEventEmitter) = (exportExcel())
+    (openLotImportFormEventEmitter) = (openBaseLotImportForm())
+    (handleLotImportFormCloseEventEventEmitter) = (handleBaseLotImportFormCloseEvent())
+    >
+
+</app-shared-lot-list>>
+
+
+
+<p-dialog header="Import Base Lot" 
+    [(visible)]="showBaseLotImportForm" 
+    [style]="{width: '600px', height: '700px'}" 
+    (onHide)="handleBaseLotImportFormCloseEvent()" 
+    >
+    <app-import
+        [whichResource]="'baselot'"
+        >
+
+    </app-import>
+
+</p-dialog>

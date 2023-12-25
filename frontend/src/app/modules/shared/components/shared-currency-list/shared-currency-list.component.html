@@ -1,0 +1,67 @@
+<p-table
+    [value]="currencies"
+    [paginator]="true"
+    [rows]="50"
+    [showCurrentPageReport]="true"
+    [tableStyle]="{ 'min-width': '50rem' }"
+    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+    [rowsPerPageOptions]="[50, 100]"
+>
+
+<ng-template pTemplate="caption">
+    <p-toolbar>
+        <div class="p-toolbar-group-start">
+            <p-button label="Add Currency" icon="pi pi-plus" (onClick)="openCreateCurrencyForm()"></p-button>
+
+        </div>
+        <div class="p-toolbar-group-end">
+            <button type="button" pButton pRipple icon="pi pi-file-excel" (click)="exportExcel()"
+                class="p-button-success mr-2" pTooltip="XLS" tooltipPosition="bottom" label="Export To Excel">
+            </button>
+
+            <button type="button" pButton pRipple icon="pi pi-upload" (click)="openCurrencyImportForm()"
+                class="p-button-warning  ml-auto" pTooltip="PDF" tooltipPosition="bottom" label="Import From Excel">
+            </button>
+        </div>
+
+    </p-toolbar>
+</ng-template>
+
+
+    <ng-template pTemplate="header">
+        <tr>
+            <th style="width:5%">Id</th>
+            <th style="width:15%">Name TM</th>
+            <th style="width:15%">Name RU</th>
+            <th style="width:15%">Name EN</th>
+            <th style="width:15%">Name Original</th>
+            <th style="width:3%"></th>
+            <th style="width:3%"></th>
+            <th style="width:3%"></th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-currency>
+        <tr>
+            <td>{{ currency.id }}</td>
+            <td>{{ currency.name_tm }}</td>
+            <td>{{ currency.name_ru }}</td>
+            <td>{{ currency.name_en }}</td>
+            <td>{{ currency.name_original }}</td>
+            <td>
+                <p-button icon="pi pi-pencil" severity="info" 
+                (onClick)="openUpdateCurrencyForm(currency)"></p-button>
+            </td>
+            <td>
+                <p-button [style]="{'margin-left': '5px', 'margin-right': 'px'}" icon="pi pi-times" 
+                (onClick)="deleteCurrency(currency.id!)" severity="danger"></p-button>
+
+            </td>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="paginatorleft">
+        <p-button type="button" icon="pi pi-plus" styleClass="p-button-text"></p-button>
+    </ng-template>
+    <ng-template pTemplate="paginatorright">
+        <p-button type="button" icon="pi pi-cloud" styleClass="p-button-text"></p-button>
+    </ng-template>
+</p-table>

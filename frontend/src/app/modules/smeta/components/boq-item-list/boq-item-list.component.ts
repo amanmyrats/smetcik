@@ -70,11 +70,11 @@ export class BoqItemListComponent {
 
   getTrades(): void {
     this.tradeService.getTrades().subscribe({
-      next: (trades: Trade[]) => {
-        this.trades = trades;
-        this.tradesDynamic = trades;
+      next: (paginatedTrades: Paginated<Trade>) => {
+        this.trades = paginatedTrades.results!;
+        this.tradesDynamic = paginatedTrades.results!;
         console.log("Trades fetched successfully");
-        console.log(trades);
+        console.log(paginatedTrades);
       }, 
       error: (err: any) => {
         console.log("Error when fetching Trades");

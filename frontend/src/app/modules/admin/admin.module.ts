@@ -28,6 +28,7 @@ import { CardModule } from 'primeng/card';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ResourceImportComponent } from '../smeta/components/resource-import/resource-import.component';
 import { SharedModule } from '../shared/shared.module';
+import { BaseLotListComponent } from './components/base-lot-list/base-lot-list.component';
 
 
 @NgModule({
@@ -40,7 +41,8 @@ import { SharedModule } from '../shared/shared.module';
     BaseCurrencyListComponent,
     BaseBoqItemListComponent,
     BaseResourceListComponent,
-    CompanyListComponent
+    CompanyListComponent,
+    BaseLotListComponent
   ],
   imports: [
     AdminRoutingModule, 

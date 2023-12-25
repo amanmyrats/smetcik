@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment as env } from 'src/environments/environment';
 import { Lot } from '../models/lot.model';
+import { Paginated } from 'src/app/models/paginated.model';
 
 
 @Injectable({
@@ -15,8 +16,8 @@ export class LotService {
     private httpClient: HttpClient,
   ) { }
 
-  getLots(): Observable<Lot[]> {
-    return this.httpClient.get<Lot[]>(`${env.apiUrl}${this.endPoint}`);
+  getLots(): Observable<Paginated<Lot>> {
+    return this.httpClient.get<Paginated<Lot>>(`${env.apiUrl}${this.endPoint}`);
   }
 
   getLot(id: string): Observable<Lot> {
@@ -33,6 +34,16 @@ export class LotService {
 
   deleteLot(id: string): Observable<any> {
     return this.httpClient.delete<any>(`${env.apiUrl}${this.endPoint}${id}/`);
+  }
+  
+  exportToExcel(queryParams?: string): Observable<Blob> {
+    return this.httpClient.get(`${env.apiUrl}${this.endPoint}exporttoexcel/`, {
+      responseType: 'blob'
+    });
+  }
+
+  importFromExcel(formData: FormData): Observable<any> {
+    return this.httpClient.post(`${env.apiUrl}${this.endPoint}importfromexcel/`, formData);
   }
 
 }

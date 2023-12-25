@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment as env } from 'src/environments/environment';
 import { Trade } from '../models/trade.model';
+import { Paginated } from 'src/app/models/paginated.model';
 
 @Injectable({
   providedIn: 'root'
@@ -15,8 +16,8 @@ export class TradeService {
     private httpClient: HttpClient,
   ) { }
 
-  getTrades(): Observable<Trade[]> {
-    return this.httpClient.get<Trade[]>(`${env.apiUrl}${this.endPoint}`);
+  getTrades(): Observable<Paginated<Trade>> {
+    return this.httpClient.get<Paginated<Trade>>(`${env.apiUrl}${this.endPoint}`);
   }
 
   getTrade(id: string): Observable<Trade> {
@@ -33,5 +34,15 @@ export class TradeService {
 
   deleteTrade(id: string): Observable<any> {
     return this.httpClient.delete<any>(`${env.apiUrl}${this.endPoint}${id}/`);
+  }
+  
+  exportToExcel(queryParams?: string): Observable<Blob> {
+    return this.httpClient.get(`${env.apiUrl}${this.endPoint}exporttoexcel/`, {
+      responseType: 'blob'
+    });
+  }
+
+  importFromExcel(formData: FormData): Observable<any> {
+    return this.httpClient.post(`${env.apiUrl}${this.endPoint}importfromexcel/`, formData);
   }
 }

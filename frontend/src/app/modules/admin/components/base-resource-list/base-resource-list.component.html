@@ -1,1 +1,28 @@
-<p>base-resource-list works!</p>
+<app-shared-resource-list
+    [resources]="baseResources"
+    (getResourcesEventEmitter) = (getBaseResources())
+    (deleteResourceEventEmitter) = (deleteBaseResource($event))
+    (openCreateResourceFormEventEmitter) = (openCreateBaseResourceForm())
+    (openUpdateResourceFormEventEmitter) = (openUpdateBaseResourceForm($event))
+    (handleResourceFormCloseEventEventEmitter) = (handleBaseResourceFormCloseEvent($event))
+    (exportExcelEventEmitter) = (exportExcel())
+    (openResourceImportFormEventEmitter) = (openBaseResourceImportForm())
+    (handleResourceImportFormCloseEventEventEmitter) = (handleBaseResourceImportFormCloseEvent())
+    >
+
+</app-shared-resource-list>>
+
+
+
+<p-dialog header="Import Base Resource" 
+    [(visible)]="showBaseResourceImportForm" 
+    [style]="{width: '600px', height: '700px'}" 
+    (onHide)="handleBaseResourceImportFormCloseEvent()" 
+    >
+    <app-import
+        [whichResource]="'baseresource'"
+        >
+
+    </app-import>
+
+</p-dialog>

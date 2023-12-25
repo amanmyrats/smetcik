@@ -7,6 +7,7 @@ import { UnitService } from 'src/app/modules/common/services/unit.service';
 import { BoqItem } from '../../models/boq-item.model';
 import { BoqItemService } from '../../services/boq-item.service';
 import { LotService } from 'src/app/modules/common/services/lot.service';
+import { Paginated } from 'src/app/models/paginated.model';
 
 @Component({
   selector: 'app-boq-item-form',
@@ -106,10 +107,10 @@ export class BoqItemFormComponent implements OnInit {
 
   getUnits(): void {
     this.unitService.getUnits().subscribe({
-      next: (units: Unit[]) => {
+      next: (paginatedUnits: Paginated<Unit>) => {
         console.log("Units fetched successfully.");
-        console.log(units);
-        this.units = units;
+        console.log(paginatedUnits);
+        this.units = paginatedUnits.results!;
       }, 
       error: (err: any) => {
         console.log("Error when fetching Units.");
@@ -120,10 +121,10 @@ export class BoqItemFormComponent implements OnInit {
 
   getLots(): void {
     this.lotService.getLots().subscribe({
-      next: (lots: Lot[]) => {
+      next: (paginatedLots: Paginated<Lot>) => {
         console.log("Successfully fetched Lots.");
-        console.log(lots);
-        this.lots = lots;
+        console.log(paginatedLots);
+        this.lots = paginatedLots.results!;
       }, 
       error: (err: any) => {
         console.log("Failed to fetch Lots.");

@@ -1,1 +1,28 @@
-<p>company-list works!</p>
+<app-shared-company-list
+    [companies]="companies"
+    (getCompaniesEventEmitter) = (getCompanies())
+    (deleteCompanyEventEmitter) = (deleteCompany($event))
+    (openCreateCompanyFormEventEmitter) = (openCreateCompanyForm())
+    (openUpdateCompanyFormEventEmitter) = (openUpdateCompanyForm($event))
+    (handleCompanyFormCloseEventEventEmitter) = (handleCompanyFormCloseEvent($event))
+    (exportExcelEventEmitter) = (exportExcel())
+    (openCompanyImportFormEventEmitter) = (openCompanyImportForm())
+    (handleCompanyImportFormCloseEventEventEmitter) = (handleCompanyImportFormCloseEvent())
+    >
+
+</app-shared-company-list>
+
+
+
+<p-dialog header="Import Company" 
+    [(visible)]="showCompanyImportForm" 
+    [style]="{width: '600px', height: '700px'}" 
+    (onHide)="handleCompanyImportFormCloseEvent()" 
+    >
+    <app-import
+        [whichResource]="'company'"
+        >
+
+    </app-import>
+
+</p-dialog>

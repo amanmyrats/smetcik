@@ -26,6 +26,10 @@ export class AdminDashboardComponent {
     this.router.navigate(['admin', 'trades']);
   }
 
+  navigateToBaseLots(): void {
+    this.router.navigate(['admin', 'lots']);
+  }
+
   navigateToBaseCountries(): void {
     this.router.navigate(['admin', 'countries']);
   }

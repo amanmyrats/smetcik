@@ -4,6 +4,7 @@ import { Resource } from '../../models/resource.model';
 import { ResourceService } from '../../services/resource.service';
 import { UnitService } from 'src/app/modules/common/services/unit.service';
 import { Unit } from 'src/app/modules/common/models/unit.model';
+import { Paginated } from 'src/app/models/paginated.model';
 
 @Component({
   selector: 'app-resource-form',
@@ -94,11 +95,11 @@ export class ResourceFormComponent implements OnInit {
       this.units = this.unitService.getCurrentUnits();
     } else {
       this.unitService.getUnits().subscribe({
-        next: (units: Unit[]) => {
+        next: (paginatedUnits: Paginated<Unit>) => {
           console.log("Units fetched from server successfully.");
-          console.log(units);
-          this.units = units;
-          this.unitService.setCurrentUnits(units);
+          console.log(paginatedUnits);
+          this.units = paginatedUnits.results!;
+          this.unitService.setCurrentUnits(this.units);
         }, 
         error: (err: any) => {
           console.log("Failed to fetch Units from server.");

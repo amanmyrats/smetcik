@@ -18,11 +18,29 @@ import { CardModule } from 'primeng/card'
 import { ButtonModule } from 'primeng/button';
 
 import { ImportComponent } from './components/import/import.component';
+import { SharedBoqItemListComponent } from './components/shared-boq-item-list/shared-boq-item-list.component';
+import { SharedUnitListComponent } from './components/shared-unit-list/shared-unit-list.component';
+import { SharedTradeListComponent } from './components/shared-trade-list/shared-trade-list.component';
+import { SharedLotListComponent } from './components/shared-lot-list/shared-lot-list.component';
+import { SharedCountryListComponent } from './components/shared-country-list/shared-country-list.component';
+import { SharedCurrencyListComponent } from './components/shared-currency-list/shared-currency-list.component';
+import { SharedResourceListComponent } from './components/shared-resource-list/shared-resource-list.component';
+import { SharedConsumptionListComponent } from './components/shared-consumption-list/shared-consumption-list.component';
+import { SharedCompanyListComponent } from './components/shared-company-list/shared-company-list.component';
 
 
 @NgModule({
   declarations: [
-    ImportComponent
+    ImportComponent,
+    SharedBoqItemListComponent,
+    SharedUnitListComponent,
+    SharedTradeListComponent,
+    SharedLotListComponent,
+    SharedCountryListComponent,
+    SharedCurrencyListComponent,
+    SharedResourceListComponent,
+    SharedConsumptionListComponent,
+    SharedCompanyListComponent
   ],
   imports: [
     CommonModule, 
@@ -47,6 +65,15 @@ import { ImportComponent } from './components/import/import.component';
   ], 
   exports: [
     ImportComponent, 
+    SharedUnitListComponent,
+    SharedTradeListComponent,
+    SharedLotListComponent,
+    SharedCountryListComponent,
+    SharedCurrencyListComponent,
+    SharedResourceListComponent,
+    SharedBoqItemListComponent,
+    SharedConsumptionListComponent, 
+    SharedCompanyListComponent, 
 
     CommonModule, 
      

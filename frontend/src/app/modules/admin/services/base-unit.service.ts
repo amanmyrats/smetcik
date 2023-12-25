@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment as env } from 'src/environments/environment';
+import { Paginated } from 'src/app/models/paginated.model';
 import { BaseUnit } from '../models/base-unit.model';
 
 @Injectable({
@@ -16,8 +17,8 @@ export class BaseUnitService {
     private httpClient: HttpClient,
   ) { }
 
-  getBaseUnits(): Observable<BaseUnit[]> {
-    return this.httpClient.get<BaseUnit[]>(`${env.apiUrl}${this.endPoint}`);
+  getBaseUnits(queryParams?: string): Observable<Paginated<BaseUnit>> {
+    return this.httpClient.get<Paginated<BaseUnit>>(`${env.apiUrl}${this.endPoint}`);
   }
 
   getBaseUnit(id: string): Observable<BaseUnit> {
@@ -42,5 +43,15 @@ export class BaseUnitService {
 
   setCurrentBaseUnits(baseUnits: BaseUnit[]): void {
     this.baseUnits = baseUnits;
+  }
+  
+  exportToExcel(queryParams?: string): Observable<Blob> {
+    return this.httpClient.get(`${env.apiUrl}${this.endPoint}exporttoexcel/`, {
+      responseType: 'blob'
+    });
+  }
+
+  importFromExcel(formData: FormData): Observable<any> {
+    return this.httpClient.post(`${env.apiUrl}${this.endPoint}importfromexcel/`, formData);
   }
 }

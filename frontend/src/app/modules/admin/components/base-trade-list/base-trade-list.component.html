@@ -1,1 +1,28 @@
-<p>base-trade-list works!</p>
+<app-shared-trade-list
+    [trades]="baseTrades"
+    (getTradesEventEmitter) = (getBaseTrades())
+    (deleteTradeEventEmitter) = (deleteBaseTrade($event))
+    (openCreateTradeFormEventEmitter) = (openCreateBaseTradeForm())
+    (openUpdateTradeFormEventEmitter) = (openUpdateBaseTradeForm($event))
+    (handleTradeFormCloseEventEventEmitter) = (handleBaseTradeFormCloseEvent($event))
+    (exportExcelEventEmitter) = (exportExcel())
+    (openTradeImportFormEventEmitter) = (openBaseTradeImportForm())
+    (handleTradeImportFormCloseEventEventEmitter) = (handleBaseTradeImportFormCloseEvent())
+    >
+
+</app-shared-trade-list>>
+
+
+
+<p-dialog header="Import Base Trade" 
+    [(visible)]="showBaseTradeImportForm" 
+    [style]="{width: '600px', height: '700px'}" 
+    (onHide)="handleBaseTradeImportFormCloseEvent()" 
+    >
+    <app-import
+        [whichResource]="'basetrade'"
+        >
+
+    </app-import>
+
+</p-dialog>

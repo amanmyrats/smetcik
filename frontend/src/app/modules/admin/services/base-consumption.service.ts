@@ -34,4 +34,14 @@ export class BaseConsumptionService {
   deleteBaseConsumption(id: string): Observable<any> {
     return this.httpClient.delete<any>(`${env.apiUrl}${this.endPoint}${id}/`);
   }
+  
+  exportToExcel(queryParams?: string): Observable<Blob> {
+    return this.httpClient.get(`${env.apiUrl}${this.endPoint}exporttoexcel/`, {
+      responseType: 'blob'
+    });
+  }
+
+  importFromExcel(formData: FormData): Observable<any> {
+    return this.httpClient.post(`${env.apiUrl}${this.endPoint}importfromexcel/`, formData);
+  }
 }

@@ -1,1 +1,29 @@
-<p>base-unit-list works!</p>
+<app-shared-unit-list
+    [units]="baseUnits"
+    (getUnitsEventEmitter) = (getBaseUnits())
+    (deleteUnitEventEmitter) = (deleteBaseUnit($event))
+    (openCreateUnitFormEventEmitter) = (openCreateBaseUnitForm())
+    (openUpdateUnitFormEventEmitter) = (openUpdateBaseUnitForm($event))
+    (handleUnitFormCloseEventEventEmitter) = (handleBaseUnitFormCloseEvent($event))
+    (openConsumptionListEventEmitter) = (openConsumptionList($event))
+    (exportExcelEventEmitter) = (exportExcel())
+    (openUnitImportFormEventEmitter) = (openBaseUnitImportForm())
+    (handleUnitImportFormCloseEventEventEmitter) = (handleBaseUnitImportFormCloseEvent())
+    >
+
+</app-shared-unit-list>
+
+
+
+<p-dialog header="Import Base Unit" 
+    [(visible)]="showBaseUnitImportForm" 
+    [style]="{width: '600px', height: '700px'}" 
+    (onHide)="handleBaseUnitImportFormCloseEvent()" 
+    >
+    <app-import
+        [whichResource]="'baseunit'"
+        >
+
+    </app-import>
+
+</p-dialog>
