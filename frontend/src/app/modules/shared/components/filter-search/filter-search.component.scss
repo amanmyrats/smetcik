@@ -1,0 +1,13 @@
+.filter {
+
+    &-wrapper {
+        // background-color: aquamarine;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        &-child {
+            margin-left: 5px;
+        }
+    }
+}

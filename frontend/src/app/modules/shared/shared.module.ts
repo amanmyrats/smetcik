@@ -16,6 +16,7 @@ import { ToolbarModule } from 'primeng/toolbar';
 import { FileUploadModule } from 'primeng/fileupload';
 import { CardModule } from 'primeng/card'
 import { ButtonModule } from 'primeng/button';
+import { PaginatorModule } from 'primeng/paginator';
 
 import { ImportComponent } from './components/import/import.component';
 import { SharedBoqItemListComponent } from './components/shared-boq-item-list/shared-boq-item-list.component';
@@ -27,6 +28,8 @@ import { SharedCurrencyListComponent } from './components/shared-currency-list/s
 import { SharedResourceListComponent } from './components/shared-resource-list/shared-resource-list.component';
 import { SharedConsumptionListComponent } from './components/shared-consumption-list/shared-consumption-list.component';
 import { SharedCompanyListComponent } from './components/shared-company-list/shared-company-list.component';
+import { SharedProjectListComponent } from './components/shared-project-list/shared-project-list.component';
+import { FilterSearchComponent } from './components/filter-search/filter-search.component';
 
 
 @NgModule({
@@ -40,7 +43,9 @@ import { SharedCompanyListComponent } from './components/shared-company-list/sha
     SharedCurrencyListComponent,
     SharedResourceListComponent,
     SharedConsumptionListComponent,
-    SharedCompanyListComponent
+    SharedCompanyListComponent,
+    SharedProjectListComponent,
+    FilterSearchComponent
   ],
   imports: [
     CommonModule, 
@@ -74,6 +79,8 @@ import { SharedCompanyListComponent } from './components/shared-company-list/sha
     SharedBoqItemListComponent,
     SharedConsumptionListComponent, 
     SharedCompanyListComponent, 
+    SharedProjectListComponent, 
+    FilterSearchComponent, 
 
     CommonModule, 
      
@@ -94,6 +101,7 @@ import { SharedCompanyListComponent } from './components/shared-company-list/sha
     CheckboxModule, 
     ToolbarModule, 
     FileUploadModule, 
+    PaginatorModule, 
     
   ]
 })

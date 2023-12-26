@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment as env } from 'src/environments/environment';
 import { BaseCompanyLot } from '../models/base-company-lot.model';
+import { Paginated } from 'src/app/models/paginated.model';
 
 @Injectable({
   providedIn: 'root'
@@ -14,8 +15,8 @@ export class BaseCompanyLotService {
     private httpClient: HttpClient,
   ) { }
 
-  getBaseCompanyLots(): Observable<BaseCompanyLot[]> {
-    return this.httpClient.get<BaseCompanyLot[]>(`${env.apiUrl}${this.endPoint}`);
+  getBaseCompanyLots(queryParams?: string): Observable<Paginated<BaseCompanyLot>> {
+    return this.httpClient.get<Paginated<BaseCompanyLot>>(`${env.apiUrl}${this.endPoint}?${queryParams}`);
   }
 
   getBaseCompanyLot(id: string): Observable<BaseCompanyLot> {

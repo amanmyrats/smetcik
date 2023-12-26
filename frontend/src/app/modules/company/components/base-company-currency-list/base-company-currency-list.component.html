@@ -1,1 +1,28 @@
-<p>base-company-currency-list works!</p>
+<app-shared-currency-list
+    [currencies]="baseCompanyCurrencies"
+    (getCurrenciesEventEmitter) = (getBaseCompanyCurrencies())
+    (deleteCurrencyEventEmitter) = (deleteBaseCompanyCurrency($event))
+    (openCreateCurrencyFormEventEmitter) = (openCreateBaseCompanyCurrencyForm())
+    (openUpdateCurrencyFormEventEmitter) = (openUpdateBaseCompanyCurrencyForm($event))
+    (handleCurrencyFormCloseEventEventEmitter) = (handleBaseCompanyCurrencyFormCloseEvent($event))
+    (exportExcelEventEmitter) = (exportExcel())
+    (openCurrencyImportFormEventEmitter) = (openBaseCompanyCurrencyImportForm())
+    (handleCurrencyImportFormCloseEventEventEmitter) = (handleBaseCompanyCurrencyImportFormCloseEvent())
+    >
+
+</app-shared-currency-list>>
+
+
+
+<p-dialog header="Import Base Company Currency" 
+    [(visible)]="showBaseCompanyCurrencyImportForm" 
+    [style]="{width: '600px', height: '700px'}" 
+    (onHide)="handleBaseCompanyCurrencyImportFormCloseEvent()" 
+    >
+    <app-import
+        [whichResource]="'basecompanycurrency'"
+        >
+
+    </app-import>
+
+</p-dialog>

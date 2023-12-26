@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Boq } from '../../models/boq.model';
 import { BoqService } from '../../services/boq.service';
 import { Router } from '@angular/router';
+import { Paginated } from 'src/app/models/paginated.model';
 
 
 @Component({
@@ -10,7 +11,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./boq-list.component.scss']
 })
 export class BoqListComponent implements OnInit {
-  boqs: Boq[] = [];
+  boqs: Boq[];
 
   constructor(
     private boqService: BoqService, 
@@ -26,10 +27,10 @@ export class BoqListComponent implements OnInit {
 
   getBoqs(): void {
     this.boqService.getBoqs().subscribe({
-      next: (boqs: Boq[]) => {
-        this.boqs = boqs;
+      next: (paginatedBoqs: Paginated<Boq>) => {
+        this.boqs = paginatedBoqs.results!;
         console.log("Successfully fetched boqs:")
-        console.log(boqs);
+        console.log(paginatedBoqs);
       },
       error: (err: any) => {
         console.log("Error when fetching boqs:");

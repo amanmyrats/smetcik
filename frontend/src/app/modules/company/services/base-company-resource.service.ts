@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment as env } from 'src/environments/environment';
 import { BaseCompanyResource } from '../models/base-company-resource.model';
+import { Paginated } from 'src/app/models/paginated.model';
 
 @Injectable({
   providedIn: 'root'
@@ -15,8 +16,8 @@ export class BaseCompanyResourceService {
     private httpClient: HttpClient
   ) { }
 
-  getBaseCompanyResources(queryParams?: string): Observable<BaseCompanyResource[]> {
-    return this.httpClient.get<BaseCompanyResource[]>(`${env.apiUrl}${this.endPoint}?${queryParams}`);
+  getBaseCompanyResources(queryParams?: string): Observable<Paginated<BaseCompanyResource>> {
+    return this.httpClient.get<Paginated<BaseCompanyResource>>(`${env.apiUrl}${this.endPoint}?${queryParams}`);
   }
 
   getBaseCompanyResource(id: string): Observable<BaseCompanyResource> {

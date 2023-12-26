@@ -16,8 +16,8 @@ export class LotService {
     private httpClient: HttpClient,
   ) { }
 
-  getLots(): Observable<Paginated<Lot>> {
-    return this.httpClient.get<Paginated<Lot>>(`${env.apiUrl}${this.endPoint}`);
+  getLots(queryParams?: string): Observable<Paginated<Lot>> {
+    return this.httpClient.get<Paginated<Lot>>(`${env.apiUrl}${this.endPoint}?${queryParams}`);
   }
 
   getLot(id: string): Observable<Lot> {

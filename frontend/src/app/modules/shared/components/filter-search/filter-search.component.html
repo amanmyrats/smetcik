@@ -1,0 +1,114 @@
+<div>
+    <form [formGroup]="filterSearchForm" (ngSubmit)="onSearchSubmit()">
+        <div class="filter-wrapper">
+
+            <div *ngIf="wantCompany" class="filter-wrapper-child">
+                <div class="p-field p-float-label">
+                    <p-dropdown [options]="countries" formControlName="company" optionLabel="name_tm" [filter]="true"
+                        filterBy="code,name_tm" [showClear]="true" id="company" placeholder="Company" optionValue="id"
+                        (onChange)="onFilterChange($event)" appendTo="body">
+                        <ng-template let-company pTemplate="item" required>
+                            <div class="flex align-items-center gap-2">
+                                <div>{{ company?.code }} - {{ company?.name_tm }}</div>
+                            </div>
+                        </ng-template>
+                    </p-dropdown>
+                    <label for="company">Company</label>
+                </div>
+            </div>
+
+            <div *ngIf="wantProject" class="filter-wrapper-child">
+                <div class="p-field p-float-label">
+                    <p-dropdown [options]="projects" formControlName="project" optionLabel="code" [filter]="true"
+                        filterBy="code,name_tm" [showClear]="true" id="project" placeholder="Project" optionValue="id"
+                        (onChange)="onFilterChange($event)" appendTo="body">
+                        <ng-template let-project pTemplate="item" required>
+                            <div class="flex align-items-center gap-2">
+                                <div>{{ project?.code }} - {{ project?.name_tm }}</div>
+                            </div>
+                        </ng-template>
+                    </p-dropdown>
+                    <label for="project">Project</label>
+                </div>
+            </div>
+
+            <div *ngIf="wantBoq" class="filter-wrapper-child">
+                <div class="p-field p-float-label">
+                    <p-dropdown [options]="boqs" formControlName="boq" optionLabel="number" [filter]="true"
+                        filterBy="code, name_tm" [showClear]="true" id="boq" placeholder="Boq" optionValue="id"
+                        (onChange)="onFilterChange($event)" appendTo="body">
+                        <ng-template let-boq pTemplate="item" required>
+                            <div class="flex align-items-center gap-2">
+                                <div>{{ boq?.code }}</div>
+                            </div>
+                        </ng-template>
+                    </p-dropdown>
+                    <label for="boq">Boq</label>
+                </div>
+            </div>
+
+            <div *ngIf="wantBaseTrade || wantBaseCompanyTrade || wantTrade" class="filter-wrapper-child">
+                <div class="p-field p-float-label">
+                    <p-dropdown [options]="trades" formControlName="trade" optionLabel="name_tm" [filter]="true"
+                        filterBy="code,name_tm" [showClear]="true" id="trade" placeholder="Trade" optionValue="id"
+                        (onChange)="onFilterChange($event)" appendTo="body">
+                        <ng-template let-trade pTemplate="item" required>
+                            <div class="flex align-items-center gap-2">
+                                <div>{{ trade?.code }} - {{ trade?.name_tm }}</div>
+                            </div>
+                        </ng-template>
+                    </p-dropdown>
+                    <label for="trade">Trade</label>
+                </div>
+            </div>
+
+            <div *ngIf="wantBaseLot || wantBaseCompanyLot || wantLot" class="filter-wrapper-child">
+                <div class="p-field p-float-label">
+                    <p-dropdown [options]="lots" formControlName="lot" optionLabel="name_tm" [filter]="true"
+                        filterBy="name_tm,name_ru" [showClear]="true" id="lot" placeholder="Lot" optionValue="id"
+                        (onChange)="onFilterChange($event)" appendTo="body">
+                        <ng-template let-lot pTemplate="item" required>
+                            <div class="flex align-items-center gap-2">
+                                <div>{{ lot?.name_en }}</div>
+                            </div>
+                        </ng-template>
+                    </p-dropdown>
+                    <label for="lot">Lot</label>
+                </div>
+            </div>
+
+            <div *ngIf="wantBaseCountry || wantBaseCompanyCountry || wantCountry" class="filter-wrapper-child">
+                <div class="p-field p-float-label">
+                    <p-dropdown [options]="countries" formControlName="country" optionLabel="name_tm" [filter]="true"
+                        filterBy="code,name_tm" [showClear]="true" id="country" placeholder="Country" optionValue="id"
+                        (onChange)="onFilterChange($event)" appendTo="body">
+                        <ng-template let-country pTemplate="item" required>
+                            <div class="flex align-items-center gap-2">
+                                <div>{{ country?.code }} - {{ country?.name_tm }}</div>
+                            </div>
+                        </ng-template>
+                    </p-dropdown>
+                    <label for="country">Country</label>
+                </div>
+            </div>
+
+            <div *ngIf="wantSearch" class="filter-wrapper-child">
+                <input pInputText required formControlName="search" />
+            </div>
+
+            <div *ngIf="wantSearch" class="filter-wrapper-child">
+                <p-button [disabled]="!filterSearchForm.valid" styleClass="p-button-raised p-button-primary"
+                    type="submit">
+                    Search <span class="pi pi-search"></span>
+                </p-button>
+            </div>
+
+            <div *ngIf="wantSearch" class="filter-wrapper-child">
+                <p-button (onClick)="clearSearch()" styleClass="p-button-raised p-button-primary">
+                    Clear <span class="pi pi-times"></span>
+                </p-button>
+            </div>
+
+        </div>
+    </form>
+</div>

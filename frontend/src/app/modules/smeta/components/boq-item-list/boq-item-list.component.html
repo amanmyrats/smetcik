@@ -1,11 +1,15 @@
+<app-filter-search
+    [wantTrade]="true" 
+    [wantLot]="true" 
+    (filterChangeEventEmitter)="handleFilterChange()" 
+    (searchSubmitEventEmitter)="handleSearchSubmit()" 
+    (clearSearchEventEmitter)="handleClearSearch()"
+    >
+</app-filter-search>
+
 <p-table
     [value]="boqItems"
-    [paginator]="true"
-    [rows]="10"
-    [showCurrentPageReport]="true"
     [tableStyle]="{ 'min-width': '50rem' }"
-    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
-    [rowsPerPageOptions]="[5, 10, 20, 50, 100]"
 >
 
 <ng-template pTemplate="caption">
@@ -74,160 +78,6 @@
 </p-table>
 
 
-<!-- Trade -->
-<p-accordion [activeIndex]="0">
-    <p-toolbar>
-        <div class="p-toolbar-group-start">
-            <p-button label="Add Trade" icon="pi pi-plus" (onClick)="openCreateTradeForm()"></p-button>
-            
-        </div>
-        <div class="p-toolbar-group-end">
-            <button type="button" pButton pRipple icon="pi pi-file-excel" (click)="exportExcel()"
-                class="p-button-success mr-2" pTooltip="XLS" tooltipPosition="bottom" label="Export To Excel">
-            </button>
-
-            <button type="button" pButton pRipple icon="pi pi-upload" (click)="openBoqItemImportForm()"
-                class="p-button-warning  ml-auto" pTooltip="PDF" tooltipPosition="bottom" label="Import From Excel">
-            </button>
-        </div>
-
-    </p-toolbar>
-    <p-accordionTab *ngFor="let trade of trades">
-        <ng-template pTemplate="header">
-            <div style="width: 30%;">
-                {{trade.name_tm}}
-            </div>
-            <div style="width: 100%;"></div>
-            <p-button icon="pi pi-pencil" severity="info" (onClick)="openUpdateTradeForm(trade)">
-            </p-button>
-            <p-button [style]="{'margin-left': '5px', 'margin-right': 'px'}" icon="pi pi-times" 
-                (onClick)="deleteTrade(trade.id!)" severity="danger">
-            </p-button>
-        </ng-template>
-        <p-button  icon="pi pi-plus"  label="Add Lot" (onClick)="openCreateLotForm(trade.id!)"></p-button>
-
-                <!-- Lot -->
-                <p-table [value]="trade.lots" dataKey="id" [tableStyle]="{ 'min-width': '60rem' }" *ngIf="trade.lots">
-
-                    <ng-template pTemplate="body" let-lot let-expanded="expanded">
-                        <tr>
-                            <td>
-                                <button type="button" pButton pRipple [pRowToggler]="lot" 
-                                    class="p-button-text p-button-rounded p-button-plain" 
-                                    [icon]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'">
-                                </button>
-                            </td>
-                            <td style="width: 100px; padding: 0;">LOT-{{ lot.id }}</td>
-                            <td style="width: 600px; padding: 0;">{{ lot.name_tm }}</td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td style="width: 50%;"></td>
-                            <td>
-                                <p-button icon="pi pi-pencil" severity="info" 
-                                    (onClick)="openUpdateLotForm(trade.id!, lot)">
-                                </p-button>
-                            </td>
-                            <td>
-                                <p-button [style]="{'margin-left': '5px', 'margin-right': 'px'}" icon="pi pi-times" 
-                                    (onClick)="deleteLot(lot.id!)" severity="danger">
-                                </p-button>
-                            </td>
-                        </tr>
-                    </ng-template>
-
-                    <ng-template pTemplate="rowexpansion" let-lot>
-                        <tr>
-                            <td colspan="7">
-                                <div class="p-3">
-
-                                    <!-- BoqItems -->
-                                    <!-- BoqItems -->
-                                    <!-- BoqItems -->
-                                    <!-- <p-button  icon="pi pi-plus"  label="Add BoqItem" (onClick)="openCreateBoqItemForm(lot.id!, trade.lots)"></p-button> -->
-
-                                    <p-table [value]="lot.boq_items" dataKey="id">
-                                        <ng-template pTemplate="header">
-                                            <tr>
-                                                <th pSortableColumn="id">Id <p-sortIcon field="price"></p-sortIcon></th>
-                                                <th pSortableColumn="name_tm" style="min-width: 50%;">Name <p-sortIcon field="customer"></p-sortIcon></th>
-                                                <th pSortableColumn="quantity">Quantity <p-sortIcon field="amount"></p-sortIcon></th>
-                                                <th pSortableColumn="unit">Unit <p-sortIcon field="date"></p-sortIcon></th>
-                                                <th pSortableColumn="material_unit_price">Material Unit Price <p-sortIcon field="status"></p-sortIcon></th>
-                                                <th pSortableColumn="labor_unit_price">Labor Unit Price <p-sortIcon field="status"></p-sortIcon></th>
-                                                <!-- <th pSortableColumn="material_total_price">Material Total Price <p-sortIcon field="status"></p-sortIcon></th>
-                                                <th pSortableColumn="labor_total_price">Labor Total Price <p-sortIcon field="status"></p-sortIcon></th>
-                                                <th pSortableColumn="total_price">Total Price <p-sortIcon field="status"></p-sortIcon></th> -->
-                                                <th></th>
-                                                <th></th>
-                                                <th></th>
-                      
-                                            </tr>
-                                        </ng-template>
-                                        <ng-template pTemplate="body" let-boq_item>
-                                            <tr>
-                                                <td>{{ boq_item.id }}</td>
-                                                <td  style="min-width: 50%;">{{ boq_item.name_tm }}</td>
-                                                <td>{{ boq_item.quantity | number: '2.2-2' }}</td>
-                                                <td>{{ boq_item.unit_object!.code_tm }}</td>
-                                                <td>{{ boq_item.material_unit_price | currency: 'USD' }}</td>
-                                                <td>{{ boq_item.labor_unit_price | currency: 'USD' }}</td>
-                                                <!-- <td>{{ boq_item.material_unit_price * boq_item.quantity | currency: 'USD' }}</td>
-                                                <td>{{ boq_item.labor_unit_price * boq_item.quantity | currency: 'USD' }}</td>
-                                                <td>{{ 
-                                                    boq_item.material_unit_price * boq_item.quantity + 
-                                                    boq_item.labor_unit_price * boq_item.quantity | currency: 'USD' 
-                                                    }}
-                                                </td> -->
-                                                <td>
-                                                    <!-- <p-button icon="pi pi-pencil" severity="info" 
-                                                    (onClick)="openUpdateBoqItemForm(lot.id!, trade.lots,  boq_item)"></p-button> -->
-                                                </td>
-                                                <td>
-                                                    <p-button [style]="{'margin-left': '5px', 'margin-right': 'px'}" icon="pi pi-times" 
-                                                    (onClick)="deleteBoqItem(boq_item.id!)" severity="danger"></p-button>
-
-                                                </td>
-                                                <td>
-                                                    <p-button [style]="{'margin-left': '5px', 'margin-right': 'px'}" icon="pi pi-list" 
-                                                    (onClick)="openConsumptionList(boq_item)" severity="info" label="Consumptions"></p-button>
-
-                                                </td>
-                                            </tr>
-                                        </ng-template>
-                                        <ng-template pTemplate="emptymessage">
-                                            <tr>
-                                                <td colspan="6">There are no boq_item for this lot yet.</td>
-                                            </tr>
-                                        </ng-template>
-                                    </p-table>
-
-
-
-                                </div>
-                            </td>
-                        </tr>
-                    </ng-template>
-                </p-table>
-                
-
-
-    </p-accordionTab>
-    <p-accordionTab header="Header II">
-        <p>
-            Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim
-            ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Consectetur, adipisci velit, sed quia non numquam eius modi.
-        </p>
-    </p-accordionTab>
-    <p-accordionTab header="Header III">
-        <p>
-            At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa
-            qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus.
-        </p>
-    </p-accordionTab>
-</p-accordion>
-
-
 
 <!-- Trade Form Dialog -->
 <p-dialog header="Create Trade" [(visible)]="showTradeForm" [style]="{width: '600px'}">
@@ -284,3 +134,17 @@
     >
 </app-boq-item-import>
 </p-dialog>
+
+<p-paginator 
+    #paginator
+    [first]="first"
+    [totalRecords]="totalRecords" 
+    [rowsPerPageOptions]="[10,20,50]" 
+    (onPageChange)="onPageChange($event)"
+        >
+    <!-- [first]="filterSearchComponent.first"
+    [rows]="filterSearchComponent.rows" 
+    [totalRecords]="filterSearchComponent.totalRecords" 
+    [rowsPerPageOptions]="[10,20,50]" 
+    (onPageChange)="onPageChange($event)" -->
+</p-paginator>

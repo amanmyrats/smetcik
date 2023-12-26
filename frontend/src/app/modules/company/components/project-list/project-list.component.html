@@ -1,1 +1,27 @@
-<p>project-list works!</p>
+<app-shared-project-list
+    [projects]="projects" 
+    (getProjectsEventEmitter) = (getProjects()) 
+    (deleteProjectEventEmitter) = (deleteProject($event)) 
+    (openCreateProjectFormEventEmitter) = (openCreateProjectForm()) 
+    (openUpdateProjectFormEventEmitter) = (openUpdateProjectForm($event)) 
+    (handleProjectFormCloseEventEventEmitter) = (handleProjectFormCloseEvent($event)) 
+    (exportExcelEventEmitter) = (exportExcel()) 
+    (openProjectImportFormEventEmitter) = (openProjectImportForm()) 
+    (handleProjectImportFormCloseEventEventEmitter) = (handleProjectImportFormCloseEvent()) 
+    >
+
+</app-shared-project-list>
+
+
+<p-dialog header="Import Project" 
+    [(visible)]="showProjectImportForm" 
+    [style]="{width: '600px', height: '700px'}" 
+    (onHide)="handleProjectImportFormCloseEvent()" 
+    >
+    <app-import
+        [whichResource]="'project'"
+        >
+
+    </app-import>
+
+</p-dialog>

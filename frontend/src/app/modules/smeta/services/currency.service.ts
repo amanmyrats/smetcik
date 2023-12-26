@@ -16,7 +16,11 @@ export class CurrencyService {
   ) { }
 
   getCurrencies(queryParams?: string): Observable<Paginated<Currency>> {
-    return this.httpClient.get<Paginated<Currency>>(`${env.apiUrl}${this.endPoint}?${queryParams}`);
+    if (queryParams){
+    return this.httpClient.get<Paginated<Currency>>(`${env.apiUrl}${this.endPoint}${queryParams}`);
+    } else {
+      return this.httpClient.get<Paginated<Currency>>(`${env.apiUrl}${this.endPoint}`);
+    }
   }
 
   getCurrency(id: string): Observable<Currency> {

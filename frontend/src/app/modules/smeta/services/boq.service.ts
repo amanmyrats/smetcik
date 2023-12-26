@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Boq } from '../models/boq.model';
 import { environment as env } from 'src/environments/environment';
+import { Paginated } from 'src/app/models/paginated.model';
 
 @Injectable({
   providedIn: 'root'
@@ -15,8 +16,12 @@ export class BoqService {
     private httpClient: HttpClient
   ) { }
 
-  getBoqs(): Observable<Boq[]> {
-    return this.httpClient.get<Boq[]>(`${env.apiUrl}${this.endPoint}`);
+  getBoqs(queryParams?: string): Observable<Paginated<Boq>> {
+    if (queryParams){
+    return this.httpClient.get<Paginated<Boq>>(`${env.apiUrl}${this.endPoint}${queryParams}`);
+    } else {
+      return this.httpClient.get<Paginated<Boq>>(`${env.apiUrl}${this.endPoint}`);
+    }
   }
 
   createBoq(boq: Boq): Observable<Boq> {

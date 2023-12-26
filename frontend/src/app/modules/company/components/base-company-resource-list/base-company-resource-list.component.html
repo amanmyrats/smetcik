@@ -1,1 +1,28 @@
-<p>base-company-resource-list works!</p>
+<app-shared-resource-list
+    [resources]="baseCompanyResources"
+    (getResourcesEventEmitter) = (getBaseCompanyResources())
+    (deleteResourceEventEmitter) = (deleteBaseCompanyResource($event))
+    (openCreateResourceFormEventEmitter) = (openCreateBaseCompanyResourceForm())
+    (openUpdateResourceFormEventEmitter) = (openUpdateBaseCompanyResourceForm($event))
+    (handleResourceFormCloseEventEventEmitter) = (handleBaseCompanyResourceFormCloseEvent($event))
+    (exportExcelEventEmitter) = (exportExcel())
+    (openResourceImportFormEventEmitter) = (openBaseCompanyResourceImportForm())
+    (handleResourceImportFormCloseEventEventEmitter) = (handleBaseCompanyResourceImportFormCloseEvent())
+    >
+
+</app-shared-resource-list>>
+
+
+
+<p-dialog header="Import Base Company Resource" 
+    [(visible)]="showBaseCompanyResourceImportForm" 
+    [style]="{width: '600px', height: '700px'}" 
+    (onHide)="handleBaseCompanyResourceImportFormCloseEvent()" 
+    >
+    <app-import
+        [whichResource]="'basecompanyresource'"
+        >
+
+    </app-import>
+
+</p-dialog>

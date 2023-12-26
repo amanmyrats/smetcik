@@ -1,1 +1,28 @@
-<p>base-company-country-list works!</p>
+<app-shared-country-list
+    [countries]="baseCompanyCountries"
+    (getCountriesEventEmitter) = (getBaseCompanyCountries())
+    (deleteCountryEventEmitter) = (deleteBaseCompanyCountry($event))
+    (openCreateCountryFormEventEmitter) = (openCreateBaseCompanyCountryForm())
+    (openUpdateCountryFormEventEmitter) = (openUpdateBaseCompanyCountryForm($event))
+    (handleCountryFormCloseEventEventEmitter) = (handleBaseCompanyCountryFormCloseEvent($event))
+    (exportExcelEventEmitter) = (exportExcel())
+    (openCountryImportFormEventEmitter) = (openBaseCompanyCountryImportForm())
+    (handleCountryImportFormCloseEventEventEmitter) = (handleBaseCompanyCountryImportFormCloseEvent())
+    >
+
+</app-shared-country-list>>
+
+
+
+<p-dialog header="Import Base Company Country" 
+    [(visible)]="showBaseCompanyCountryImportForm" 
+    [style]="{width: '600px', height: '700px'}" 
+    (onHide)="handleBaseCompanyCountryImportFormCloseEvent()" 
+    >
+    <app-import
+        [whichResource]="'basecompanycountry'"
+        >
+
+    </app-import>
+
+</p-dialog>

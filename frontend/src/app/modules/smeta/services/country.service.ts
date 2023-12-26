@@ -16,7 +16,11 @@ export class CountryService {
   ) { }
 
   getCountries(queryParams?: string): Observable<Paginated<Country>> {
-    return this.httpClient.get<Paginated<Country>>(`${env.apiUrl}${this.endPoint}?${queryParams}`);
+    if (queryParams){
+    return this.httpClient.get<Paginated<Country>>(`${env.apiUrl}${this.endPoint}${queryParams}`);
+    } else {
+      return this.httpClient.get<Paginated<Country>>(`${env.apiUrl}${this.endPoint}`);
+    }
   }
 
   getCountry(id: string): Observable<Country> {

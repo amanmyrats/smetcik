@@ -1,1 +1,28 @@
-<p>base-company-unit-list works!</p>
+<app-shared-unit-list
+    [units]="baseCompanyUnits"
+    (getUnitsEventEmitter) = (getBaseCompanyUnits())
+    (deleteUnitEventEmitter) = (deleteBaseCompanyUnit($event))
+    (openCreateUnitFormEventEmitter) = (openCreateBaseCompanyUnitForm())
+    (openUpdateUnitFormEventEmitter) = (openUpdateBaseCompanyUnitForm($event))
+    (handleUnitFormCloseEventEventEmitter) = (handleBaseCompanyUnitFormCloseEvent($event))
+    (exportExcelEventEmitter) = (exportExcel())
+    (openUnitImportFormEventEmitter) = (openBaseCompanyUnitImportForm())
+    (handleUnitImportFormCloseEventEventEmitter) = (handleBaseCompanyUnitImportFormCloseEvent())
+    >
+
+</app-shared-unit-list>
+
+
+
+<p-dialog header="Import Base Company Unit" 
+    [(visible)]="showBaseCompanyUnitImportForm" 
+    [style]="{width: '600px', height: '700px'}" 
+    (onHide)="handleBaseCompanyUnitImportFormCloseEvent()" 
+    >
+    <app-import
+        [whichResource]="'basecompanyunit'"
+        >
+
+    </app-import>
+
+</p-dialog>

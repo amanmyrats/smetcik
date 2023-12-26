@@ -10,7 +10,7 @@ export class SharedCompanyListComponent implements OnInit {
 
   @Input() companies: Company[];
   
-  @Output() getCountriesEventEmitter = new EventEmitter<any>();
+  @Output() getCompaniesEventEmitter = new EventEmitter<any>();
   @Output() deleteCompanyEventEmitter = new EventEmitter<string>();
   @Output() openCreateCompanyFormEventEmitter = new EventEmitter<any>();
   @Output() openUpdateCompanyFormEventEmitter = new EventEmitter<Company>();
@@ -26,11 +26,11 @@ export class SharedCompanyListComponent implements OnInit {
   ){}
 
   ngOnInit(): void {
-    this.getCountries();
+    this.getCompanies();
   }
 
-  getCountries(queryParams?: string): void {
-    this.getCountriesEventEmitter.emit();
+  getCompanies(queryParams?: string): void {
+    this.getCompaniesEventEmitter.emit();
   }
 
   deleteCompany(id: string): void {

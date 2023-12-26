@@ -37,7 +37,12 @@ from company.resources import (
     BaseCompanyConsumptionResource, CompanyResource, ProjectResource
 )
 from company.filtersets import (
-    CompanyFilterSet, ProjectFilterSet
+    CompanyFilterSet, ProjectFilterSet, 
+    BaseCompanyUnitFilterSet, BaseCompanyTradeFilterSet, 
+    BaseCompanyLotFilterSet, BaseCompanyCountryFilterSet,
+    BaseCompanyCurrencyFilterSet, BaseCompanyBoqItemFilterSet, 
+    BaseCompanyResourceFilterSet, BaseCompanyConsumptionFilterSet,     
+
 )
 
 
@@ -118,6 +123,8 @@ class ProjectModelViewSet(ModelViewSet):
 class BaseCompanyUnitModelViewSet(ModelViewSet):
     queryset = BaseCompanyUnit.objects.all()
     serializer_class = BaseCompanyUnitModelSerializer
+    filterset_class = BaseCompanyUnitFilterSet
+    pagination_class = CustomPagination
 
     @action(detail=False, methods=['get'])
     def exporttoexcel(self, request, *args, **kwargs):
@@ -146,6 +153,8 @@ class BaseCompanyUnitModelViewSet(ModelViewSet):
 class BaseCompanyTradeModelViewSet(ModelViewSet):
     queryset = BaseCompanyTrade.objects.all()
     serializer_class = BaseCompanyTradeModelSerializer
+    filterset_class = BaseCompanyTradeFilterSet
+    pagination_class = CustomPagination
        
     @action(detail=False, methods=['get'])
     def exporttoexcel(self, request, *args, **kwargs):
@@ -174,6 +183,8 @@ class BaseCompanyTradeModelViewSet(ModelViewSet):
 class BaseCompanyLotModelViewSet(ModelViewSet):
     queryset = BaseCompanyLot.objects.all()
     serializer_class = BaseCompanyLotModelSerializer
+    filterset_class = BaseCompanyLotFilterSet
+    pagination_class = CustomPagination
     
     @action(detail=False, methods=['get'])
     def exporttoexcel(self, request, *args, **kwargs):
@@ -202,6 +213,8 @@ class BaseCompanyLotModelViewSet(ModelViewSet):
 class BaseCompanyCurrencyModelViewSet(ModelViewSet):
     queryset = BaseCompanyCurrency.objects.all()
     serializer_class = BaseCompanyCurrencyModelSerializer
+    filterset_class = BaseCompanyCurrencyFilterSet
+    pagination_class = CustomPagination
     
     @action(detail=False, methods=['get'])
     def exporttoexcel(self, request, *args, **kwargs):
@@ -231,6 +244,8 @@ class BaseCompanyCurrencyModelViewSet(ModelViewSet):
 class BaseCompanyCountryModelViewSet(ModelViewSet):
     queryset = BaseCompanyCountry.objects.all()
     serializer_class = BaseCompanyCountryModelSerializer
+    filterset_class = BaseCompanyCountryFilterSet
+    pagination_class = CustomPagination
 
     @action(detail=False, methods=['get'])
     def exporttoexcel(self, request, *args, **kwargs):
@@ -260,6 +275,8 @@ class BaseCompanyCountryModelViewSet(ModelViewSet):
 class BaseCompanyBoqItemModelViewSet(ModelViewSet):
     queryset = BaseCompanyBoqItem.objects.all()
     serializer_class = BaseCompanyBoqItemModelSerializer
+    filterset_class = BaseCompanyBoqItemFilterSet
+    pagination_class = CustomPagination
 
     @action(detail=False, methods=['get'])
     def exporttoexcel(self, request, *args, **kwargs):
@@ -289,6 +306,8 @@ class BaseCompanyBoqItemModelViewSet(ModelViewSet):
 class BaseCompanyResourceModelViewSet(ModelViewSet):
     queryset = BaseCompanyResource.objects.all()
     serializer_class = BaseCompanyResourceModelSerializer
+    filterset_class = BaseCompanyResourceFilterSet
+    pagination_class = CustomPagination
 
     @action(detail=False, methods=['get'])
     def exporttoexcel(self, request, *args, **kwargs):
@@ -316,6 +335,8 @@ class BaseCompanyResourceModelViewSet(ModelViewSet):
 class BaseCompanyConsumptionModelViewSet(ModelViewSet):
     queryset = BaseCompanyConsumption.objects.all()
     serializer_class = BaseCompanyConsumptionModelSerializer
+    filterset_class = BaseCompanyConsumptionFilterSet
+    pagination_class = CustomPagination
     
     @action(detail=False, methods=['get'])
     def exporttoexcel(self, request, *args, **kwargs):

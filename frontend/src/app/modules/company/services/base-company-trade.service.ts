@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment as env } from 'src/environments/environment';
 import { BaseCompanyTrade } from '../models/base-company-trade.model';
+import { Paginated } from 'src/app/models/paginated.model';
 
 @Injectable({
   providedIn: 'root'
@@ -15,8 +16,8 @@ export class BaseCompanyTradeService  {
     private httpClient: HttpClient,
   ) { }
 
-  getBaseCompanyTrades(): Observable<BaseCompanyTrade[]> {
-    return this.httpClient.get<BaseCompanyTrade[]>(`${env.apiUrl}${this.endPoint}`);
+  getBaseCompanyTrades(queryParams?: string): Observable<Paginated<BaseCompanyTrade>> {
+    return this.httpClient.get<Paginated<BaseCompanyTrade>>(`${env.apiUrl}${this.endPoint}?${queryParams}`);
   }
 
   getBaseCompanyTrade(id: string): Observable<BaseCompanyTrade> {

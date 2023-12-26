@@ -16,7 +16,11 @@ export class ConsumptionService {
   ) { }
 
   getConsumptions(queryParams: string): Observable<Consumption[]> {
-    return this.httpClient.get<Consumption[]>(`${env.apiUrl}${this.endPoint}?${queryParams}`);
+    if (queryParams) {
+      return this.httpClient.get<Consumption[]>(`${env.apiUrl}${this.endPoint}${queryParams}`);
+    } else {
+      return this.httpClient.get<Consumption[]>(`${env.apiUrl}${this.endPoint}`);
+    }
   }
 
   getConsumption(id: string): Observable<Consumption> {

@@ -29,7 +29,12 @@ from smeta.resources import (
     BoqItemResource, ResourceResource,
     ConsumptionResource
 )
-from smeta.filtersets import BoqItemFilterSet
+from smeta.filtersets import (
+    UnitFilterSet, TradeFilterSet,  LotFilterSet, 
+    CountryFilterSet, CurrencyFilterSet, BoqItemFilterSet, 
+    ResourceFilterSet, ConsumptionFilterSet, 
+    BoqFilterSet      
+)
 from smeta.utils import (
     duplicate_company_units_to_boq, 
     duplicate_company_trades_to_boq, 
@@ -44,6 +49,8 @@ from smeta.utils import (
 class BoqModelViewSet(ModelViewSet):
     queryset = Boq.objects.all()
     serializer_class = BoqModelSerializer
+    filterset_class = BoqFilterSet
+    pagination_class = CustomPagination
 
     def create(self, request, *args, **kwargs):
         response = super().create(request, *args, **kwargs)
@@ -83,7 +90,8 @@ class BoqItemRetrieveUpdateDestroyAPIView(RetrieveUpdateDestroyAPIView):
 class ConsumptionListCreateAPIView(ListCreateAPIView):
     queryset = Consumption.objects.all()
     serializer_class = ConsumptionModelSerializer
-    filterset_fields = ('boq_item', 'resource',)
+    filterset_class = ConsumptionFilterSet
+    pagination_class = CustomPagination
 
     def create(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
@@ -101,6 +109,8 @@ class ConsumptionRetrieveUpdateDestroyAPIiew(RetrieveUpdateDestroyAPIView):
 class ResourceListCreateAPIView(ListCreateAPIView):
     queryset = Resource.objects.all()
     serializer_class = ResourceModelSerializer
+    filterset_class = ResourceFilterSet
+    pagination_class = CustomPagination
 
     def create(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
@@ -171,6 +181,8 @@ class BoqItemExportAPIView(GenericAPIView):
 class UnitModelViewSet(ModelViewSet):
     queryset = Unit.objects.all()
     serializer_class = UnitModelSerializer
+    filterset_class = UnitFilterSet
+    pagination_class = CustomPagination
     
     @action(detail=False, methods=['get'])
     def exporttoexcel(self, request, *args, **kwargs):
@@ -199,6 +211,8 @@ class UnitModelViewSet(ModelViewSet):
 class TradeModelViewSet(ModelViewSet):
     queryset = Trade.objects.all()
     serializer_class = TradeModelSerializer
+    filterset_class = TradeFilterSet
+    pagination_class = CustomPagination
        
     @action(detail=False, methods=['get'])
     def exporttoexcel(self, request, *args, **kwargs):
@@ -227,6 +241,8 @@ class TradeModelViewSet(ModelViewSet):
 class LotModelViewSet(ModelViewSet):
     queryset = Lot.objects.all()
     serializer_class = LotModelSerializer
+    filterset_class = LotFilterSet
+    pagination_class = CustomPagination
     
     @action(detail=False, methods=['get'])
     def exporttoexcel(self, request, *args, **kwargs):
@@ -255,6 +271,8 @@ class LotModelViewSet(ModelViewSet):
 class CurrencyModelViewSet(ModelViewSet):
     queryset = Currency.objects.all()
     serializer_class = CurrencyModelSerializer
+    filterset_class = CurrencyFilterSet
+    pagination_class = CustomPagination
     
     @action(detail=False, methods=['get'])
     def exporttoexcel(self, request, *args, **kwargs):
@@ -283,6 +301,8 @@ class CurrencyModelViewSet(ModelViewSet):
 class CountryModelViewSet(ModelViewSet):
     queryset = Country.objects.all()
     serializer_class = CountryModelSerializer
+    filterset_class = CountryFilterSet
+    pagination_class = CustomPagination
 
     @action(detail=False, methods=['get'])
     def exporttoexcel(self, request, *args, **kwargs):

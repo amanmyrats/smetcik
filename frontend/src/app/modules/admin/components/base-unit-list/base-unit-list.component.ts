@@ -13,8 +13,6 @@ export class BaseUnitListComponent implements OnInit {
   baseUnits: BaseUnit[];
   baseUnitToEdit: BaseUnit | null = null;
   showBaseUnitForm: boolean = false;
-  showConsumptionList: boolean = false;
-  currentBaseUnit: BaseUnit;
   showBaseUnitImportForm: boolean = false;
 
   constructor(
@@ -68,11 +66,6 @@ export class BaseUnitListComponent implements OnInit {
     // this.updateTrades(null, null, baseBoqItem);
     this.getBaseUnits();
     this.showBaseUnitForm = false;
-  }
-
-  openConsumptionList(baseBoqItem: BaseUnit): void {
-    this.showConsumptionList = true;
-    this.currentBaseUnit = baseBoqItem;
   }
   
   exportExcel(): void {

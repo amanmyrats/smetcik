@@ -16,7 +16,7 @@ export class TradeService {
     private httpClient: HttpClient,
   ) { }
 
-  getTrades(): Observable<Paginated<Trade>> {
+  getTrades(queryParams?: string): Observable<Paginated<Trade>> {
     return this.httpClient.get<Paginated<Trade>>(`${env.apiUrl}${this.endPoint}`);
   }
 

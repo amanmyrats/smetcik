@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 
 import { SmetaRoutingModule } from './smeta-routing.module';
 import { BoqListComponent } from './components/boq-list/boq-list.component';
@@ -45,5 +45,6 @@ import { SharedModule } from '../shared/shared.module';
 
     SharedModule, 
   ],
+  schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
 })
 export class SmetaModule { }

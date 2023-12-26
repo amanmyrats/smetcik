@@ -46,8 +46,8 @@ export class CommonService {
     if (!event) {
       return '';
     }
-    let filter: string = this.buildFilter(event.filters);
-    // let filter: string = this.buildFilterFromForm(event.filters);
+    // let filter: string = this.buildFilter(event.filters);
+    let filter: string = this.buildFilterFromForm(event.filters);
     const direction = event.sortOrder === 1 ? 'asc' : 'desc';
 
     // If result of page is 0 then assign 1

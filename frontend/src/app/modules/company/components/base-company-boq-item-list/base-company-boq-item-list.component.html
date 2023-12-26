@@ -1,1 +1,27 @@
-<p>base-company-boq-item-list works!</p>
+<app-shared-boq-item-list
+    [boqItems]="baseCompanyBoqItems"
+    (getBoqItemsEventEmitter) = (getBaseCompanyBoqItems())
+    (deleteBoqItemEventEmitter) = (deleteBaseCompanyBoqItem($event))
+    (openCreateBoqItemFormEventEmitter) = (openCreateBaseCompanyBoqItemForm())
+    (openUpdateBoqItemFormEventEmitter) = (openUpdateBaseCompanyBoqItemForm($event))
+    (handleBoqItemFormCloseEventEventEmitter) = (handleBaseCompanyBoqItemFormCloseEvent($event))
+    (openConsumptionListEventEmitter) = (openConsumptionList($event))
+    (exportExcelEventEmitter) = (exportExcel())
+    (openBoqItemImportFormEventEmitter) = (openBaseCompanyBoqItemImportForm())
+    (handleBoqItemImportFormCloseEventEventEmitter) = (handleBaseCompanyBoqItemImportFormCloseEvent())
+    >
+
+</app-shared-boq-item-list>
+
+<p-dialog header="Import Base Company Boq Item" 
+    [(visible)]="showBaseCompanyBoqItemImportForm" 
+    [style]="{width: '600px', height: '700px'}" 
+    (onHide)="handleBaseCompanyBoqItemImportFormCloseEvent()" 
+    >
+    <app-import
+        [whichResource]="'basecompanyboqitem'"
+        >
+
+    </app-import>
+
+</p-dialog>

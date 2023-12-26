@@ -18,7 +18,11 @@ export class BoqItemService {
   ) { }
   
   getBoqItems(queryParams?: string): Observable<Paginated<BoqItem>> {
-    return this.httpClient.get<Paginated<BoqItem>>(`${env.apiUrl}${this.endPoint}?${queryParams}`);
+    if (queryParams){
+      return this.httpClient.get<Paginated<BoqItem>>(`${env.apiUrl}${this.endPoint}${queryParams}`);
+    } else {
+      return this.httpClient.get<Paginated<BoqItem>>(`${env.apiUrl}${this.endPoint}`);
+    }
   }
 
   getBoqItem(id: string): Observable<BoqItem> {

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Paginated } from 'src/app/models/paginated.model';
 import { BaseBoqItem } from '../../models/base-boq-item.model';
 import { BaseBoqItemService } from '../../services/base-boq-item.service';
-import { Paginated } from 'src/app/models/paginated.model';
 
 @Component({
   selector: 'app-base-boq-item-list',

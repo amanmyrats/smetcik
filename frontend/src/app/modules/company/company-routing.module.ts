@@ -9,6 +9,7 @@ import { BaseCompanyCurrencyListComponent } from './components/base-company-curr
 import { BaseCompanyBoqItemListComponent } from './components/base-company-boq-item-list/base-company-boq-item-list.component';
 import { BaseCompanyResourceListComponent } from './components/base-company-resource-list/base-company-resource-list.component';
 import { ProjectListComponent } from './components/project-list/project-list.component';
+import { BaseCompanyLotListComponent } from './components/base-company-lot-list/base-company-lot-list.component';
 
 const routes: Routes = [
   {
@@ -30,6 +31,10 @@ const routes: Routes = [
       {
         path: 'trades', 
         component: BaseCompanyTradeListComponent
+      },
+      {
+        path: 'lots', 
+        component: BaseCompanyLotListComponent
       },
       {
         path: 'countries', 

@@ -16,7 +16,11 @@ export class ResourceService {
   ) { }
 
   getResources(queryParams?: string): Observable<Resource[]> {
-    return this.httpClient.get<Resource[]>(`${env.apiUrl}${this.endPoint}?${queryParams}`);
+    if (queryParams){
+      return this.httpClient.get<Resource[]>(`${env.apiUrl}${this.endPoint}${queryParams}`);
+    } else {
+      return this.httpClient.get<Resource[]>(`${env.apiUrl}${this.endPoint}`);
+    }
   }
 
   getResource(id: string): Observable<Resource> {

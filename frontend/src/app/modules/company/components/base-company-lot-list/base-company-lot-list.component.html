@@ -1,0 +1,28 @@
+<app-shared-lot-list
+    [lots]="baseCompanyLots"
+    (getLotsEventEmitter) = (getBaseCompanyLots())
+    (deleteLotEventEmitter) = (deleteBaseCompanyLot($event))
+    (openCreateLotFormEventEmitter) = (openCreateBaseCompanyLotForm())
+    (openUpdateLotFormEventEmitter) = (openUpdateBaseCompanyLotForm($event))
+    (handleLotFormCloseEventEventEmitter) = (handleBaseCompanyLotFormCloseEvent($event))
+    (exportExcelEventEmitter) = (exportExcel())
+    (openLotImportFormEventEmitter) = (openBaseCompanyLotImportForm())
+    (handleLotImportFormCloseEventEventEmitter) = (handleBaseCompanyLotImportFormCloseEvent())
+    >
+
+</app-shared-lot-list>
+
+
+
+<p-dialog header="Import Base Company Lot" 
+    [(visible)]="showBaseCompanyLotImportForm" 
+    [style]="{width: '600px', height: '700px'}" 
+    (onHide)="handleBaseCompanyLotImportFormCloseEvent()" 
+    >
+    <app-import
+        [whichResource]="'basecompanylot'"
+        >
+
+    </app-import>
+
+</p-dialog>

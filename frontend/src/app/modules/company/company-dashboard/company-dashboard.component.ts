@@ -26,6 +26,10 @@ export class CompanyDashboardComponent {
     this.router.navigate(['company', 'trades']);
   }
 
+  navigateToCompanyLots(): void {
+    this.router.navigate(['company', 'lots']);
+  }
+
   navigateToCompanyCountries(): void {
     this.router.navigate(['company', 'countries']);
   }

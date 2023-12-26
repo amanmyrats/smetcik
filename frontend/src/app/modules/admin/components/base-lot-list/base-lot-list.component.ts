@@ -27,11 +27,11 @@ export class BaseLotListComponent implements OnInit {
     this.baseLotService.getBaseLots(queryParams).subscribe({
       next: (paginatedBaseLots: Paginated<BaseLot>) => {
         this.baseLots = paginatedBaseLots.results!;
-        console.log("Successfully fetched BaseUnits.");
+        console.log("Successfully fetched BaseLots.");
         console.log(paginatedBaseLots.results!);
       }, 
       error: (err: any) => {
-        console.log("Error when fetching BaseUnits");
+        console.log("Error when fetching BaseLots");
         console.log(err);
       }
     });
@@ -71,7 +71,7 @@ export class BaseLotListComponent implements OnInit {
   exportExcel(): void {
     this.baseLotService.exportToExcel().subscribe({
       next: (data: Blob) => {
-        console.log("Succussfully exported BaseUnits.");
+        console.log("Succussfully exported BaseLots.");
         console.log(data);
         // Create a Blob from the response
       const blob = new Blob([data], { type: 'application/vnd.ms-excel' });
@@ -86,7 +86,7 @@ export class BaseLotListComponent implements OnInit {
       window.URL.revokeObjectURL(link.href);
       }, 
       error: (err: any) => {
-        console.log("Error happened when exporting BaseUnits");
+        console.log("Error happened when exporting BaseLots");
         console.log(err);
       }
     });
