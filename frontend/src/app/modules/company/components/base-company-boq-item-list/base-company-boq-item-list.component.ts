@@ -17,18 +17,22 @@ export class BaseCompanyBoqItemListComponent implements OnInit {
   currentBaseCompanyBoqItem: BaseCompanyBoqItem;
   showBaseCompanyBoqItemImportForm: boolean = false;
 
+  totalRecords: number;
+  rootPathSegment: string = '/company/boqitems/';
+
   constructor(
     private baseCompanyBoqItemService: BaseCompanyBoqItemService, 
   ){}
 
   ngOnInit(): void {
-    this.getBaseCompanyBoqItems();
+    // this.getBaseCompanyBoqItems();
   }
 
   getBaseCompanyBoqItems(queryParams?: string): void {
     this.baseCompanyBoqItemService.getBaseCompanyBoqItems(queryParams).subscribe({
       next: (paginatedBaseCompanyBoqItems: Paginated<BaseCompanyBoqItem>) => {
         this.baseCompanyBoqItems = paginatedBaseCompanyBoqItems.results!;
+        this.totalRecords = paginatedBaseCompanyBoqItems.count! as unknown as number;
         console.log("Successfully fetched BaseCompanyBoqItems.");
         console.log(paginatedBaseCompanyBoqItems.results!);
       }, 

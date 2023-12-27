@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Paginated } from 'src/app/models/paginated.model';
 import { BaseBoqItem } from '../../models/base-boq-item.model';
 import { BaseBoqItemService } from '../../services/base-boq-item.service';
+import { LazyLoadEvent } from 'primeng/api';
 
 @Component({
   selector: 'app-base-boq-item-list',
@@ -17,6 +18,9 @@ export class BaseBoqItemListComponent implements OnInit {
   currentBaseBoqItem: BaseBoqItem;
   showBaseBoqItemImportForm: boolean = false;
 
+  totalRecords: number;
+  rootPathSegment: string = '/admin/boqitems/';
+
   constructor(
     private baseBoqItemService: BaseBoqItemService, 
   ){}
@@ -29,6 +33,7 @@ export class BaseBoqItemListComponent implements OnInit {
     this.baseBoqItemService.getBaseBoqItems(queryParams).subscribe({
       next: (paginatedBaseBoqItems: Paginated<BaseBoqItem>) => {
         this.baseBoqItems = paginatedBaseBoqItems.results!;
+        this.totalRecords = paginatedBaseBoqItems.count! as unknown as number;
         console.log("Successfully fetched BaseBoqItems.");
         console.log(paginatedBaseBoqItems.results!);
       }, 
@@ -107,5 +112,6 @@ export class BaseBoqItemListComponent implements OnInit {
     this.getBaseBoqItems();
     this.showBaseBoqItemImportForm = false;
   }
+
 
 }

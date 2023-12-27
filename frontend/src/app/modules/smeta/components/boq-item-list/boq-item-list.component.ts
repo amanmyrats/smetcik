@@ -25,25 +25,25 @@ export class BoqItemListComponent implements OnInit, AfterViewInit {
   tradesDynamic: Trade[] = [];
   lots: Lot[];
   boqItems: BoqItem[] = [];
-
-  first: number = 0;
-  rows: number = 5;
-  totalRecords: number;
-
+  
   showTradeForm: boolean = false;
   showLotForm: boolean = false;
   showBoqItemForm: boolean = false;
   showConsumptionList: boolean = false;
   showBoqItemImportForm: boolean = false;
-
+  
   lotToEdit: Lot | null = null;
   boqItemToEdit: BoqItem | null = null;
   tradeToEdit: Trade | null = null;
-
+  
   currentTradeId: string;
   currentLotId: string;
   currentBoqItem: BoqItem;
 
+  first: number = 0;
+  rows: number = 5;
+  totalRecords: number;
+  
   rootPathSegment: string = '/smeta/boqs/1/boqitems';
   calledOnPageChange: boolean = false;
 
@@ -182,6 +182,8 @@ export class BoqItemListComponent implements OnInit, AfterViewInit {
     this.showLotForm = false;
   }
 
+
+
   openCreateBoqItemForm(): void {
     this.boqItemToEdit = null;
     this.showBoqItemForm = true;
@@ -216,6 +218,8 @@ export class BoqItemListComponent implements OnInit, AfterViewInit {
     this.initializeBoqItems();
     this.showBoqItemForm = false;
   }
+
+
 
   openConsumptionList(boqItem: BoqItem): void {
     this.showConsumptionList = true;

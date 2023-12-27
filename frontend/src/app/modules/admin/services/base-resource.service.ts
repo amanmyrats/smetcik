@@ -17,7 +17,7 @@ export class BaseResourceService {
   ) { }
 
   getBaseResources(queryParams?: string): Observable<Paginated<BaseResource>> {
-    return this.httpClient.get<Paginated<BaseResource>>(`${env.apiUrl}${this.endPoint}?${queryParams}`);
+    return this.httpClient.get<Paginated<BaseResource>>(`${env.apiUrl}${this.endPoint}${queryParams}`);
   }
 
   getBaseResource(id: string): Observable<BaseResource> {

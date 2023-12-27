@@ -25,6 +25,14 @@ const routes: Routes = [
         component: ProjectListComponent
       },
       {
+        path: 'boqitems', 
+        component: BaseCompanyBoqItemListComponent
+      },
+      {
+        path: 'resources', 
+        component: BaseCompanyResourceListComponent
+      },
+      {
         path: 'units', 
         component: BaseCompanyUnitListComponent
       },
@@ -44,16 +52,8 @@ const routes: Routes = [
         path: 'currencies', 
         component: BaseCompanyCurrencyListComponent
       },
-      {
-        path: 'boqitems', 
-        component: BaseCompanyBoqItemListComponent
-      },
-      {
-        path: 'resources', 
-        component: BaseCompanyResourceListComponent
-      }
     ]
-  }
+    }
 ];
 
 @NgModule({

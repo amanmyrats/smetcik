@@ -70,7 +70,7 @@ export class BaseCountryListComponent implements OnInit {
   exportExcel(): void {
     this.baseCountryService.exportToExcel().subscribe({
       next: (data: Blob) => {
-        console.log("Succussfully exported BaseUnits.");
+        console.log("Succussfully exported BaseCountries.");
         console.log(data);
         // Create a Blob from the response
       const blob = new Blob([data], { type: 'application/vnd.ms-excel' });
@@ -85,7 +85,7 @@ export class BaseCountryListComponent implements OnInit {
       window.URL.revokeObjectURL(link.href);
       }, 
       error: (err: any) => {
-        console.log("Error happened when exporting BaseUnits");
+        console.log("Error happened when exporting BaseCountries");
         console.log(err);
       }
     });

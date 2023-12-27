@@ -14,19 +14,23 @@ export class BaseCompanyResourceListComponent  implements OnInit {
   baseCompanyResourceToEdit: BaseCompanyResource | null = null;
   showBaseCompanyResourceForm: boolean = false;
   showBaseCompanyResourceImportForm: boolean = false;
+  
+  totalRecords: number;
+  rootPathSegment: string = '/company/resources/';
 
   constructor(
     private baseCompanyResourceService: BaseCompanyResourceService, 
   ){}
 
   ngOnInit(): void {
-    this.getBaseCompanyResources();
+    // this.getBaseCompanyResources();
   }
 
   getBaseCompanyResources(queryParams?: string): void {
     this.baseCompanyResourceService.getBaseCompanyResources(queryParams).subscribe({
       next: (paginatedBaseCompanyResources: Paginated<BaseCompanyResource>) => {
         this.baseCompanyResources = paginatedBaseCompanyResources.results!;
+        this.totalRecords = paginatedBaseCompanyResources.count! as unknown as number;
         console.log("Successfully fetched Base Company Resources.");
         console.log(paginatedBaseCompanyResources.results!);
       }, 

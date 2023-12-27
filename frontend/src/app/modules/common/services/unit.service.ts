@@ -17,8 +17,8 @@ export class UnitService {
     private httpClient: HttpClient,
   ) { }
 
-  getUnits(): Observable<Paginated<Unit>> {
-    return this.httpClient.get<Paginated<Unit>>(`${env.apiUrl}${this.endPoint}`);
+  getUnits(queryParams?: string): Observable<Paginated<Unit>> {
+    return this.httpClient.get<Paginated<Unit>>(`${env.apiUrl}${this.endPoint}${queryParams}`);
   }
 
   getUnit(id: string): Observable<Unit> {

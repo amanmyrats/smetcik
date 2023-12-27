@@ -1,1 +1,28 @@
-<p>lot-list works!</p>
+<app-shared-lot-list
+    [lots]="lots"
+    (getLotsEventEmitter) = (getLots())
+    (deleteLotEventEmitter) = (deleteLot($event))
+    (openCreateLotFormEventEmitter) = (openCreateLotForm())
+    (openUpdateLotFormEventEmitter) = (openUpdateLotForm($event))
+    (handleLotFormCloseEventEventEmitter) = (handleLotFormCloseEvent($event))
+    (exportExcelEventEmitter) = (exportExcel())
+    (openLotImportFormEventEmitter) = (openLotImportForm())
+    (handleLotImportFormCloseEventEventEmitter) = (handleLotImportFormCloseEvent())
+    >
+
+</app-shared-lot-list>
+
+
+
+<p-dialog header="Import Lot" 
+    [(visible)]="showLotImportForm" 
+    [style]="{width: '600px', height: '700px'}" 
+    (onHide)="handleLotImportFormCloseEvent()" 
+    >
+    <app-import
+        [whichResource]="'lot'"
+        >
+
+    </app-import>
+
+</p-dialog>

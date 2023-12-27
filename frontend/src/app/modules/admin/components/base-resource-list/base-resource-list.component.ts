@@ -14,6 +14,9 @@ export class BaseResourceListComponent  implements OnInit {
   baseResourceToEdit: BaseResource | null = null;
   showBaseResourceForm: boolean = false;
   showBaseResourceImportForm: boolean = false;
+  
+  totalRecords: number;
+  rootPathSegment: string = '/admin/resources/';
 
   constructor(
     private baseResourceService: BaseResourceService, 
@@ -27,6 +30,7 @@ export class BaseResourceListComponent  implements OnInit {
     this.baseResourceService.getBaseResources(queryParams).subscribe({
       next: (paginatedBaseResources: Paginated<BaseResource>) => {
         this.baseResources = paginatedBaseResources.results!;
+        this.totalRecords = paginatedBaseResources.count! as unknown as number;
         console.log("Successfully fetched Base Resources.");
         console.log(paginatedBaseResources.results!);
       }, 

@@ -1,1 +1,28 @@
-<p>country-list works!</p>
+<app-shared-country-list
+    [countries]="countries"
+    (getCountriesEventEmitter) = (getCountries())
+    (deleteCountryEventEmitter) = (deleteCountry($event))
+    (openCreateCountryFormEventEmitter) = (openCreateCountryForm())
+    (openUpdateCountryFormEventEmitter) = (openUpdateCountryForm($event))
+    (handleCountryFormCloseEventEventEmitter) = (handleCountryFormCloseEvent($event))
+    (exportExcelEventEmitter) = (exportExcel())
+    (openCountryImportFormEventEmitter) = (openCountryImportForm())
+    (handleCountryImportFormCloseEventEventEmitter) = (handleCountryImportFormCloseEvent())
+    >
+
+</app-shared-country-list>>
+
+
+
+<p-dialog header="Import Country" 
+    [(visible)]="showCountryImportForm" 
+    [style]="{width: '600px', height: '700px'}" 
+    (onHide)="handleCountryImportFormCloseEvent()" 
+    >
+    <app-import
+        [whichResource]="'country'"
+        >
+
+    </app-import>
+
+</p-dialog>

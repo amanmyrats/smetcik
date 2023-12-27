@@ -1,1 +1,28 @@
-<p>unit-list works!</p>
+<app-shared-unit-list
+    [units]="units"
+    (getUnitsEventEmitter) = (getUnits())
+    (deleteUnitEventEmitter) = (deleteUnit($event))
+    (openCreateUnitFormEventEmitter) = (openCreateUnitForm())
+    (openUpdateUnitFormEventEmitter) = (openUpdateUnitForm($event))
+    (handleUnitFormCloseEventEventEmitter) = (handleUnitFormCloseEvent($event))
+    (exportExcelEventEmitter) = (exportExcel())
+    (openUnitImportFormEventEmitter) = (openUnitImportForm())
+    (handleUnitImportFormCloseEventEventEmitter) = (handleUnitImportFormCloseEvent())
+    >
+
+</app-shared-unit-list>
+
+
+
+<p-dialog header="Import Unit" 
+    [(visible)]="showUnitImportForm" 
+    [style]="{width: '600px', height: '700px'}" 
+    (onHide)="handleUnitImportFormCloseEvent()" 
+    >
+    <app-import
+        [whichResource]="'unit'"
+        >
+
+    </app-import>
+
+</p-dialog>

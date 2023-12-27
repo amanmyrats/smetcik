@@ -1,6 +1,6 @@
 <app-shared-resource-list
     [resources]="baseResources"
-    (getResourcesEventEmitter) = (getBaseResources())
+    (getResourcesEventEmitter) = (getBaseResources($event))
     (deleteResourceEventEmitter) = (deleteBaseResource($event))
     (openCreateResourceFormEventEmitter) = (openCreateBaseResourceForm())
     (openUpdateResourceFormEventEmitter) = (openUpdateBaseResourceForm($event))
@@ -8,9 +8,12 @@
     (exportExcelEventEmitter) = (exportExcel())
     (openResourceImportFormEventEmitter) = (openBaseResourceImportForm())
     (handleResourceImportFormCloseEventEventEmitter) = (handleBaseResourceImportFormCloseEvent())
+    [totalRecords] = "totalRecords" 
+    [rootPathSegment] = "rootPathSegment" 
+
     >
 
-</app-shared-resource-list>>
+</app-shared-resource-list>
 
 
 

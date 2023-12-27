@@ -60,10 +60,10 @@ export class BaseUnitListComponent implements OnInit {
     this.showBaseUnitForm = true;
   }
   
-  handleBaseUnitFormCloseEvent(baseBoqItem: BaseUnit | null): void {
+  handleBaseUnitFormCloseEvent(baseUnit: BaseUnit | null): void {
     console.log("received:");
-    console.log(baseBoqItem);
-    // this.updateTrades(null, null, baseBoqItem);
+    console.log(baseUnit);
+    // this.updateTrades(null, null, baseUnit);
     this.getBaseUnits();
     this.showBaseUnitForm = false;
   }

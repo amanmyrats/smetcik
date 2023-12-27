@@ -1,1 +1,27 @@
-<p>trade-list works!</p>
+<app-shared-trade-list
+    [trades]="trades"
+    (getTradesEventEmitter) = (getTrades())
+    (deleteTradeEventEmitter) = (deleteTrade($event))
+    (openCreateTradeFormEventEmitter) = (openCreateTradeForm())
+    (openUpdateTradeFormEventEmitter) = (openUpdateTradeForm($event))
+    (handleTradeFormCloseEventEventEmitter) = (handleTradeFormCloseEvent($event))
+    (exportExcelEventEmitter) = (exportExcel())
+    (openTradeImportFormEventEmitter) = (openTradeImportForm())
+    (handleTradeImportFormCloseEventEventEmitter) = (handleTradeImportFormCloseEvent())
+    >
+
+</app-shared-trade-list>>
+
+
+<p-dialog header="Import Trade" 
+    [(visible)]="showTradeImportForm" 
+    [style]="{width: '600px', height: '700px'}" 
+    (onHide)="handleTradeImportFormCloseEvent()" 
+    >
+    <app-import
+        [whichResource]="'trade'"
+        >
+
+    </app-import>
+
+</p-dialog>

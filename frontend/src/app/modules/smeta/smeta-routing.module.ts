@@ -33,23 +33,23 @@ const routes: Routes = [
         component: ResourceListComponent,
       },
       {
-        path: 'boqs/:boqId/units',
+        path: 'units',
         component: UnitListComponent
       },
       {
-        path: 'boqs/:boqId/trades',
+        path: 'trades',
         component: TradeListComponent
       },
       {
-        path: 'boqs/:boqId/lots',
+        path: 'lots',
         component: LotListComponent
       },
       {
-        path: 'boqs/:boqId/countries',
+        path: 'countries',
         component: CountryListComponent
       },
       {
-        path: 'boqs/:boqId/currencies',
+        path: 'currencies',
         component: CurrencyListComponent
       },
       {

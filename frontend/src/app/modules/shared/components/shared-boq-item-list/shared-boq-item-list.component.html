@@ -1,11 +1,25 @@
+<app-filter-search
+    [wantTrade] = "wantTrade" 
+    [wantLot] = "wantLot" 
+    [wantCountry] = "wantCountry" 
+
+    [wantBaseTrade] = "wantBaseTrade" 
+    [wantBaseLot] = "wantBaseLot" 
+    [wantBaseCountry] = "wantBaseCountry" 
+
+    [wantBaseCompanyTrade] = "wantBaseCompanyTrade" 
+    [wantBaseCompanyLot] = "wantBaseCompanyLot" 
+    [wantBaseCompanyCountry] = "wantBaseCompanyCountry" 
+    
+    (filterChangeEventEmitter)="handleFilterChange()" 
+    (searchSubmitEventEmitter)="handleSearchSubmit()" 
+    (clearSearchEventEmitter)="handleClearSearch()"
+    >
+</app-filter-search>
+
 <p-table
     [value]="boqItems"
-    [paginator]="true"
-    [rows]="10"
-    [showCurrentPageReport]="true"
     [tableStyle]="{ 'min-width': '50rem' }"
-    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
-    [rowsPerPageOptions]="[5, 10, 20, 50, 100]"
 >
 
 <ng-template pTemplate="caption">
@@ -85,3 +99,18 @@
     </app-import>
 
 </p-dialog> -->
+
+<p-paginator 
+    #paginator
+    [first]="first"
+    [rows]="rows" 
+    [totalRecords]="totalRecords" 
+    [rowsPerPageOptions]="[5,10,20,50]" 
+    (onPageChange)="onPageChange($event)"
+    >
+    <!-- [first]="filterSearchComponent.first"
+    [rows]="filterSearchComponent.rows" 
+    [totalRecords]="filterSearchComponent.totalRecords" 
+    [rowsPerPageOptions]="[10,20,50]" 
+    (onPageChange)="onPageChange($event)" -->
+</p-paginator>

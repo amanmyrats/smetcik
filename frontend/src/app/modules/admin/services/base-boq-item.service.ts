@@ -17,7 +17,7 @@ export class BaseBoqItemService {
   ) { }
   
   getBaseBoqItems(queryParams?: string): Observable<Paginated<BaseBoqItem>> {
-    return this.httpClient.get<Paginated<BaseBoqItem>>(`${env.apiUrl}${this.endPoint}?${queryParams}`);
+    return this.httpClient.get<Paginated<BaseBoqItem>>(`${env.apiUrl}${this.endPoint}${queryParams}`);
   }
 
   getBaseBoqItem(id: string): Observable<BaseBoqItem> {

@@ -67,6 +67,7 @@ import { FilterSearchComponent } from './components/filter-search/filter-search.
     CheckboxModule, 
     ToolbarModule, 
     FileUploadModule, 
+    PaginatorModule, 
   ], 
   exports: [
     ImportComponent, 

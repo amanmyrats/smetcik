@@ -1,11 +1,25 @@
+<app-filter-search
+    [wantTrade] = "wantTrade" 
+    [wantLot] = "wantLot" 
+    [wantCountry] = "wantCountry" 
+
+    [wantBaseTrade] = "wantBaseTrade" 
+    [wantBaseLot] = "wantBaseLot" 
+    [wantBaseCountry] = "wantBaseCountry" 
+
+    [wantBaseCompanyTrade] = "wantBaseCompanyTrade" 
+    [wantBaseCompanyLot] = "wantBaseCompanyLot" 
+    [wantBaseCompanyCountry] = "wantBaseCompanyCountry" 
+    
+    (filterChangeEventEmitter)="handleFilterChange()" 
+    (searchSubmitEventEmitter)="handleSearchSubmit()" 
+    (clearSearchEventEmitter)="handleClearSearch()"
+    >
+</app-filter-search>
+
 <p-table
     [value]="resources"
-    [paginator]="true"
-    [rows]="50"
-    [showCurrentPageReport]="true"
     [tableStyle]="{ 'min-width': '50rem' }"
-    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
-    [rowsPerPageOptions]="[50, 100]"
 >
 
 <ng-template pTemplate="caption">
@@ -67,3 +81,14 @@
         <p-button type="button" icon="pi pi-cloud" styleClass="p-button-text"></p-button>
     </ng-template>
 </p-table>
+
+
+<p-paginator 
+    #paginator
+    [first]="first"
+    [rows]="rows" 
+    [totalRecords]="totalRecords" 
+    [rowsPerPageOptions]="[5,10,20,50]" 
+    (onPageChange)="onPageChange($event)"
+    >
+</p-paginator>

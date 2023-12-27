@@ -1,6 +1,6 @@
 <app-shared-boq-item-list
     [boqItems]="baseBoqItems"
-    (getBoqItemsEventEmitter) = (getBaseBoqItems())
+    (getBoqItemsEventEmitter) = (getBaseBoqItems($event))
     (deleteBoqItemEventEmitter) = (deleteBaseBoqItem($event))
     (openCreateBoqItemFormEventEmitter) = (openCreateBaseBoqItemForm())
     (openUpdateBoqItemFormEventEmitter) = (openUpdateBaseBoqItemForm($event))
@@ -9,6 +9,11 @@
     (exportExcelEventEmitter) = (exportExcel())
     (openBoqItemImportFormEventEmitter) = (openBaseBoqItemImportForm())
     (handleBoqItemImportFormCloseEventEventEmitter) = (handleBaseBoqItemImportFormCloseEvent())
+    [totalRecords] = "totalRecords" 
+    [rootPathSegment] = "rootPathSegment" 
+
+    [wantBaseTrade] = "true" 
+    [wantBaseLot] = "true" 
     >
 
 

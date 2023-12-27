@@ -70,7 +70,7 @@ export class BaseCurrencyListComponent implements OnInit {
   exportExcel(): void {
     this.baseCurrencyService.exportToExcel().subscribe({
       next: (data: Blob) => {
-        console.log("Succussfully exported BaseUnits.");
+        console.log("Succussfully exported BaseCurrencies.");
         console.log(data);
         // Create a Blob from the response
       const blob = new Blob([data], { type: 'application/vnd.ms-excel' });
@@ -85,7 +85,7 @@ export class BaseCurrencyListComponent implements OnInit {
       window.URL.revokeObjectURL(link.href);
       }, 
       error: (err: any) => {
-        console.log("Error happened when exporting BaseUnits");
+        console.log("Error happened when exporting BaseCurrencies");
         console.log(err);
       }
     });

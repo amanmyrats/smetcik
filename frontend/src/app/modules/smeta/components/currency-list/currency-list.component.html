@@ -1,1 +1,28 @@
-<p>currency-list works!</p>
+<app-shared-currency-list
+    [currencies]="currencies"
+    (getCurrenciesEventEmitter) = (getCurrencies())
+    (deleteCurrencyEventEmitter) = (deleteCurrency($event))
+    (openCreateCurrencyFormEventEmitter) = (openCreateCurrencyForm())
+    (openUpdateCurrencyFormEventEmitter) = (openUpdateCurrencyForm($event))
+    (handleCurrencyFormCloseEventEventEmitter) = (handleCurrencyFormCloseEvent($event))
+    (exportExcelEventEmitter) = (exportExcel())
+    (openCurrencyImportFormEventEmitter) = (openCurrencyImportForm())
+    (handleCurrencyImportFormCloseEventEventEmitter) = (handleCurrencyImportFormCloseEvent())
+    >
+
+</app-shared-currency-list>>
+
+
+
+<p-dialog header="Import Currency" 
+    [(visible)]="showCurrencyImportForm" 
+    [style]="{width: '600px', height: '700px'}" 
+    (onHide)="handleCurrencyImportFormCloseEvent()" 
+    >
+    <app-import
+        [whichResource]="'currency'"
+        >
+
+    </app-import>
+
+</p-dialog>

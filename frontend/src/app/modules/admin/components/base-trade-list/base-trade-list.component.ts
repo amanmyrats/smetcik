@@ -27,11 +27,11 @@ export class BaseTradeListComponent implements OnInit {
     this.baseTradeService.getBaseTrades(queryParams).subscribe({
       next: (paginatedBaseTrades: Paginated<BaseTrade>) => {
         this.baseTrades = paginatedBaseTrades.results!;
-        console.log("Successfully fetched BaseUnits.");
+        console.log("Successfully fetched BaseTrades.");
         console.log(paginatedBaseTrades.results!);
       }, 
       error: (err: any) => {
-        console.log("Error when fetching BaseUnits");
+        console.log("Error when fetching BaseTrades");
         console.log(err);
       }
     });
@@ -71,7 +71,7 @@ export class BaseTradeListComponent implements OnInit {
   exportExcel(): void {
     this.baseTradeService.exportToExcel().subscribe({
       next: (data: Blob) => {
-        console.log("Succussfully exported BaseUnits.");
+        console.log("Succussfully exported BaseTrades.");
         console.log(data);
         // Create a Blob from the response
       const blob = new Blob([data], { type: 'application/vnd.ms-excel' });
@@ -86,7 +86,7 @@ export class BaseTradeListComponent implements OnInit {
       window.URL.revokeObjectURL(link.href);
       }, 
       error: (err: any) => {
-        console.log("Error happened when exporting BaseUnits");
+        console.log("Error happened when exporting BaseTrades");
         console.log(err);
       }
     });
