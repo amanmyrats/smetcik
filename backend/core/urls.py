@@ -21,4 +21,5 @@ urlpatterns = [
     path('api/v1/', include('smeta.urls')),
     path('api/v1/', include('common.urls')),
     path('api/v1/', include('company.urls')),
+    path('api/v1/auth/', include('jwtauth.urls')),
 ]
