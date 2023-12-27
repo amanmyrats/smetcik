@@ -1,8 +1,9 @@
 angular
-- trades, lots, units, country, currency, boq_item, resources list, create, edit, delete for base and company base
-
+- trades, lots, units, country, currency, boq_item, resources list, create, edit, delete for boq
 - company list, create, edit, delete
 - project list, create, edit, delete
+
++ trades, lots, units, country, currency, boq_item, resources list, create, edit, delete for base and company base
 
 django
 + write duplication functions to company and smeta

@@ -19,6 +19,11 @@ import { ResourceImportComponent } from './components/resource-import/resource-i
 import { BoqItemImportComponent } from './components/boq-item-import/boq-item-import.component';
 import { BoqFormComponent } from './components/boq-form/boq-form.component';
 import { SharedModule } from '../shared/shared.module';
+import { UnitListComponent } from './components/unit-list/unit-list.component';
+import { TradeListComponent } from './components/trade-list/trade-list.component';
+import { CountryListComponent } from './components/country-list/country-list.component';
+import { CurrencyListComponent } from './components/currency-list/currency-list.component';
+import { LotListComponent } from './components/lot-list/lot-list.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +43,12 @@ import { SharedModule } from '../shared/shared.module';
     SmetaHomeComponent,
     ResourceImportComponent,
     BoqItemImportComponent,
-    BoqFormComponent
+    BoqFormComponent,
+    UnitListComponent,
+    TradeListComponent,
+    CountryListComponent,
+    CurrencyListComponent,
+    LotListComponent
   ],
   imports: [
     SmetaRoutingModule,

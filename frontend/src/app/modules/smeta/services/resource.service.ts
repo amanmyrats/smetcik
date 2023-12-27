@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment as env } from 'src/environments/environment';
 import { Resource } from '../models/resource.model';
+import { Paginated } from 'src/app/models/paginated.model';
 
 @Injectable({
   providedIn: 'root'
@@ -15,11 +16,11 @@ export class ResourceService {
     private httpClient: HttpClient
   ) { }
 
-  getResources(queryParams?: string): Observable<Resource[]> {
+  getResources(queryParams?: string): Observable<Paginated<Resource>> {
     if (queryParams){
-      return this.httpClient.get<Resource[]>(`${env.apiUrl}${this.endPoint}${queryParams}`);
+      return this.httpClient.get<Paginated<Resource>>(`${env.apiUrl}${this.endPoint}${queryParams}`);
     } else {
-      return this.httpClient.get<Resource[]>(`${env.apiUrl}${this.endPoint}`);
+      return this.httpClient.get<Paginated<Resource>>(`${env.apiUrl}${this.endPoint}`);
     }
   }
 

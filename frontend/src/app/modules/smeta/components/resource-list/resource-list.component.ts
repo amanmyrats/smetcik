@@ -1,20 +1,33 @@
-import { Component, OnInit } from '@angular/core';
-import { SortEvent } from 'primeng/api';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { LazyLoadEvent, SortEvent } from 'primeng/api';
 import { Resource } from '../../models/resource.model';
 import { ResourceService } from '../../services/resource.service';
 import { UnitService } from 'src/app/modules/common/services/unit.service';
+import { Paginated } from 'src/app/models/paginated.model';
+import { FilterSearchComponent } from 'src/app/modules/shared/components/filter-search/filter-search.component';
+import { Paginator } from 'primeng/paginator';
 
 @Component({
   selector: 'app-resource-list',
   templateUrl: './resource-list.component.html',
   styleUrls: ['./resource-list.component.scss']
 })
-export class ResourceListComponent implements OnInit{
+export class ResourceListComponent implements OnInit, AfterViewInit{
+  @ViewChild('paginator', { static: true }) paginator: Paginator;
+  @ViewChild(FilterSearchComponent) filterSearchComponent!: FilterSearchComponent;
 
   resources: Resource[];
   resourceToUpdate: Resource | null;
   showResourceForm: boolean = false;
   showResourceImportForm: boolean = false;
+
+  first: number = 0;
+  rows: number = 5;
+  totalRecords: number;
+
+  rootPathSegment: string = '/smeta/boqs/1/resources';
+  calledOnPageChange: boolean = false;
+
 
   constructor(
     private resourceService: ResourceService, 
@@ -23,6 +36,33 @@ export class ResourceListComponent implements OnInit{
   ngOnInit(): void {
       this.getResources();
   }
+  
+  ngAfterViewInit(): void {
+    this.initializeResources();
+  }
+  
+  private initializeResources(): void {
+    this.getResources(this.filterSearchComponent.queryParams);
+    this.filterSearchComponent.updateUrl(this.rootPathSegment, this.filterSearchComponent.queryParams);
+  }
+  
+    getResources(queryParams?: string): void {
+      this.resourceService.getResources(queryParams).subscribe({
+        next: (paginatedResources: Paginated<Resource>) => {
+          console.log("Successfully received Resources.");
+          console.log(paginatedResources);
+          this.resources = paginatedResources.results!;
+          this.filterSearchComponent.totalRecords = paginatedResources.count! as unknown as number;
+          this.first = this.filterSearchComponent.first;
+          this.rows = this.filterSearchComponent.rows;
+          this.totalRecords = this.filterSearchComponent.totalRecords;
+        }, 
+        error: (err: any) => {
+          console.log("Error when fetching Resources.");
+          console.log(err);
+        }
+      });
+    }
 
   openCreateResourceForm(): void {
     this.resourceToUpdate = null;
@@ -51,20 +91,6 @@ export class ResourceListComponent implements OnInit{
   handleResourceFormCloseEvent(resource: Resource): void {
     this.getResources();
     this.showResourceForm = false;
-  }
-
-  getResources(): void {
-    this.resourceService.getResources().subscribe({
-      next: (resources: Resource[]) => {
-        console.log("Successfully received Resources.");
-        console.log(resources);
-        this.resources = resources;
-      }, 
-      error: (err: any) => {
-        console.log("Error when fetching Resources.");
-        console.log(err);
-      }
-    });
   }
 
   customSort(event: SortEvent) {
@@ -113,7 +139,6 @@ importFromExcel(event: any): void {
   console.log(event);
 }
 
-
 openResourceImportForm(): void {
   this.showResourceImportForm = true;
 }
@@ -121,6 +146,39 @@ openResourceImportForm(): void {
 handleResourceImportFormCloseEvent(): void {
   this.getResources();
   this.showResourceImportForm = false;
+}
+
+onPageChange(event: LazyLoadEvent | any) {
+  this.calledOnPageChange = true;
+  this.filterSearchComponent.lazyLoadEvent.first = event.first;
+  this.filterSearchComponent.lazyLoadEvent.rows = event.rows;
+  this.filterSearchComponent.lazyLoadEvent.filters = this.filterSearchComponent.filterSearchForm.value;
+  if (!this.filterSearchComponent.lazyLoadEvent.sortField) {
+    this.filterSearchComponent.lazyLoadEvent.sortField = 'id';
+  }
+
+  this.filterSearchComponent.queryParams = this.filterSearchComponent.commonService.buildPaginationParams(this.filterSearchComponent.lazyLoadEvent);
+  this.getResources(this.filterSearchComponent.queryParams);
+  this.filterSearchComponent.updateUrl(this.rootPathSegment, this.filterSearchComponent.queryParams);
+
+}
+
+handleFilterChange(): void {
+  this.calledOnPageChange = false;
+  this.paginator.changePage(0);
+  if (!this.calledOnPageChange) {
+    this.onPageChange(this.filterSearchComponent.lazyLoadEvent);
+  }
+}
+
+handleSearchSubmit(): void {
+  if (this.filterSearchComponent.filterSearchForm.valid) {
+    this.paginator.changePage(0);
+  }
+}
+
+handleClearSearch(): void {
+  this.initializeResources();
 }
 
 }

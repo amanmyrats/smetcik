@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment as env } from 'src/environments/environment';
 import { Consumption } from '../models/consumption.model';
+import { Paginated } from 'src/app/models/paginated.model';
 
 @Injectable({
   providedIn: 'root'
@@ -15,11 +16,11 @@ export class ConsumptionService {
     private httpClient: HttpClient
   ) { }
 
-  getConsumptions(queryParams: string): Observable<Consumption[]> {
+  getConsumptions(queryParams: string): Observable<Paginated<Consumption>> {
     if (queryParams) {
-      return this.httpClient.get<Consumption[]>(`${env.apiUrl}${this.endPoint}${queryParams}`);
+      return this.httpClient.get<Paginated<Consumption>>(`${env.apiUrl}${this.endPoint}${queryParams}`);
     } else {
-      return this.httpClient.get<Consumption[]>(`${env.apiUrl}${this.endPoint}`);
+      return this.httpClient.get<Paginated<Consumption>>(`${env.apiUrl}${this.endPoint}`);
     }
   }
 
@@ -50,3 +51,4 @@ export class ConsumptionService {
   }
 
 }
+

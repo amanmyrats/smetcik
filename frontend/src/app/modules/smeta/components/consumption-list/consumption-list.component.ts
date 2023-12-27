@@ -4,6 +4,7 @@ import { BoqItem } from '../../models/boq-item.model';
 import { CommonService } from 'src/app/services/common.service';
 import { ConsumptionService } from '../../services/consumption.service';
 import { UnitService } from 'src/app/modules/common/services/unit.service';
+import { Paginated } from 'src/app/models/paginated.model';
 
 @Component({
   selector: 'app-consumption-list',
@@ -63,11 +64,12 @@ export class ConsumptionListComponent implements OnInit {
     var queryParams: string = this.commonService.buildFilter({
       boq_item: {value: this.boqItemFromParent!.id }
     });
+    queryParams = `?${queryParams}`
     this.consumptionService.getConsumptions(queryParams).subscribe({
-      next: (consumptions: Consumption[]) => {
+      next: (paginatedConsumptions: Paginated<Consumption>) => {
         console.log("Successfully fetched Consumptions.");
-        console.log(consumptions);
-        this.consumptions = consumptions;
+        console.log(paginatedConsumptions);
+        this.consumptions = paginatedConsumptions.results!;
       }, 
       error: (err: any) => {
         console.log("Failed to fetch Consumptions.");

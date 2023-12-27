@@ -1,4 +1,11 @@
 <div style="font-size: xx-large; font-weight: bold;">Materials</div>
+<app-filter-search
+    [wantCountry]="true" 
+    (filterChangeEventEmitter)="handleFilterChange()" 
+    (searchSubmitEventEmitter)="handleSearchSubmit()" 
+    (clearSearchEventEmitter)="handleClearSearch()"
+    >
+</app-filter-search>
 
 <p-table [value]="resources" (sortFunction)="customSort($event)" 
 [customSort]="true" 
@@ -92,3 +99,19 @@
 
 </app-import>
 </p-dialog>
+
+
+<p-paginator 
+    #paginator
+    [first]="first"
+    [rows]="rows" 
+    [totalRecords]="totalRecords" 
+    [rowsPerPageOptions]="[5,10,20,50]" 
+    (onPageChange)="onPageChange($event)"
+        >
+    <!-- [first]="filterSearchComponent.first"
+    [rows]="filterSearchComponent.rows" 
+    [totalRecords]="filterSearchComponent.totalRecords" 
+    [rowsPerPageOptions]="[10,20,50]" 
+    (onPageChange)="onPageChange($event)" -->
+</p-paginator>

@@ -57,7 +57,7 @@ export class FilterSearchComponent  implements OnInit {
   @Input() wantBaseCompanyCountry: boolean = false;
 
   first: number = 0;
-  rows: number = 10;
+  rows: number = 5;
   totalRecords: number = 0;
   queryParams: string = '?';
   pathSegments: string[];

@@ -9,6 +9,7 @@ import { LazyLoadEvent } from 'primeng/api';
 import { Paginated } from 'src/app/models/paginated.model';
 import { FilterSearchComponent } from 'src/app/modules/shared/components/filter-search/filter-search.component';
 import { Paginator } from 'primeng/paginator';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-boq-item-list',
@@ -26,7 +27,7 @@ export class BoqItemListComponent implements OnInit, AfterViewInit {
   boqItems: BoqItem[] = [];
 
   first: number = 0;
-  rows: number = 10;
+  rows: number = 5;
   totalRecords: number;
 
   showTradeForm: boolean = false;
@@ -43,7 +44,7 @@ export class BoqItemListComponent implements OnInit, AfterViewInit {
   currentLotId: string;
   currentBoqItem: BoqItem;
 
-  rootPathSegment: string = '/boqs/1/boqitems';
+  rootPathSegment: string = '/smeta/boqs/1/boqitems';
   calledOnPageChange: boolean = false;
 
 
@@ -51,8 +52,9 @@ export class BoqItemListComponent implements OnInit, AfterViewInit {
     private tradeService: TradeService,
     private boqItemService: BoqItemService,
     private lotService: LotService,
+    private route: ActivatedRoute, 
   ) {
-    // this.boqIdFromUrl = this.route.snapshot.paramMap.get('boqId');
+    this.boqIdFromUrl = this.route.snapshot.paramMap.get('boqId');
     // this.getBoqItems();
   }
 

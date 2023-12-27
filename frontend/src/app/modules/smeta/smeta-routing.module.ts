@@ -8,6 +8,11 @@ import { BoqMaterialComponent } from './components/boq-material/boq-material.com
 import { ResourceListComponent } from './components/resource-list/resource-list.component';
 import { SmetaHomeComponent } from './smeta-home/smeta-home.component';
 import { BoqFormComponent } from './components/boq-form/boq-form.component';
+import { UnitListComponent } from './components/unit-list/unit-list.component';
+import { TradeListComponent } from './components/trade-list/trade-list.component';
+import { LotListComponent } from './components/lot-list/lot-list.component';
+import { CountryListComponent } from './components/country-list/country-list.component';
+import { CurrencyListComponent } from './components/currency-list/currency-list.component';
 
 const routes: Routes = [
   {
@@ -18,14 +23,34 @@ const routes: Routes = [
       {
         path: 'dashboard',
         component: SmetaDashboardComponent,
-      }, 
+      },
       {
         path: 'boqs/:boqId/boqitems',
         component: BoqItemListComponent
       },
       {
-        path: 'boqs/:boqId/materials',
+        path: 'boqs/:boqId/resources',
         component: ResourceListComponent,
+      },
+      {
+        path: 'boqs/:boqId/units',
+        component: UnitListComponent
+      },
+      {
+        path: 'boqs/:boqId/trades',
+        component: TradeListComponent
+      },
+      {
+        path: 'boqs/:boqId/lots',
+        component: LotListComponent
+      },
+      {
+        path: 'boqs/:boqId/countries',
+        component: CountryListComponent
+      },
+      {
+        path: 'boqs/:boqId/currencies',
+        component: CurrencyListComponent
       },
       {
         path: 'boqs/create',

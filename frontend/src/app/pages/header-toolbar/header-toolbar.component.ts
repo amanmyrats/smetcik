@@ -20,8 +20,8 @@ export class HeaderToolbarComponent {
     this.router.navigate(['tender']);
   }
 
-  navigateToBoq(): void {
-    this.router.navigate(['smeta', 'boqs']);
+  navigateToSmeta(): void {
+    this.router.navigate(['smeta', 'dashboard']);
   }
 
   navigateToPayment(): void {

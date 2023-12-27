@@ -7,6 +7,7 @@ import { ResourceService } from '../../services/resource.service';
 import { Unit } from 'src/app/modules/common/models/unit.model';
 import { Resource } from '../../models/resource.model';
 import { Consumption } from '../../models/consumption.model';
+import { Paginated } from 'src/app/models/paginated.model';
 
 @Component({
   selector: 'app-consumption-form',
@@ -100,10 +101,10 @@ export class ConsumptionFormComponent implements OnInit {
 
   getResources(): void {
     this.resourceService.getResources().subscribe({
-      next: (resources: Resource[]) => {
+      next: (paginatedResources: Paginated<Resource>) => {
         console.log("Successfully fetched Resources.");
-        console.log(resources);
-        this.resources = resources;
+        console.log(paginatedResources);
+        this.resources = paginatedResources.results!;
       }, 
       error: (err: any) => {
         console.log("Failed to fetch Resources.");

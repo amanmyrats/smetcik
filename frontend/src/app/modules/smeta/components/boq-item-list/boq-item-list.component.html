@@ -138,8 +138,9 @@
 <p-paginator 
     #paginator
     [first]="first"
+    [rows]="rows" 
     [totalRecords]="totalRecords" 
-    [rowsPerPageOptions]="[10,20,50]" 
+    [rowsPerPageOptions]="[5,10,20,50]" 
     (onPageChange)="onPageChange($event)"
         >
     <!-- [first]="filterSearchComponent.first"
